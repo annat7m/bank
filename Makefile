@@ -32,13 +32,13 @@ bin:
 	mkdir -p bin
 
 bin/main: bin src/*.cpp include/*.h
-	${compiler} -std=${CPP_VERSION} -o bin/main ${CFLAGS} src/*.cpp -Iinclude
+	${compiler} -std=${CPP_VERSION} -o bin/main ${CFLAGS} src/*.cpp
 
 valgrind: bin/main
 	valgrind ${VALGRIND_FLAGS} bin/main
 
 printAll:
-	enscript ${ENSCRIPT_FLAGS} src/*.cpp include/*.h test/*.cpp | ps2pdf - bin/src.pdf
+	enscript ${ENSCRIPT_FLAGS} include/*.h src/*.cpp test/*.cpp | ps2pdf - bin/src.pdf
 
 runMe: bin/main
 	bin/main
