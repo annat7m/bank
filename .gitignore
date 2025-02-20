@@ -6,6 +6,8 @@
 # googletest
 googletest/
 build/
+**/*.tar.gz
+
 
 *.exe
 bin/main
