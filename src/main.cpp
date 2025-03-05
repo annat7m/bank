@@ -1,9 +1,9 @@
 //***************************************************************************
 // File name:   main.cpp
-// Author:      
+// Author:      Anna Tymoshenko
 // Date:        
 // Class:       
-// Assignment:  
+// Assignment:  Assignment 3
 // Purpose:     
 //***************************************************************************
 
