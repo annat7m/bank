@@ -19,13 +19,13 @@ class CheckingAccount : public Account {
 			long long minBalance, long long minBalanceFee);
 		virtual ~CheckingAccount();
 
-		//
-		//
+		virtual void deposit (long long amount);
+		virtual void withdraw (long long amount);
 
 	private:
 		long long mMinBalance;
 		long long mMinBalanceFee;
 
-		// apply min balance fee
+		bool applyMinBalanceFee();
 
 };
