@@ -127,10 +127,9 @@ void Account::addTransaction (TransactionType transactionType,
 // Returned:    none
 //***************************************************************************
 
-void Account::displayAccount() const {
-    std::cout << mAccountNumber  << ", $" << mBalance*mInterestRate << ", " 
-		<< mInterestRate*100 << "%, ";
-}
+// void Account::displayAccount() const {
+    
+// }
 
 //***************************************************************************
 // Function:    getAccountNumber
@@ -158,6 +157,20 @@ int Account::getAccountNumber() const {
 
 long long Account::getBalance() const {
     return mBalance;
+}
+
+//***************************************************************************
+// Function:    getInterestRate
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+double Account::getInterestRate() const {
+	return mInterestRate;
 }
 
 //***************************************************************************

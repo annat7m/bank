@@ -22,6 +22,7 @@ class SavingsAccount : public Account {
 		virtual void deposit (long long amount) override;
 		virtual void withdraw (long long amount) override;
 		virtual void chargeMonthlyFee () override;
+		virtual void displayAccount () const override;
 
 	private:
 		long long mMinBalance;

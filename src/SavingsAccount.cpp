@@ -9,6 +9,7 @@
 
 #include "../include/SavingsAccount.h"
 #include <iostream>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: SavingsAccount
@@ -98,4 +99,21 @@ void SavingsAccount::chargeMonthlyFee() {
 		adjustBalance(-mMonthlyFee);
 		addTransaction(TransactionType::fee, mMonthlyFee);
 	}
+}
+
+//***************************************************************************
+// Function:    displayAccount
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void SavingsAccount::displayAccount() const {
+	std::cout << std::fixed << std::setprecision(2) << Account::getAccountNumber()  
+		<< ", $" << Account::getBalance()*Account::getInterestRate() 
+		<< ", " << Account::getInterestRate()*100 << "%, ";
+	std::cout << mMonthlyFee << ", " << mMinBalance;
 }

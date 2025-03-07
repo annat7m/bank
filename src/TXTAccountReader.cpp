@@ -59,6 +59,8 @@ TXTAccountReader::~TXTAccountReader () {
 //***************************************************************************
 
 void TXTAccountReader::readAccounts(Bank& bank) {
+	const char SAVINGS = 'S';
+	const char CHECKING = 'C';
 	std::string line;
 	int accountNumber;
 	long long balance;
@@ -74,14 +76,14 @@ void TXTAccountReader::readAccounts(Bank& bank) {
 	}
 
 	while (mcAccountsFile >> accountType >> accountNumber >> balance >> interestRate) {
-		if (accountType == 'S') {
+		if (accountType == SAVINGS) {
 			mcAccountsFile >> monthlyFee >> minBalance;
 			account = std::make_shared<SavingsAccount>(accountNumber, balance, 
 				interestRate, minBalance, monthlyFee);
-		} else if (accountType == 'C') {
+		} else if (accountType == CHECKING) {
 			mcAccountsFile >> minBalance >> minBalanceFee;
 			account = std::make_shared<CheckingAccount>(accountNumber, balance, 
-				interestRate, minBalance, monthlyFee);
+				interestRate, minBalance, minBalanceFee);
 		}
 
 		if (account) {

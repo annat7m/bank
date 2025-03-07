@@ -10,6 +10,7 @@
 #include "../include/CheckingAccount.h"
 #include "../include/Account.h"
 #include <iostream>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: CheckingAccount
@@ -91,3 +92,20 @@ bool CheckingAccount::applyMinBalanceFee() {
 	}
 	return false;
 }
+
+//***************************************************************************
+// Function:    displayAccount
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::displayAccount() const {
+	std::cout << std::fixed << std::setprecision(2) << Account::getAccountNumber()  
+		<< ", $" <<  Account::getBalance()*Account::getInterestRate()
+		<< ", " << Account::getInterestRate()*100 << "%, ";
+	std::cout << mMinBalance << ", " << mMinBalanceFee;
+	}
