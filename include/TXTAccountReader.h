@@ -16,12 +16,12 @@
 class TXTAccountReader : public IAccountReader {
 
 	public:
-		TXTAccountReader ();
+		TXTAccountReader (const std::string& fileName);
 		virtual ~TXTAccountReader();
 
 		virtual void readAccounts (Bank& bank) override;
 
 	private:
-		std::ifstream mAccountsFile;
+		std::ifstream mcAccountsFile;
 
 };

@@ -16,20 +16,19 @@ class Account {
 
 	public:
 		Account (int accountNumber, long long balance, double interestRate);
-		virtual ~Account() = default;
+		virtual ~Account();
 
 		virtual void deposit (long long amount) = 0;
 		virtual void withdraw (long long amount) = 0;
-		virtual void chargeMonthlyFee () = 0;
+		virtual void chargeMonthlyFee ();
 		virtual void accrueInterest ();
 		virtual void addTransaction (TransactionType transactionType,
-			long long amount) = 0;
+			long long amount);
 
 		void displayAccount () const;
 
 		int getAccountNumber () const;
 		long long getBalance () const;
-		// double getInterestRate () const;
 
 	private:
 		int mAccountNumber;

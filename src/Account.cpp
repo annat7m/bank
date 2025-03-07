@@ -72,6 +72,20 @@ void Account::withdraw (long long amount) {
 }
 
 //***************************************************************************
+// Function:    chargeMonthlyFee
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void Account::chargeMonthlyFee () {
+	
+}
+
+//***************************************************************************
 // Function:    accrueInterest
 //
 // Description: 
@@ -114,9 +128,8 @@ void Account::addTransaction (TransactionType transactionType,
 //***************************************************************************
 
 void Account::displayAccount() const {
-    std::cout << "Account Number: " << mAccountNumber << std::endl;
-    std::cout << "Balance: " << mBalance << std::endl;
-    std::cout << "Interest Rate: " << mInterestRate << std::endl;
+    std::cout << mAccountNumber  << ", $" << mBalance*mInterestRate << ", " 
+		<< mInterestRate*100 << "%, ";
 }
 
 //***************************************************************************
@@ -146,20 +159,6 @@ int Account::getAccountNumber() const {
 long long Account::getBalance() const {
     return mBalance;
 }
-
-//***************************************************************************
-// Function:    getInterestRate
-//
-// Description: 
-//
-// Parameters:  none
-//
-// Returned:    none
-//***************************************************************************
-
-// double Account::getInterestRate() const {
-// 	return mInterestRate;
-// }
 
 //***************************************************************************
 // Function:    adjustBalance

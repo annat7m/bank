@@ -17,7 +17,7 @@ class SavingsAccount : public Account {
 	public:
 		SavingsAccount (int accNumber, long long accBalance, double accInterestRate,
 			long long minBalance, long long monthlyFee);
-		~SavingsAccount() override = default;
+		virtual ~SavingsAccount();
 
 		virtual void deposit (long long amount) override;
 		virtual void withdraw (long long amount) override;
