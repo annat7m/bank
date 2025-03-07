@@ -15,9 +15,9 @@
 //
 // Description: Initializes Bank Account object
 //
-// Parameters:  accountNumber -
-//							balance				-
-//							interestRate	-
+// Parameters:  accountNumber - account number
+//							balance				- initial balance of the account
+//							interestRate	- interest rate
 //
 // Returned:    None
 //***************************************************************************
@@ -116,20 +116,6 @@ void Account::addTransaction (TransactionType transactionType,
 	long long amount) {
 	mTransactions.emplace_back(transactionType, amount);
 }
-
-//***************************************************************************
-// Function:    displayAccount
-//
-// Description: 
-//
-// Parameters:  none
-//
-// Returned:    none
-//***************************************************************************
-
-// void Account::displayAccount() const {
-    
-// }
 
 //***************************************************************************
 // Function:    getAccountNumber
