@@ -19,10 +19,10 @@ class SavingAccount : public Account {
 			long long minBalance, long long monthlyFee);
 		virtual ~SavingAccount();
 
-		virtual void deposit (long long amount);
-		virtual void withdraw (long long amount);
-		virtual void chargeMonthlyFee ();
-		virtual void accrueInterest ();
+		virtual void deposit (long long amount) override;
+		virtual void withdraw (long long amount) override;
+		virtual void chargeMonthlyFee () override;
+		virtual void accrueInterest () override;
 
 	private:
 		long long mMinBalance;

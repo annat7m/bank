@@ -19,8 +19,8 @@ class CheckingAccount : public Account {
 			long long minBalance, long long minBalanceFee);
 		virtual ~CheckingAccount();
 
-		virtual void deposit (long long amount);
-		virtual void withdraw (long long amount);
+		virtual void deposit (long long amount) override;
+		virtual void withdraw (long long amount) override;
 
 	private:
 		long long mMinBalance;

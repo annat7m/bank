@@ -20,15 +20,15 @@ class Account {
 
 		virtual void deposit (long long amount) = 0;
 		virtual void withdraw (long long amount) = 0;
-
 		virtual void chargeMonthlyFee () = 0;
+		virtual void accrueInterest () = 0;
 
-		virtual void accrueInterest ();
+		void displayAccount ();
 
 	private:
 		int mNumber;
 		long long mBalance;
 		double mInterestRate;
-		// std::vector<Transaction> mTransactions;
+		std::vector<Transaction> mTransactions;
 
 };
