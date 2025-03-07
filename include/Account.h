@@ -25,10 +25,11 @@ class Account {
 		virtual void addTransaction (TransactionType transactionType,
 			long long amount);
 
-		void displayAccount () const;
+		virtual void displayAccount() const = 0;
 
 		int getAccountNumber () const;
 		long long getBalance () const;
+		double getInterestRate () const;
 
 	private:
 		int mAccountNumber;

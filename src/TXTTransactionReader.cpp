@@ -76,6 +76,7 @@ void TXTTransactionReader::readTransactions(Bank& bank) {
 	}
 
 	while (mcCommandsFile >> command) {
+		std::cout << "-------------" << std::endl;
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> amount;
 			account = bank.findAccount(accountNumber);
