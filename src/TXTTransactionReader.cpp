@@ -24,9 +24,9 @@
 // Returned:    None
 //***************************************************************************
 
-TXTTransactionReader::TXTTransactionReader(const std::string& fileName) {
-	mcCommandsFile.open(fileName);
-	if (!mcCommandsFile.is_open()) {
+TXTTransactionReader::TXTTransactionReader (const std::string& fileName) {
+	mcCommandsFile.open (fileName);
+	if (!mcCommandsFile.is_open ()) {
 		throw std::system_error (errno, std::system_category (),
 			"Error: Could not open file: " + fileName + "\n");
 	}
@@ -49,16 +49,16 @@ TXTTransactionReader::~TXTTransactionReader () {
 }
 
 //***************************************************************************
-// Function:    readAccounts
+// Function:    readTransactions
 //
-// Description: 
+// Description: read file with commands amd process the data according to it
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void TXTTransactionReader::readTransactions(Bank& bank) {
+void TXTTransactionReader::readTransactions (Bank& bank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
@@ -71,25 +71,28 @@ void TXTTransactionReader::readTransactions(Bank& bank) {
 
 	std::shared_ptr<Account> account;
 
-	if (!mcCommandsFile.is_open()) {
+	if (!mcCommandsFile.is_open ()) {
 		return;
 	}
 
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> amount;
-			account = bank.findAccount(accountNumber);
-			account->withdraw(amount);
-		} else if (command == DEPOSIT) {
+			account = bank.findAccount (accountNumber);
+			account->withdraw (amount);
+		}
+		else if (command == DEPOSIT) {
 			mcCommandsFile >> accountNumber >> amount;
-			account = bank.findAccount(accountNumber);
-			account->deposit(amount);
-		} else if (command == PRINT) {
+			account = bank.findAccount (accountNumber);
+			account->deposit (amount);
+		}
+		else if (command == PRINT) {
 			std::cout << "-------------" << std::endl;
 			bank.display ();
 			std::cout << "-------------" << std::endl;
-		} else if (command == CHARGE) {
-			bank.applyMonthlyUpdates();
+		}
+		else if (command == CHARGE) {
+			bank.applyMonthlyUpdates ();
 		}
 	}
 }

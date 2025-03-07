@@ -25,17 +25,18 @@
 // Returned:    None
 //***************************************************************************
 
-SavingsAccount::SavingsAccount(int accountNumber, long long balance, 
+SavingsAccount::SavingsAccount (int accountNumber, long long balance,
 	double interestRate, long long minBalance, long long monthlyFee)
-	: Account(accountNumber, balance, interestRate) {
-		mMinBalance = minBalance;
-		mMonthlyFee = monthlyFee;
-		if (Account::getBalance() >= minBalance) {
-			mbIsBelowMinBalance = false;
-		} else {
-			mbIsBelowMinBalance = true;
-			chargeMonthlyFee();
-		}
+	: Account (accountNumber, balance, interestRate) {
+	mMinBalance = minBalance;
+	mMonthlyFee = monthlyFee;
+	if (Account::getBalance () >= minBalance) {
+		mbIsBelowMinBalance = false;
+	}
+	else {
+		mbIsBelowMinBalance = true;
+		chargeMonthlyFee ();
+	}
 }
 
 //***************************************************************************
@@ -53,16 +54,16 @@ SavingsAccount::~SavingsAccount () {}
 //***************************************************************************
 // Function:    deposit
 //
-// Description: 
+// Description: apply deposit operation on savings account
 //
-// Parameters:  none
+// Parameters:  amount - amount deposited
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::deposit(long long amount) {
-	Account::deposit(amount);
-	if (Account::getBalance() >= mMinBalance) {
+void SavingsAccount::deposit (long long amount) {
+	Account::deposit (amount);
+	if (Account::getBalance () >= mMinBalance) {
 		mbIsBelowMinBalance = false;
 	}
 }
@@ -70,16 +71,16 @@ void SavingsAccount::deposit(long long amount) {
 //***************************************************************************
 // Function:    withdraw
 //
-// Description: 
+// Description: withdraw money from savings account
 //
-// Parameters:  none
+// Parameters:  amount - amount withdrawn
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::withdraw(long long amount) {
-	Account::withdraw(amount);
-	if (Account::getBalance() < mMinBalance) {
+void SavingsAccount::withdraw (long long amount) {
+	Account::withdraw (amount);
+	if (Account::getBalance () < mMinBalance) {
 		mbIsBelowMinBalance = true;
 	}
 }
@@ -87,33 +88,33 @@ void SavingsAccount::withdraw(long long amount) {
 //***************************************************************************
 // Function:    chargeMonthlyFee
 //
-// Description: 
+// Description: charge the savings account the monthly fee
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::chargeMonthlyFee() {
+void SavingsAccount::chargeMonthlyFee () {
 	if (mbIsBelowMinBalance) {
-		adjustBalance(-mMonthlyFee);
-		addTransaction(TransactionType::fee, mMonthlyFee);
+		adjustBalance (-mMonthlyFee);
+		addTransaction (TransactionType::fee, mMonthlyFee);
 	}
 }
 
 //***************************************************************************
 // Function:    displayAccount
 //
-// Description: 
+// Description: display savings account info
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::displayAccount() const {
-	std::cout << std::fixed << std::setprecision(2) << Account::getAccountNumber()  
-		<< ", $" << Account::getBalance()*Account::getInterestRate() 
-		<< ", " << Account::getInterestRate()*100 << "%, ";
+void SavingsAccount::displayAccount () const {
+	std::cout << std::fixed << std::setprecision (2) << Account::getAccountNumber ()
+		<< ", $" << Account::getBalance () * Account::getInterestRate ()
+		<< ", " << Account::getInterestRate () * 100 << "%, ";
 	std::cout << mMonthlyFee << ", " << mMinBalance;
 }

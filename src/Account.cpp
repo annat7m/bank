@@ -22,7 +22,7 @@
 // Returned:    None
 //***************************************************************************
 
-Account::Account(int accountNumber, long long balance, double interestRate) {
+Account::Account (int accountNumber, long long balance, double interestRate) {
 	mAccountNumber = accountNumber;
 	mBalance = balance;
 	mInterestRate = interestRate;
@@ -43,24 +43,24 @@ Account::~Account () {}
 //***************************************************************************
 // Function:    deposit
 //
-// Description: 
+// Description: apply deposit operation on account
 //
-// Parameters:  none
+// Parameters:  amount - amount deposited
 //
 // Returned:    none
 //***************************************************************************
 
 void Account::deposit (long long amount) {
 	mBalance += amount;
-	addTransaction(TransactionType::deposit, amount);
+	addTransaction (TransactionType::deposit, amount);
 }
 
 //***************************************************************************
 // Function:    withdraw
 //
-// Description: 
+// Description: withdraw money from account
 //
-// Parameters:  none
+// Parameters:  amount - amount withdrawn
 //
 // Returned:    none
 //***************************************************************************
@@ -68,13 +68,13 @@ void Account::deposit (long long amount) {
 void Account::withdraw (long long amount) {
 	// accounts are allowed to be negative
 	mBalance -= amount;
-	addTransaction(TransactionType::withdrawal, amount);
+	addTransaction (TransactionType::withdrawal, amount);
 }
 
 //***************************************************************************
 // Function:    chargeMonthlyFee
 //
-// Description: 
+// Description: charge banking account the monthly fee
 //
 // Parameters:  none
 //
@@ -82,93 +82,94 @@ void Account::withdraw (long long amount) {
 //***************************************************************************
 
 void Account::chargeMonthlyFee () {
-	
+
 }
 
 //***************************************************************************
 // Function:    accrueInterest
 //
-// Description: 
+// Description: accrue interest on a banking account
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::accrueInterest() {
-    long long interest = static_cast<long long>(mBalance * mInterestRate);
-    mBalance += interest;
-    addTransaction(TransactionType::interest, interest);
+void Account::accrueInterest () {
+	long long interest = static_cast<long long>(mBalance * mInterestRate);
+	mBalance += interest;
+	addTransaction (TransactionType::interest, interest);
 }
 
 //***************************************************************************
 // Function:    addTransaction
 //
-// Description: 
+// Description: add a transaction that was made using banking account
 //
-// Parameters:  TransactionType	-
-//							amount					-
+// Parameters:  TransactionType	- type of transaction that was made
+//							amount					- amount of the transaction
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::addTransaction (TransactionType transactionType, 
+void Account::addTransaction (TransactionType transactionType,
 	long long amount) {
-	mTransactions.emplace_back(transactionType, amount);
+	mTransactions.emplace_back (transactionType, amount);
 }
 
 //***************************************************************************
 // Function:    getAccountNumber
 //
-// Description: 
+// Description: getter function for account number
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    number identidying banking account
 //***************************************************************************
 
-int Account::getAccountNumber() const {
-    return mAccountNumber;
+int Account::getAccountNumber () const {
+	return mAccountNumber;
 }
 
 //***************************************************************************
 // Function:    getBalance
 //
-// Description: 
+// Description: getter function for balance
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    amount of money that is on the balance
 //***************************************************************************
 
-long long Account::getBalance() const {
-    return mBalance;
+long long Account::getBalance () const {
+	return mBalance;
 }
 
 //***************************************************************************
 // Function:    getInterestRate
 //
-// Description: 
+// Description: getter function for the interest rate
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    the interest rate
 //***************************************************************************
 
-double Account::getInterestRate() const {
+double Account::getInterestRate () const {
 	return mInterestRate;
 }
 
 //***************************************************************************
 // Function:    adjustBalance
 //
-// Description: 
+// Description: protected function to change or adjust the account balance based
+//							on the amount
 //
-// Parameters:  none
+// Parameters:  amount - how much would the balance change 
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::adjustBalance(long long amount) {
+void Account::adjustBalance (long long amount) {
 	mBalance += amount;
 }

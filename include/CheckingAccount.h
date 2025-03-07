@@ -14,19 +14,19 @@
 
 class CheckingAccount : public Account {
 
-	public:
-		CheckingAccount (int accNumber, long long accBalance, double accInterestRate,
-			long long minBalance, long long minBalanceFee);
-		virtual ~CheckingAccount();
+public:
+	CheckingAccount (int accNumber, long long accBalance, double accInterestRate,
+		long long minBalance, long long minBalanceFee);
+	virtual ~CheckingAccount ();
 
-		virtual void deposit (long long amount) override;
-		virtual void withdraw (long long amount) override;
-		virtual void displayAccount () const override;
+	virtual void deposit (long long amount) override;
+	virtual void withdraw (long long amount) override;
+	virtual void displayAccount () const override;
 
-	private:
-		long long mMinBalance;
-		long long mMinBalanceFee;
+private:
+	long long mMinBalance;
+	long long mMinBalanceFee;
 
-		bool applyMinBalanceFee();
+	bool applyMinBalanceFee ();
 
 };
