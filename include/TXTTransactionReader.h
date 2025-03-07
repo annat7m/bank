@@ -1,5 +1,5 @@
 //***************************************************************************
-// File name:   Bank.h
+// File name:   TXTTransactionReader.h
 // Author:      Anna Tymoshenko
 // Date:        03/04/2025
 // Class:       CS485
@@ -7,24 +7,16 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include <vector>
-#include <memory>
-#include "../include/Account.h"
+#include "../include/Bank.h"
 
 #pragma once
 
-class Bank : public Account {
+class TXTTransactionReader {
 
 	public:
-		Bank (std::vector<std::shared_ptr<Account>>);
-		virtual ~Bank();
+		TXTTransactionReader ();
+		virtual ~TXTTransactionReader();
 
-		void addAccount (Account& account);
-		void applyMonthlyUpdates();
-
-		virtual void display ();
-
-	private:
-		std::vector<std::shared_ptr<Account>> mAccounts;
+		virtual void readTransactions (Bank bank);
 
 };

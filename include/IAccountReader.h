@@ -1,5 +1,5 @@
 //***************************************************************************
-// File name:   Bank.h
+// File name:   IAccountReader.h
 // Author:      Anna Tymoshenko
 // Date:        03/04/2025
 // Class:       CS485
@@ -7,24 +7,16 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include <vector>
-#include <memory>
-#include "../include/Account.h"
+#include "../include/Bank.h"
 
 #pragma once
 
-class Bank : public Account {
+class IAccountReader {
 
 	public:
-		Bank (std::vector<std::shared_ptr<Account>>);
-		virtual ~Bank();
+		IAccountReader ();
+		virtual ~IAccountReader();
 
-		void addAccount (Account& account);
-		void applyMonthlyUpdates();
-
-		virtual void display ();
-
-	private:
-		std::vector<std::shared_ptr<Account>> mAccounts;
+		virtual void readAccounts (Bank bank) = 0;
 
 };
