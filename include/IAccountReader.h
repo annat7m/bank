@@ -17,6 +17,6 @@ class IAccountReader {
 		IAccountReader ();
 		virtual ~IAccountReader();
 
-		virtual void readAccounts (Bank bank) = 0;
+		virtual void readAccounts (Bank& bank) = 0;
 
 };

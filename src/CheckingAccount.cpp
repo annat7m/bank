@@ -7,7 +7,7 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "CheckingAccount.h"
+#include "../include/CheckingAccount.h"
 #include "../include/Account.h"
 #include <iostream>
 

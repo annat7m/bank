@@ -8,15 +8,20 @@
 //***************************************************************************
 
 #include "../include/Bank.h"
+#include "../include/ITransactionReader.h"
+#include <fstream>
 
 #pragma once
 
-class TXTTransactionReader {
+class TXTTransactionReader : public ITransactionReader {
 
 	public:
 		TXTTransactionReader ();
 		virtual ~TXTTransactionReader();
 
-		virtual void readTransactions (Bank bank);
+		virtual void readTransactions (Bank& bank) override;
+
+	private:
+		std::ifstream mCommandsFile;
 
 };
