@@ -15,17 +15,17 @@
 
 class Bank {
 
-	public:
-		Bank ();
-		virtual ~Bank();
+public:
+	Bank ();
+	virtual ~Bank ();
 
-		void addAccount (std::shared_ptr<Account> account);
-		void applyMonthlyUpdates();
-		std::shared_ptr<Account> findAccount (int accountNumber);
+	void addAccount (std::shared_ptr<Account> account);
+	void applyMonthlyUpdates ();
+	std::shared_ptr<Account> findAccount (int accountNumber);
 
-		void display ();
+	void display ();
 
-	private:
-		std::vector<std::shared_ptr<Account>> mAccounts;
+private:
+	std::vector<std::shared_ptr<Account>> mAccounts;
 
 };

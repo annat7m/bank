@@ -13,10 +13,10 @@
 
 class ITransactionReader {
 
-	public:
-		ITransactionReader ();
-		virtual ~ITransactionReader();
+public:
+	ITransactionReader ();
+	virtual ~ITransactionReader ();
 
-		virtual void readTransactions (Bank& bank) = 0;
+	virtual void readTransactions (Bank& bank) = 0;
 
 };

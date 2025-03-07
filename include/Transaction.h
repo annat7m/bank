@@ -25,15 +25,15 @@ enum class TransactionType {
 
 class Transaction {
 
-	public:
-		Transaction (TransactionType transactionType, long long amount);
-		virtual ~Transaction();
+public:
+	Transaction (TransactionType transactionType, long long amount);
+	virtual ~Transaction ();
 
-		TransactionType getType ();
-		long long getAmount ();
+	TransactionType getType ();
+	long long getAmount ();
 
-	private:
-		TransactionType mType;
-		long long mAmount;
+private:
+	TransactionType mType;
+	long long mAmount;
 
 };

@@ -21,24 +21,23 @@
 //***************************************************************************
 // Function:    main
 //
-// Description: 
+// Description: Make Bank functional
 //
 // Parameters:  none
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
-int main()
-{
+int main () {
 	const std::string ACCOUNTS_FILENAME = "data/Accounts.txt";
 	const std::string TRANSACTIONS_FILENAME = "data/Commands.txt";
 
 	Bank firstBank;
-	TXTAccountReader accountReader(ACCOUNTS_FILENAME);
-	TXTTransactionReader commandsReader(TRANSACTIONS_FILENAME);
+	TXTAccountReader accountReader (ACCOUNTS_FILENAME);
+	TXTTransactionReader commandsReader (TRANSACTIONS_FILENAME);
 
-	accountReader.readAccounts(firstBank);
-	commandsReader.readTransactions(firstBank);
+	accountReader.readAccounts (firstBank);
+	commandsReader.readTransactions (firstBank);
 
 	return EXIT_SUCCESS;
-		
+
 }

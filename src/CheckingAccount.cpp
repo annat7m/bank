@@ -27,9 +27,9 @@
 // Returned:    None
 //***************************************************************************
 
-CheckingAccount::CheckingAccount(int accountNumber, long long balance, 
+CheckingAccount::CheckingAccount (int accountNumber, long long balance,
 	double interestRate, long long minBalance, long long minBalanceFee)
-	: Account(accountNumber, balance, interestRate) {
+	: Account (accountNumber, balance, interestRate) {
 	mMinBalance = minBalance;
 	mMinBalanceFee = minBalanceFee;
 }
@@ -49,50 +49,51 @@ CheckingAccount::~CheckingAccount () {}
 //***************************************************************************
 // Function:    deposit
 //
-// Description: 
+// Description: apply deposit operation on checking account
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::deposit(long long amount) {
-	Account::deposit(amount);
+void CheckingAccount::deposit (long long amount) {
+	Account::deposit (amount);
 }
 
 //***************************************************************************
 // Function:    withdraw
 //
-// Description: 
+// Description: withdraw money from checking account
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::withdraw(long long amount) {
-	Account::withdraw(amount);
-	if (Account::getBalance() < 0) {
-		adjustBalance(-Account::getBalance());
+void CheckingAccount::withdraw (long long amount) {
+	Account::withdraw (amount);
+	applyMinBalanceFee ();
+	if (Account::getBalance () < 0) {
+		adjustBalance (-Account::getBalance ());
 	}
 }
 
 //***************************************************************************
 // Function:    applyMinBalanceFee
 //
-// Description: 
+// Description: fee is charged if the balance falls below the minimum
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-bool CheckingAccount::applyMinBalanceFee() {
-	if (Account::getBalance() < mMinBalance) {
-		adjustBalance(-mMinBalanceFee);
-		addTransaction(TransactionType::fee, mMinBalanceFee);
-		if (Account::getBalance() < 0) {
-			adjustBalance(-Account::getBalance());
+bool CheckingAccount::applyMinBalanceFee () {
+	if (Account::getBalance () < mMinBalance) {
+		adjustBalance (-mMinBalanceFee);
+		addTransaction (TransactionType::fee, mMinBalanceFee);
+		if (Account::getBalance () < 0) {
+			adjustBalance (-Account::getBalance ());
 		}
 		return true;
 	}
@@ -102,16 +103,16 @@ bool CheckingAccount::applyMinBalanceFee() {
 //***************************************************************************
 // Function:    displayAccount
 //
-// Description: 
+// Description: display checking account
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::displayAccount() const {
-	std::cout << std::fixed << std::setprecision(2) << Account::getAccountNumber()  
-		<< ", $" <<  Account::getBalance() * Account::getInterestRate()
-		<< ", " << Account::getInterestRate() * 100 << "%, ";
+void CheckingAccount::displayAccount () const {
+	std::cout << std::fixed << std::setprecision (2) << Account::getAccountNumber ()
+		<< ", $" << Account::getBalance () * Account::getInterestRate ()
+		<< ", " << Account::getInterestRate () * 100 << "%, ";
 	std::cout << mMinBalance << ", " << mMinBalanceFee;
-	}
+}

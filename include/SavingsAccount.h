@@ -14,19 +14,19 @@
 
 class SavingsAccount : public Account {
 
-	public:
-		SavingsAccount (int accNumber, long long accBalance, double accInterestRate,
-			long long minBalance, long long monthlyFee);
-		virtual ~SavingsAccount();
+public:
+	SavingsAccount (int accNumber, long long accBalance, double accInterestRate,
+		long long minBalance, long long monthlyFee);
+	virtual ~SavingsAccount ();
 
-		virtual void deposit (long long amount) override;
-		virtual void withdraw (long long amount) override;
-		virtual void chargeMonthlyFee () override;
-		virtual void displayAccount () const override;
+	virtual void deposit (long long amount) override;
+	virtual void withdraw (long long amount) override;
+	virtual void chargeMonthlyFee () override;
+	virtual void displayAccount () const override;
 
-	private:
-		long long mMinBalance;
-		long long mMonthlyFee;
-		bool mbIsBelowMinBalance;
+private:
+	long long mMinBalance;
+	long long mMonthlyFee;
+	bool mbIsBelowMinBalance;
 
 };

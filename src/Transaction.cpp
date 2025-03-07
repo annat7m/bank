@@ -13,10 +13,10 @@
 //***************************************************************************
 // Constructor: Transaction
 //
-// Description: Initializes Checking Account object in Banking system
+// Description: Initializes Transaction object in Banking system
 //
-// Parameters:  accountNumber - 
-//              balance       - 
+// Parameters:  transactionType - type of transaction that was made
+//              amount       		- amount of transaction
 //
 // Returned:    None
 //***************************************************************************
@@ -41,11 +41,11 @@ Transaction::~Transaction () {}
 //***************************************************************************
 // Function:    getType
 //
-// Description: 
+// Description: Getter for transaction type
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    type of transaction
 //***************************************************************************
 
 TransactionType Transaction::getType () {
@@ -55,11 +55,11 @@ TransactionType Transaction::getType () {
 //***************************************************************************
 // Function:    getAmount
 //
-// Description: 
+// Description: Getter for amount of transaction
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    amount of money that was proccessed during transaction
 //***************************************************************************
 
 long long Transaction::getAmount () {

@@ -21,7 +21,7 @@
 // Returned:    None
 //***************************************************************************
 
-Bank::Bank() {}
+Bank::Bank () {}
 
 //***************************************************************************
 // Destructor:  Bank
@@ -40,13 +40,13 @@ Bank::~Bank () {}
 //
 // Description: Adds an Account to the Bank
 //
-// Parameters:  none
+// Parameters:  account - smart pointer to an Account object
 //
 // Returned:    none
 //***************************************************************************
 
 void Bank::addAccount (std::shared_ptr<Account> account) {
-	mAccounts.push_back(account);
+	mAccounts.push_back (account);
 }
 
 //***************************************************************************
@@ -61,8 +61,8 @@ void Bank::addAccount (std::shared_ptr<Account> account) {
 
 void Bank::applyMonthlyUpdates () {
 	for (auto& account : mAccounts) {
-		account->chargeMonthlyFee();
-		account->accrueInterest();
+		account->chargeMonthlyFee ();
+		account->accrueInterest ();
 	}
 }
 
@@ -78,7 +78,7 @@ void Bank::applyMonthlyUpdates () {
 
 void Bank::display () {
 	for (const auto& account : mAccounts) {
-		account->displayAccount();
+		account->displayAccount ();
 		std::cout << std::endl;
 	}
 }
@@ -86,19 +86,19 @@ void Bank::display () {
 //***************************************************************************
 // Function:    findAccount
 //
-// Description: 
+// Description: look up account in the bank
 //
-// Parameters:  none
+// Parameters:  accountNumber - account number
 //
 // Returned:    none
 //***************************************************************************
 
-std::shared_ptr<Account> Bank::findAccount(int accountNumber) {
+std::shared_ptr<Account> Bank::findAccount (int accountNumber) {
 	for (auto& account : mAccounts) {
-		if (account->getAccountNumber() == accountNumber) {
+		if (account->getAccountNumber () == accountNumber) {
 			return account;
 		}
 	}
-	return nullptr; 
+	return nullptr;
 }
 
