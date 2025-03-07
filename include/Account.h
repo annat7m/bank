@@ -15,20 +15,28 @@
 class Account {
 
 	public:
-		Account (int number, long long balance, double interestRate);
-		virtual ~Account();
+		Account (int accountNumber, long long balance, double interestRate);
+		virtual ~Account() = default;
 
 		virtual void deposit (long long amount) = 0;
 		virtual void withdraw (long long amount) = 0;
-		virtual void chargeMonthlyFee () = 0;
-		virtual void accrueInterest () = 0;
+		virtual void accrueInterest ();
+		virtual void addTransaction (TransactionType transactionType,
+			long long amount) = 0;
 
-		void displayAccount ();
+		void displayAccount () const;
+
+		int getAccountNumber () const;
+		long long getBalance () const;
+		// double getInterestRate () const;
 
 	private:
-		int mNumber;
+		int mAccountNumber;
 		long long mBalance;
 		double mInterestRate;
 		std::vector<Transaction> mTransactions;
+
+	protected:
+    void adjustBalance(long long amount);
 
 };

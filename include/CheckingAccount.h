@@ -17,7 +17,7 @@ class CheckingAccount : public Account {
 	public:
 		CheckingAccount (int accNumber, long long accBalance, double accInterestRate,
 			long long minBalance, long long minBalanceFee);
-		virtual ~CheckingAccount();
+		~CheckingAccount() override = default;
 
 		virtual void deposit (long long amount) override;
 		virtual void withdraw (long long amount) override;

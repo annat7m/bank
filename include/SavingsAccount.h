@@ -12,20 +12,20 @@
 
 #pragma once
 
-class SavingAccount : public Account {
+class SavingsAccount : public Account {
 
 	public:
-		SavingAccount (int accNumber, long long accBalance, double accInterestRate,
+		SavingsAccount (int accNumber, long long accBalance, double accInterestRate,
 			long long minBalance, long long monthlyFee);
-		virtual ~SavingAccount();
+		~SavingsAccount() override = default;
 
 		virtual void deposit (long long amount) override;
 		virtual void withdraw (long long amount) override;
 		virtual void chargeMonthlyFee () override;
-		virtual void accrueInterest () override;
 
 	private:
 		long long mMinBalance;
 		long long mMonthlyFee;
+		bool mbIsBelowMinBalance;
 
 };

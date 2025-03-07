@@ -6,3 +6,88 @@
 // Assignment:  Assignment 3 - Bank Accounts
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
+
+#include "CheckingAccount.h"
+#include "../include/Account.h"
+#include <iostream>
+
+//***************************************************************************
+// Constructor: CheckingAccount
+//
+// Description: Initializes Checking Account object in Banking system
+//
+// Parameters:  accountNumber - account number
+//              balance       - initial balance
+//              interestRate  - annual interest rate
+//              minBalance    - minimum balance allowed
+//              minBalanceFee - fee charged if the balance falls below the 
+//															minimum
+//
+// Returned:    None
+//***************************************************************************
+
+CheckingAccount::CheckingAccount(int accountNumber, long long balance, 
+	double interestRate, long long minBalance, long long minBalanceFee)
+	: Account(accountNumber, balance, interestRate) {
+	mMinBalance = minBalance;
+	mMinBalanceFee = minBalanceFee;
+}
+
+//***************************************************************************
+// Destructor:  CheckingAccount
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+CheckingAccount::~CheckingAccount () {}
+
+//***************************************************************************
+// Function:    deposit
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::deposit(long long amount) {
+	Account::deposit(amount);
+}
+
+//***************************************************************************
+// Function:    withdraw
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::withdraw(long long amount) {
+	Account::withdraw(amount);
+}
+
+//***************************************************************************
+// Function:    applyMinBalanceFee
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+bool CheckingAccount::applyMinBalanceFee() {
+	if (Account::getBalance() < mMinBalance) {
+		adjustBalance(-mMinBalanceFee);
+		addTransaction(TransactionType::fee, mMinBalanceFee);
+		return true;
+	}
+	return false;
+}
