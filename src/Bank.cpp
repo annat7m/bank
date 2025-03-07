@@ -9,6 +9,7 @@
 
 #include "../include/Bank.h"
 #include <iostream>
+#include <fstream>
 
 //***************************************************************************
 // Constructor: Bank
@@ -78,6 +79,26 @@ void Bank::applyMonthlyUpdates () {
 void Bank::display () {
 	for (const auto& account : mAccounts) {
 		account->displayAccount();
-		std::cout << "-------------------------" << std::endl;
+		std::cout << std::endl;
 	}
 }
+
+//***************************************************************************
+// Function:    findAccount
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+std::shared_ptr<Account> Bank::findAccount(int accountNumber) {
+	for (auto& account : mAccounts) {
+		if (account->getAccountNumber() == accountNumber) {
+			return account;
+		}
+	}
+	return nullptr; 
+}
+

@@ -21,6 +21,7 @@ class Bank {
 
 		void addAccount (std::shared_ptr<Account> account);
 		void applyMonthlyUpdates();
+		std::shared_ptr<Account> findAccount (int accountNumber);
 
 		void display ();
 

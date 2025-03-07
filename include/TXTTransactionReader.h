@@ -16,12 +16,12 @@
 class TXTTransactionReader : public ITransactionReader {
 
 	public:
-		TXTTransactionReader ();
+		TXTTransactionReader (const std::string& fileName);
 		virtual ~TXTTransactionReader();
 
 		virtual void readTransactions (Bank& bank) override;
 
 	private:
-		std::ifstream mCommandsFile;
+		std::ifstream mcCommandsFile;
 
 };
