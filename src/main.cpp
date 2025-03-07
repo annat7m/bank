@@ -39,10 +39,6 @@ int main()
 	accountReader.readAccounts(firstBank);
 	commandsReader.readTransactions(firstBank);
 
-	firstBank.applyMonthlyUpdates();
-
-	firstBank.display();
-
 	return EXIT_SUCCESS;
 		
 }

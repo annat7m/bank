@@ -72,6 +72,9 @@ void CheckingAccount::deposit(long long amount) {
 
 void CheckingAccount::withdraw(long long amount) {
 	Account::withdraw(amount);
+	if (Account::getBalance() < 0) {
+		adjustBalance(-Account::getBalance());
+	}
 }
 
 //***************************************************************************
@@ -88,6 +91,9 @@ bool CheckingAccount::applyMinBalanceFee() {
 	if (Account::getBalance() < mMinBalance) {
 		adjustBalance(-mMinBalanceFee);
 		addTransaction(TransactionType::fee, mMinBalanceFee);
+		if (Account::getBalance() < 0) {
+			adjustBalance(-Account::getBalance());
+		}
 		return true;
 	}
 	return false;
@@ -105,7 +111,7 @@ bool CheckingAccount::applyMinBalanceFee() {
 
 void CheckingAccount::displayAccount() const {
 	std::cout << std::fixed << std::setprecision(2) << Account::getAccountNumber()  
-		<< ", $" <<  Account::getBalance()*Account::getInterestRate()
-		<< ", " << Account::getInterestRate()*100 << "%, ";
+		<< ", $" <<  Account::getBalance() * Account::getInterestRate()
+		<< ", " << Account::getInterestRate() * 100 << "%, ";
 	std::cout << mMinBalance << ", " << mMinBalanceFee;
 	}

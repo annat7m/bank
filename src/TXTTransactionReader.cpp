@@ -76,7 +76,6 @@ void TXTTransactionReader::readTransactions(Bank& bank) {
 	}
 
 	while (mcCommandsFile >> command) {
-		std::cout << "-------------" << std::endl;
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> amount;
 			account = bank.findAccount(accountNumber);
@@ -86,7 +85,9 @@ void TXTTransactionReader::readTransactions(Bank& bank) {
 			account = bank.findAccount(accountNumber);
 			account->deposit(amount);
 		} else if (command == PRINT) {
+			std::cout << "-------------" << std::endl;
 			bank.display ();
+			std::cout << "-------------" << std::endl;
 		} else if (command == CHARGE) {
 			bank.applyMonthlyUpdates();
 		}
