@@ -13,16 +13,16 @@
 
 #pragma once
 
-class Bank : public Account {
+class Bank {
 
 	public:
-		Bank (std::vector<std::shared_ptr<Account>>);
+		Bank ();
 		virtual ~Bank();
 
-		void addAccount (Account& account);
+		void addAccount (std::shared_ptr<Account> account);
 		void applyMonthlyUpdates();
 
-		virtual void display ();
+		void display ();
 
 	private:
 		std::vector<std::shared_ptr<Account>> mAccounts;

@@ -20,6 +20,7 @@ class Account {
 
 		virtual void deposit (long long amount) = 0;
 		virtual void withdraw (long long amount) = 0;
+		virtual void chargeMonthlyFee () = 0;
 		virtual void accrueInterest ();
 		virtual void addTransaction (TransactionType transactionType,
 			long long amount) = 0;

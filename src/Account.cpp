@@ -7,7 +7,7 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "Account.h"
+#include "../include/Account.h"
 #include <iostream>
 
 //***************************************************************************
@@ -83,7 +83,7 @@ void Account::withdraw (long long amount) {
 
 void Account::accrueInterest() {
     long long interest = static_cast<long long>(mBalance * mInterestRate);
-    mInterestRate += interest;
+    mBalance += interest;
     addTransaction(TransactionType::interest, interest);
 }
 
