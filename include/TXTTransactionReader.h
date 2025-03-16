@@ -9,6 +9,7 @@
 
 #include "../include/Bank.h"
 #include "../include/ITransactionReader.h"
+#include <iostream>
 #include <fstream>
 
 #pragma once

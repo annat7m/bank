@@ -7,6 +7,8 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
+#include <iostream>
+
 #pragma once
 
 class Money {
