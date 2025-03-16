@@ -1,9 +1,9 @@
 //***************************************************************************
 // File name:   TXTTransactionReader.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
@@ -19,7 +19,7 @@ public:
 	TXTTransactionReader (const std::string& fileName);
 	virtual ~TXTTransactionReader ();
 
-	virtual void readTransactions (Bank& bank) override;
+	virtual void readTransactions (std::ostream& rcOutStream, Bank& bank) override;
 
 private:
 	std::ifstream mcCommandsFile;

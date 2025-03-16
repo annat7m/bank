@@ -1,43 +1,50 @@
 //***************************************************************************
 // File name:   Account.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
 #include <vector>
+#include <memory>
 #include "../include/Transaction.h"
+#include "../include/Interest.h"
+#include "../include/Money.h"
 
 #pragma once
 
 class Account {
 
 public:
-	Account (int accountNumber, long long balance, double interestRate);
+	Account (unsigned int accountNumber, const Money& balance,
+		const Interest& interestRate);
 	virtual ~Account ();
 
-	virtual void deposit (long long amount) = 0;
-	virtual void withdraw (long long amount) = 0;
+	virtual void deposit (const Money& amount) = 0;
+	virtual void withdraw (const Money& amount) = 0;
 	virtual void chargeMonthlyFee ();
-	virtual void accrueInterest ();
+	virtual void generateInterest ();
 	virtual void addTransaction (TransactionType transactionType,
-		long long amount);
+		const Money& amount);
 
-	virtual void displayAccount () const = 0;
+	virtual void accrueInterest ();
 
-	int getAccountNumber () const;
-	long long getBalance () const;
-	double getInterestRate () const;
+	Money getBalance () const;
+	bool operator== (unsigned int accountNum) const;
+	virtual void displayAccount (std::ostream& rcOutStream) const = 0;
+	virtual void read (std::istream& rcInStream) const;
+
+	friend std::ostream& operator<< (std::ostream& rcOutStream,
+		const Account& account);
+	friend std::istream& operator>> (std::istream& rcOutStream,
+		const Account& account);
 
 private:
-	int mAccountNumber;
-	long long mBalance;
-	double mInterestRate;
+	unsigned int mAccountNumber;
+	Money mBalance;
+	std::shared_ptr<Interest> mInterestRate;
 	std::vector<Transaction> mTransactions;
-
-protected:
-	void adjustBalance (long long amount);
 
 };

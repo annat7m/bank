@@ -1,9 +1,9 @@
 //***************************************************************************
 // File name:   TXTAccountReader.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
@@ -19,7 +19,8 @@ public:
 	TXTAccountReader (const std::string& fileName);
 	virtual ~TXTAccountReader ();
 
-	virtual void readAccounts (Bank& bank) override;
+	virtual std::shared_ptr<Account> readAccount (std::ostream&
+		rcOutStream) override;
 
 private:
 	std::ifstream mcAccountsFile;

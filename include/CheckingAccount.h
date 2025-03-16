@@ -1,31 +1,35 @@
 //***************************************************************************
 // File name:   CheckingAccount.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
 #include <vector>
 #include "../include/Account.h"
+#include "../include/Interest.h"
 
 #pragma once
 
 class CheckingAccount : public Account {
 
 public:
-	CheckingAccount (int accNumber, long long accBalance, double accInterestRate,
-		long long minBalance, long long minBalanceFee);
+	CheckingAccount (unsigned int accNumber, const Money& accBalance,
+		const Interest& accInterestRate,
+		const Money& minBalance, const Money& minBalanceFee);
 	virtual ~CheckingAccount ();
 
-	virtual void deposit (long long amount) override;
-	virtual void withdraw (long long amount) override;
-	virtual void displayAccount () const override;
+	virtual void deposit (const Money& amount) override;
+	virtual void withdraw (const Money& amount) override;
+
+	virtual void displayAccount (std::ostream& rcOutStream) const override;
+	virtual void read (std::istream& rcInStream) const override;
 
 private:
-	long long mMinBalance;
-	long long mMinBalanceFee;
+	Money mMinBalance;
+	Money mMinBalanceFee;
 
 	bool applyMinBalanceFee ();
 

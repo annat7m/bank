@@ -1,5 +1,5 @@
 //***************************************************************************
-// File name:   ITransactionReader.h
+// File name:   FlatInterest.h
 // Author:      Anna Tymoshenko
 // Date:        03/15/2025
 // Class:       CS485
@@ -7,16 +7,13 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "../include/Bank.h"
+#include "../include/Interest.h"
 
 #pragma once
 
-class ITransactionReader {
-
+class FlatInterest : public Interest {
 public:
-	ITransactionReader ();
-	virtual ~ITransactionReader ();
 
-	virtual void readTransactions (std::ostream& rcOutStream, Bank& bank) = 0;
+private:
 
 };
