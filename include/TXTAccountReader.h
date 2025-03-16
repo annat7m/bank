@@ -7,7 +7,6 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "../include/Bank.h"
 #include "../include/IAccountReader.h"
 #include <fstream>
 
