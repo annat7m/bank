@@ -17,16 +17,11 @@ add_subdirectory(googletest)
 
 set (Headers
     include/placeholder.h
-		include/Account.h
-		include/SavingsAccount.h
-		include/CheckingAccount.h
+		include/Money.h
 )
 
 set (Sources
-    src/main.cpp
-		src/Account.cpp
-		src/SavingsAccount.cpp
-		src/CheckingAccount.cpp
+		src/Money.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})

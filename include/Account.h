@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include <vector>
+#include <iostream>
 #include <memory>
 #include "../include/Transaction.h"
 #include "../include/Interest.h"
