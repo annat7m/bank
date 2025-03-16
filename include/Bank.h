@@ -19,7 +19,7 @@ class Bank {
 
 public:
 	Bank ();
-	Bank (IAccountReader&);
+	Bank (IAccountReader& accountReader);
 	virtual ~Bank ();
 
 	void deposit (const Money& amount);

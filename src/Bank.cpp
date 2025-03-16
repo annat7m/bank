@@ -16,12 +16,26 @@
 //
 // Description: Default constructor
 //
-// Parameters:  accounts - vector of smart pointers to Account objects
+// Parameters:  none
 //
 // Returned:    None
 //***************************************************************************
 
 Bank::Bank () {}
+
+//***************************************************************************
+// Constructor: Bank
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    None
+//***************************************************************************
+
+Bank::Bank (IAccountReader& accountReader) {
+
+}
 
 //***************************************************************************
 // Destructor:  Bank
@@ -36,17 +50,31 @@ Bank::Bank () {}
 Bank::~Bank () {}
 
 //***************************************************************************
-// Function:    addAccount
+// Function:    deposit
 //
-// Description: Adds an Account to the Bank
+// Description: 
 //
-// Parameters:  account - smart pointer to an Account object
+// Parameters:  amount - 
 //
 // Returned:    none
 //***************************************************************************
 
-void Bank::addAccount (std::shared_ptr<Account> account) {
-	mAccounts.push_back (account);
+void Bank::deposit (const Money& amount) {
+
+}
+
+//***************************************************************************
+// Function:    withdraw
+//
+// Description: 
+//
+// Parameters:  amount - 
+//
+// Returned:    none
+//***************************************************************************
+
+void Bank::withdraw (const Money& amount) {
+
 }
 
 //***************************************************************************
@@ -82,23 +110,3 @@ void Bank::display () {
 		std::cout << std::endl;
 	}
 }
-
-//***************************************************************************
-// Function:    findAccount
-//
-// Description: look up account in the bank
-//
-// Parameters:  accountNumber - account number
-//
-// Returned:    none
-//***************************************************************************
-
-std::shared_ptr<Account> Bank::findAccount (int accountNumber) {
-	for (auto& account : mAccounts) {
-		if (account->getAccountNumber () == accountNumber) {
-			return account;
-		}
-	}
-	return nullptr;
-}
-

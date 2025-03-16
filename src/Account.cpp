@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "../include/Account.h"
+#include "../include/Money.h"
 #include <iostream>
 
 //***************************************************************************
@@ -22,7 +23,8 @@
 // Returned:    None
 //***************************************************************************
 
-Account::Account (int accountNumber, long long balance, double interestRate) {
+Account::Account (unsigned int accountNumber, const Money& balance, 
+	const Interest& interestRate) {
 	mAccountNumber = accountNumber;
 	mBalance = balance;
 	mInterestRate = interestRate;
@@ -50,7 +52,7 @@ Account::~Account () {}
 // Returned:    none
 //***************************************************************************
 
-void Account::deposit (long long amount) {
+void Account::deposit (const Money& amount) {
 	mBalance += amount;
 	addTransaction (TransactionType::deposit, amount);
 }
@@ -65,7 +67,7 @@ void Account::deposit (long long amount) {
 // Returned:    none
 //***************************************************************************
 
-void Account::withdraw (long long amount) {
+void Account::withdraw (const Money& amount) {
 	// accounts are allowed to be negative
 	mBalance -= amount;
 	addTransaction (TransactionType::withdrawal, amount);
@@ -86,6 +88,36 @@ void Account::chargeMonthlyFee () {
 }
 
 //***************************************************************************
+// Function:    generateInterest
+//
+// Description: generate interest based on balance
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void Account::generateInterest () {
+
+}
+
+//***************************************************************************
+// Function:    addTransaction
+//
+// Description: add a transaction that was made using banking account
+//
+// Parameters:  TransactionType	- type of transaction that was made
+//							amount					- amount of the transaction
+//
+// Returned:    none
+//***************************************************************************
+
+void Account::addTransaction (TransactionType transactionType,
+	const Money& amount) {
+	mTransactions.emplace_back (transactionType, amount);
+}
+
+//***************************************************************************
 // Function:    accrueInterest
 //
 // Description: accrue interest on a banking account
@@ -102,36 +134,6 @@ void Account::accrueInterest () {
 }
 
 //***************************************************************************
-// Function:    addTransaction
-//
-// Description: add a transaction that was made using banking account
-//
-// Parameters:  TransactionType	- type of transaction that was made
-//							amount					- amount of the transaction
-//
-// Returned:    none
-//***************************************************************************
-
-void Account::addTransaction (TransactionType transactionType,
-	long long amount) {
-	mTransactions.emplace_back (transactionType, amount);
-}
-
-//***************************************************************************
-// Function:    getAccountNumber
-//
-// Description: getter function for account number
-//
-// Parameters:  none
-//
-// Returned:    number identidying banking account
-//***************************************************************************
-
-int Account::getAccountNumber () const {
-	return mAccountNumber;
-}
-
-//***************************************************************************
 // Function:    getBalance
 //
 // Description: getter function for balance
@@ -141,35 +143,80 @@ int Account::getAccountNumber () const {
 // Returned:    amount of money that is on the balance
 //***************************************************************************
 
-long long Account::getBalance () const {
+Money Account::getBalance () const {
 	return mBalance;
 }
 
 //***************************************************************************
-// Function:    getInterestRate
+// Function:    operaotr==
 //
-// Description: getter function for the interest rate
+// Description: compare if accounts are the same 
 //
-// Parameters:  none
+// Parameters:  accountNum - number of account
 //
-// Returned:    the interest rate
+// Returned:    true if equal, false otherwise
 //***************************************************************************
 
-double Account::getInterestRate () const {
-	return mInterestRate;
+bool Account::operator== (unsigned int accountNum) const {
+
 }
 
 //***************************************************************************
-// Function:    adjustBalance
+// Function:    display
 //
-// Description: protected function to change or adjust the account balance based
-//							on the amount
+// Description: display account info to the stream 
 //
-// Parameters:  amount - how much would the balance change 
+// Parameters:  rcOutStream - stream to output to
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::adjustBalance (long long amount) {
-	mBalance += amount;
+void Account::display (std::ostream& rcOutStream) const {
+
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read account info from the stream 
+//
+// Parameters:  rcInStream - stream to input from
+//
+// Returned:    none
+//***************************************************************************
+
+void Account::read (std::istream& rcInStream) const {
+
+}
+
+//***************************************************************************
+// Function:    operator<<
+//
+// Description: display account info to the screen 
+//
+// Parameters:  rcOutStream	- steam to output to
+//							account			- account to output
+//
+// Returned:    none
+//***************************************************************************
+
+std::ostream& operator<< (std::ostream& rcOutStream,
+	const Account& account) {
+
+}
+
+//***************************************************************************
+// Function:    operator>>
+//
+// Description: read account info from the stream 
+//
+// Parameters:  rcOutStream - steam to input from
+//							account			- account to input
+//
+// Returned:    none
+//***************************************************************************
+
+std::istream& operator>> (std::istream& rcOutStream,
+	const Account& account) {
+
 }
