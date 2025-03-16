@@ -20,11 +20,12 @@ public:
 	Money& operator+= (const Money& amount);
 	Money& operator-= (const Money& amount);
 	Money& operator*= (const Money& amount);
+	Money operator* (double multiplier);
 
-	bool operator< (const Money& amount);
-	bool operator>= (const Money& amount);
+	bool operator< (const Money& amount) const;
+	bool operator>= (const Money& amount) const;
 
-	void display (std::ostream& rcOutStream);
+	void display (std::ostream& rcOutStream) const;
 	void read (std::istream& rcInStream);
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
@@ -36,3 +37,7 @@ private:
 	long long mAmount;
 
 };
+
+// non-member, non-friend operators
+Money operator+(const Money& amount1, const Money& amount2);
+Money operator-(const Money& amount1, const Money& amount2);
