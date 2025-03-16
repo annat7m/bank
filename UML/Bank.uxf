@@ -1,0 +1,110 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>390</x><y>210</y><w>280</w><h>390</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+Account
+--
+-mNumber : int
+-mBalance : long long
+-mInterestRate : double
+-mTransactions : std::vector&lt;Transaction&gt;
+
+--
++Account(int, long long, double)
+/+~Account()/
+
+/+deposit (long long) = 0 : void/
+/+withdraw (long long) = 0 : void/
+/+chargeMonthlyFee () : void/
++addTransaction (TransactionType, long long) : void
+
+/+accrueInterest () : void/
+
+/+ &lt;&lt;const&gt;&gt; getBalance () : long long/
+/+ &lt;&lt;const&gt;&gt; getAccountNumber () : int/
+/+ &lt;&lt;const&gt;&gt; getInterestRate () : double/
+
+/+ &lt;&lt;const&gt;&gt; displayAccount () = 0: void/
+
+#adjustBalance (long long) : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>740</x><y>140</y><w>330</w><h>180</h></coordinates><panel_attributes>Bank
+--
+-mAccounts : std::vector&lt;std::shared_ptr&lt;Account&gt;&gt;
+
+--
++Bank ()
+/~Bank ()/
+
++addAccount (std::shared_ptr&lt;Account&gt;) : void
++applyMonthlyUpdates () : void
++findAccount (int) : std::shared_ptr&lt;Account&gt;
+
+/+displayAccounts () : void/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>640</y><w>380</w><h>210</h></coordinates><panel_attributes>CheckingAccount
+--
+-mMinBalance : long long
+-mMinBalanceFee : long long
+--
++CheckingAccount (int, long long, double, long long, long long)
+/+~CheckingAccount ()/
+
+/+deposit (long long) : void/
+/+withdraw (long long) : void/
+
+/+ &lt;&lt;const&gt;&gt; displayAccount () : void/
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>140</x><y>640</y><w>380</w><h>210</h></coordinates><panel_attributes>SavingsAccount
+--
+-mMinBalance : long long
+-mMonthlyFee : long long
+-mbIsBelowMinBalance : bool
+-
++SavingsAccount (int, long long, double, long long, long long)
+/~SavingsAccount ()/
+
+/+deposit (long long) : void/
+/+withdraw (long long) : void/
+/+chargeMonthlyFee () : void/
+
+/+ &lt;&lt;const&gt;&gt; displayAccount () : void/
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>360</y><w>200</w><h>120</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+IAccountReader
+--
+--
++IAccountReader ()
+/+~IAccountReader ()/
+
+/+readAccounts (Bank) = 0 : void/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>390</y><w>210</w><h>160</h></coordinates><panel_attributes>Transaction
+--
+-mType : TransactionType
+-mAmount : long long
+--
++Transaction (TransactionType, long long)
+/+~Transaction ()/
+
++getType () : TransactionType
++getAmount () : long long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>210</y><w>180</w><h>110</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+TransactionType
+--
+deposit
+withdrawal
+fee
+interest
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>310</y><w>30</w><h>100</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>590</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>590</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>700</x><y>510</y><w>200</w><h>110</h></coordinates><panel_attributes>TXTAccountReader
+--
+-mAccountFile : std::ifsream
+--
++TXTAccountReader ()
+/+~TXTAccountReader ()/
+
+/+readAccounts (Bank&amp;) : void/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>360</y><w>200</w><h>120</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+ITransactionReader
+--
+--
++ITransactionReader ()
+/+~ITransactionReader ()/
+
+/+readTransactions (Bank) = 0 : void/</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>920</x><y>510</y><w>200</w><h>110</h></coordinates><panel_attributes>TXTTransactionReader
+--
+-mCommandsFile : std::ifstream
+--
++TXTTransactionReader ()
+/+~TXTTransactionReader ()/
+
+/+readTransactions (Bank&amp;) : void/</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>480</y><w>90</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>860</x><y>310</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>310</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>860</x><y>470</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>470</y><w>30</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>UMLNote</id><coordinates><x>390</x><y>140</y><w>140</w><h>50</h></coordinates><panel_attributes>Anna Tymoshenko</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>660</x><y>270</y><w>100</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>80;10;10;10</additional_attributes></element></diagram>
