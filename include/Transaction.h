@@ -1,13 +1,14 @@
 //***************************************************************************
 // File name:   Transaction.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
 #include <vector>
+#include "../include/Money.h"
 
 #pragma once
 
@@ -26,14 +27,14 @@ enum class TransactionType {
 class Transaction {
 
 public:
-	Transaction (TransactionType transactionType, long long amount);
+	Transaction (TransactionType transactionType, const Money& amount);
 	virtual ~Transaction ();
 
-	TransactionType getType ();
-	long long getAmount ();
+	TransactionType& getType () const;
+	Money& getAmount () const;
 
 private:
 	TransactionType mType;
-	long long mAmount;
+	Money mAmount;
 
 };

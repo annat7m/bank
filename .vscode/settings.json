@@ -76,7 +76,18 @@
 		"stack": "cpp",
 		"compare": "cpp",
 		"concepts": "cpp",
-		"numbers": "cpp"
+		"numbers": "cpp",
+		"any": "cpp",
+		"csignal": "cpp",
+		"forward_list": "cpp",
+		"list": "cpp",
+		"map": "cpp",
+		"set": "cpp",
+		"unordered_set": "cpp",
+		"semaphore": "cpp",
+		"span": "cpp",
+		"stop_token": "cpp",
+		"variant": "cpp"
 	},
    
   "editor.tabSize": 2,

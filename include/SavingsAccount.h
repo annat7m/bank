@@ -1,32 +1,36 @@
 //***************************************************************************
 // File name:   SavingAccount.h
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/15/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
 #include <vector>
 #include "../include/Account.h"
+#include "../include/Interest.h"
 
 #pragma once
 
 class SavingsAccount : public Account {
 
 public:
-	SavingsAccount (int accNumber, long long accBalance, double accInterestRate,
-		long long minBalance, long long monthlyFee);
+	SavingsAccount (unsigned int accNumber, const Money& accBalance,
+		const Interest& accInterestRate,
+		const Money& minBalance, const Money& monthlyFee);
 	virtual ~SavingsAccount ();
 
-	virtual void deposit (long long amount) override;
-	virtual void withdraw (long long amount) override;
+	virtual void deposit (const Money& amount) override;
+	virtual void withdraw (const Money& amount) override;
 	virtual void chargeMonthlyFee () override;
-	virtual void displayAccount () const override;
+
+	virtual void displayAccount (std::ostream& rcOutStream) const override;
+	virtual void read (std::istream& rcInStream) const override;
 
 private:
-	long long mMinBalance;
-	long long mMonthlyFee;
+	Money mMinBalance;
+	Money mMonthlyFee;
 	bool mbIsBelowMinBalance;
 
 };
