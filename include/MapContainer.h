@@ -8,12 +8,26 @@
 //***************************************************************************
 
 #include "../include/IContainer.h"
+#include <map>
 
 #pragma once
 
 class MapContainer : public IContainer {
 public:
+	MapContainer ();
+	virtual ~MapContainer ();
+
+	virtual void addAccount (std::shared_ptr<Account> account) override;
+	virtual void removeAccount (unsigned int accountNumber) override;
+	virtual std::shared_ptr<Account> getFirst () override;
+	virtual std::shared_ptr<Account> getNext () override;
+
+	virtual bool bAccountExists (unsigned int accountNumber) override;
+	virtual std::shared_ptr<Account> getAccount (unsigned int accountNumber)
+		override;
 
 private:
+	std::map<unsigned int, std::shared_ptr<Account>> mAccounts;
+	std::map<unsigned int, std::shared_ptr<Account>>::iterator mIterator;
 
 };
