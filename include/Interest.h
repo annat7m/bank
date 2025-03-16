@@ -10,8 +10,19 @@
 #pragma once
 
 class Interest {
-	public:
+public:
+	Interest ();
+	virtual ~Interest ();
 
-	private:
+	virtual Money generate (const Money& amount) = 0;
+	virtual void display (std::ostream& rcOutStream) const;
+	virtual void read (std::istream& rcInStream) const;
 
+	friend std::ostream& operator<< (std::ostream& rcOutStream,
+		const Interest& interest);
+	friend std::istream& operator>> (std::istream& rcOutStream,
+		const Interest& interest);
+
+private:
+	
 };
