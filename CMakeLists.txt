@@ -18,10 +18,12 @@ add_subdirectory(googletest)
 set (Headers
     include/placeholder.h
 		include/Money.h
+		include/TieredInterest.h
 )
 
 set (Sources
 		src/Money.cpp
+		src/TieredInterest.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})
