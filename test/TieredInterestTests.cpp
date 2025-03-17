@@ -13,12 +13,15 @@
 #include "../include/TieredInterest.h"
 
 //***************************************************************************
-// Test: 				Constructor
+// Test:        Constructor
 //
-// Description: 
-//							 
+// Description: Tests the constructor of TieredInterest to ensure it initializes
+//              correctly.
 //***************************************************************************
-
-TEST (TieredInterestTests, Constructor) {
-	EXPECT_TRUE(true);
+TEST(TieredInterestTests, Constructor) {
+	TieredInterest tieredInterest(3);
+	std::stringstream stream;
+	tieredInterest.display(stream);
+	EXPECT_EQ(stream.str(), "T 3");
 }
+
