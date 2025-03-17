@@ -155,6 +155,20 @@ bool Money::operator>= (const Money& amount) const {
 }
 
 //***************************************************************************
+// Function:    operator()
+//
+// Description: function call operator
+//
+// Parameters:  none
+//
+// Returned:    amount (running total logic)
+//***************************************************************************
+
+long long Money::operator() () const {
+	return mAmount;
+}
+
+//***************************************************************************
 // Function:    display
 //
 // Description: display the Money object to the stream
@@ -200,7 +214,7 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 }
 
 //***************************************************************************
-// Function:    operator<<
+// Function:    operator>>
 //
 // Description: insertion operator
 //
@@ -213,4 +227,34 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 std::istream& operator>> (std::istream& rcInStream, Money& amount) {
 	amount.read(rcInStream);
 	return rcInStream;
+}
+
+//***************************************************************************
+// Function:    operator+
+//
+// Description: free function - performs basic addition of two long long's
+//
+// Parameters:  multiplier - amount to multiply by
+//
+// Returned:    updated Money object
+//***************************************************************************
+
+Money operator+ (Money amount1, const Money& amount2) {
+	amount1 += amount2;
+	return amount1 ();
+}
+
+//***************************************************************************
+// Function:    operator-
+//
+// Description: free function - performs basic subtraction of two long long's
+//
+// Parameters:  multiplier - amount to multiply by
+//
+// Returned:    updated Money object
+//***************************************************************************
+
+Money operator- (Money amount1, const Money& amount2) {
+	amount1 -= amount2;
+	return amount1 ();
 }
