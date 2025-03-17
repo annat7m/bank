@@ -16,14 +16,14 @@ public:
 	Interest ();
 	virtual ~Interest ();
 
-	virtual Money generate (const Money& amount) = 0;
+	virtual Money generate (Money& balance) const = 0;
 	virtual void display (std::ostream& rcOutStream) const;
-	virtual void read (std::istream& rcInStream) const;
+	virtual void read (std::istream& rcInStream);
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
 		const Interest& interest);
 	friend std::istream& operator>> (std::istream& rcOutStream,
-		const Interest& interest);
+		Interest& interest);
 
 private:
 	

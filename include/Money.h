@@ -34,7 +34,7 @@ public:
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
 		const Money& amount);
-	friend std::istream& operator>> (std::istream& rcOutStream,
+	friend std::istream& operator>> (std::istream& rcInStream,
 		Money& amount);
 
 private:

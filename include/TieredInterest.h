@@ -18,18 +18,13 @@
 class TieredInterest : public Interest {
 public:
 	TieredInterest (unsigned int numOfTieres);
-	virtual ~TieredInterest ();
+	virtual ~TieredInterest () override;
 
-	virtual Money generate (const Money& amount) override;
+	virtual Money generate (Money& balance) const override;
 	virtual void display (std::ostream& rcOutStream) const override;
-	virtual void read (std::istream& rcInStream) const override;
+	virtual void read (std::istream& rcInStream) override;
 
 	void addTier (const Money& amount, double interest);
-
-	friend std::ostream& operator<< (std::ostream& rcOutStream,
-		const Interest& interest);
-	friend std::istream& operator>> (std::istream& rcOutStream,
-		const Interest& interest);
 
 private:
 	unsigned int mNumberOfTieres;

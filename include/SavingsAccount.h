@@ -20,7 +20,7 @@ public:
 	SavingsAccount (unsigned int accNumber, const Money& accBalance,
 		const Interest& accInterestRate,
 		const Money& minBalance, const Money& monthlyFee);
-	virtual ~SavingsAccount ();
+	virtual ~SavingsAccount () override;
 
 	virtual void deposit (const Money& amount) override;
 	virtual void withdraw (const Money& amount) override;

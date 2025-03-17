@@ -1,0 +1,81 @@
+//***************************************************************************
+// File name:   FlatInterest.h
+// Author:      Anna Tymoshenko
+// Date:        03/16/2025
+// Class:       CS485
+// Assignment:  Assignment 4 - Bank 2
+// Purpose:     Practice Object Oriented Design Skills
+//***************************************************************************
+
+#include "FlatInterest.h"
+
+//***************************************************************************
+// Constructor: FlatInterest
+//
+// Description: Initializes Flat Interest object
+//
+// Parameters:  rate - wanted interest rate
+//
+// Returned:    None
+//***************************************************************************
+
+FlatInterest::FlatInterest (double rate) {
+	mInterest = rate;
+}
+
+//***************************************************************************
+// Destructor:  FlatInterest
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+FlatInterest::~FlatInterest () {}
+
+//***************************************************************************
+// Function:    generate
+//
+// Description: apply flat interest rate on balance
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+Money FlatInterest::generate (Money& balance) const {
+	if (balance < Money (0)) {
+		return Money (0);
+	}
+	return balance * mInterest;
+}
+
+//***************************************************************************
+// Function:    display
+//
+// Description: display flat interest rate to the stream
+//
+// Parameters:  rcOutStream - stream to write to
+//
+// Returned:    none
+//***************************************************************************
+
+void FlatInterest::display (std::ostream& rcOutStream) const {
+	rcOutStream << "F " << mInterest;
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read flat interest rate from the stream
+//
+// Parameters:  rcInStream - stream to read from
+//
+// Returned:    none
+//***************************************************************************
+
+void FlatInterest::read (std::istream& rcInStream) {
+	rcInStream >> mInterest;
+}
