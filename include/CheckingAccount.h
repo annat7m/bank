@@ -20,7 +20,7 @@ public:
 	CheckingAccount (unsigned int accNumber, const Money& accBalance,
 		const Interest& accInterestRate,
 		const Money& minBalance, const Money& minBalanceFee);
-	virtual ~CheckingAccount ();
+	virtual ~CheckingAccount () override;
 
 	virtual void deposit (const Money& amount) override;
 	virtual void withdraw (const Money& amount) override;
