@@ -7,6 +7,7 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
+#include "../include/Money.h"
 #include <iostream>
 
 #pragma once
@@ -22,7 +23,7 @@ public:
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
 		const Interest& interest);
-	friend std::istream& operator>> (std::istream& rcOutStream,
+	friend std::istream& operator>> (std::istream& rcInStream,
 		Interest& interest);
 
 private:

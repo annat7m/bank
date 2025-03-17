@@ -1,5 +1,5 @@
 //***************************************************************************
-// File name:   FlatInterest.h
+// File name:   FlatInterest.cpp
 // Author:      Anna Tymoshenko
 // Date:        03/16/2025
 // Class:       CS485
@@ -7,7 +7,8 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "FlatInterest.h"
+#include "../include/FlatInterest.h"
+#include <iostream>
 
 //***************************************************************************
 // Constructor: FlatInterest
@@ -63,7 +64,7 @@ Money FlatInterest::generate (Money& balance) const {
 //***************************************************************************
 
 void FlatInterest::display (std::ostream& rcOutStream) const {
-	rcOutStream << "F " << mInterest;
+	rcOutStream << "F " << mInterest << "%";
 }
 
 //***************************************************************************

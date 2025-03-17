@@ -1,0 +1,59 @@
+//***************************************************************************
+// File name:   Interest.cpp
+// Author:      Anna Tymoshenko
+// Date:        03/16/2025
+// Class:       CS485
+// Assignment:  Assignment 4 - Bank 2
+// Purpose:     Practice Object Oriented Design Skills
+//***************************************************************************
+
+#include "../include/Interest.h"
+#include "../include/FlatInterest.h"
+#include "../include/TieredInterest.h"
+
+//***************************************************************************
+// Function:    operator<<
+//
+// Description: display interest rate to the stream
+//
+// Parameters:  rcOutStream	- stream to write to
+//							interest		- ineterest rate to display
+//
+// Returned:    none
+//***************************************************************************
+
+std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
+	interest.display (rcOutStream);
+	return rcOutStream;
+}
+
+//***************************************************************************
+// Function:    operator>>
+//
+// Description: read flat interest rate from the stream
+//
+// Parameters:  rcInStream - stream to read from
+//							interest		- ineterest rate to display
+//
+// Returned:    none
+//***************************************************************************
+
+std::istream& operator>>(std::istream& rcInStream, Interest& interest) {
+	const char FLAT = 'F';
+	const char TIERED = 'T';
+	char type;
+
+	rcInStream >> type;
+
+	if (type == FLAT) {
+		interest = FlatInterest (0.0);
+		interest.read (rcInStream);
+	}
+
+	else if (type == TIERED) {
+		interest = TieredInterest (0);
+		interest.read (rcInStream);
+	}
+	
+	return rcInStream;
+}
