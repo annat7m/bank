@@ -11,6 +11,10 @@
 #include "../include/FlatInterest.h"
 #include "../include/TieredInterest.h"
 
+Interest::Interest() {}
+
+Interest::~Interest() {}
+
 //***************************************************************************
 // Function:    operator<<
 //
