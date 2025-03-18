@@ -55,7 +55,7 @@ Money TieredInterest::generate (const Money& balance) const {
 
 	for (int i = mInterestRates.size () - 1; i >= 0; --i) {
 		if (balance >= mInterestRates[i].first) {
-			return balance - (balance * mInterestRates[i].second);
+			return balance + (balance * mInterestRates[i].second);
 		}
 	}
 
@@ -73,12 +73,15 @@ Money TieredInterest::generate (const Money& balance) const {
 //***************************************************************************
 
 void TieredInterest::display (std::ostream& rcOutStream) const {
-	rcOutStream << "T " << mNumberOfTieres;
+	rcOutStream << "T";
 	for (const auto& tier : mInterestRates) {
-		rcOutStream << " $" << tier.first;
+		rcOutStream << " $" << tier.first * 0.01;
+	}
+	if (mInterestRates.size() > 0) {
+		rcOutStream << ",";
 	}
 	for (const auto& tier : mInterestRates) {
-		rcOutStream << " " << tier.first << "%";
+		rcOutStream << " " << tier.second * 100 << "%";
 	}
 }
 
@@ -94,15 +97,15 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 
 void TieredInterest::read (std::istream& rcInStream) {
 	rcInStream >> mNumberOfTieres;
-	//mInterestRates.resize (mNumberOfTieres);
+	mInterestRates.clear();
+
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
-		long long minBalance;
-		double rate;
-		rcInStream >> minBalance >> rate;
-		mInterestRates[i] = std::make_pair (Money (minBalance), rate);
+			long long minBalance;
+			double interestRate;
+
+			rcInStream >> minBalance >> interestRate;
+			mInterestRates.emplace_back(Money(minBalance), interestRate);
 	}
-	// Sort tiers in ascending order of minimum balance
-	std::sort (mInterestRates.begin (), mInterestRates.end ());
 }
 
 //***************************************************************************
