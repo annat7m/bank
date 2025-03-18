@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "../include/TieredInterest.h"
+#include "../include/Interest.h"
 #include <iostream>
 #include <algorithm>
 

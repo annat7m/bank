@@ -11,7 +11,27 @@
 #include "../include/FlatInterest.h"
 #include "../include/TieredInterest.h"
 
+//***************************************************************************
+// Constructor: Interest
+//
+// Description: Initializes Interest object
+//
+// Parameters:  none
+//
+// Returned:    None
+//***************************************************************************
+
 Interest::Interest() {}
+
+//***************************************************************************
+// Destructor:  Interest
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
 
 Interest::~Interest() {}
 

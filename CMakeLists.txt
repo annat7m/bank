@@ -19,11 +19,15 @@ set (Headers
     include/placeholder.h
 		include/Money.h
 		include/TieredInterest.h
+		include/Interest.h
+		include/FlatInterest.h
 )
 
 set (Sources
 		src/Money.cpp
 		src/TieredInterest.cpp
+		src/Interest.cpp
+		src/FlatInterest.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})
