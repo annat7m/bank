@@ -121,9 +121,22 @@ Money& Money::operator*= (const Money& amount) {
 // Returned:    updated Money object
 //***************************************************************************
 
-Money Money::operator* (double multiplier) {
-	mAmount = mAmount * multiplier;
-  return *this;
+Money Money::operator* (double multiplier) const {
+	return Money(static_cast<long long>(mAmount * multiplier));
+}
+
+//***************************************************************************
+// Function:    operator==
+//
+// Description: compare two Money objects
+//
+// Parameters:  amount - amount to compare to
+//
+// Returned:    true or false
+//***************************************************************************
+
+bool Money::operator== (const Money& amount) const {
+	return mAmount == amount.mAmount;
 }
 
 //***************************************************************************

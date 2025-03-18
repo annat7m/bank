@@ -17,7 +17,7 @@ public:
 	Interest ();
 	virtual ~Interest ();
 
-	virtual Money generate (Money& balance) const = 0;
+	virtual Money generate (const Money& balance) const = 0;
 	virtual void display (std::ostream& rcOutStream) const = 0;
 	virtual void read (std::istream& rcInStream) = 0;
 

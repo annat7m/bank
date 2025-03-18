@@ -18,7 +18,7 @@ public:
 	FlatInterest (double inteerst);
 	virtual ~FlatInterest () override;
 
-	virtual Money generate (Money& balance) const override;
+	virtual Money generate (const Money& balance) const override;
 	virtual void display (std::ostream& rcOutStream) const override;
 	virtual void read (std::istream& rcInStream) override;
 
