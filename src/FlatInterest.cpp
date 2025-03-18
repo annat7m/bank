@@ -50,7 +50,7 @@ Money FlatInterest::generate (const Money& balance) const {
 	if (balance < Money (0)) {
 		return Money (0);
 	}
-	return balance - (balance * mInterest);
+	return balance + (balance * mInterest);
 }
 
 //***************************************************************************
