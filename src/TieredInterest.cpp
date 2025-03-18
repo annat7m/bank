@@ -45,17 +45,17 @@ TieredInterest::~TieredInterest () {}
 //
 // Parameters:  none
 //
-// Returned:    none
+// Returned:    balance with applied interest
 //***************************************************************************
 
-Money TieredInterest::generate (Money& balance) const {
+Money TieredInterest::generate (const Money& balance) const {
 	if (balance < Money (0)) {
 		return Money (0);
 	}
 
 	for (int i = mInterestRates.size () - 1; i >= 0; --i) {
 		if (balance >= mInterestRates[i].first) {
-			return balance * mInterestRates[i].second;
+			return balance - (balance * mInterestRates[i].second);
 		}
 	}
 

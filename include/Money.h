@@ -22,8 +22,9 @@ public:
 	Money& operator+= (const Money& amount);
 	Money& operator-= (const Money& amount);
 	Money& operator*= (const Money& amount);
-	Money operator* (double multiplier);
+	Money operator* (double multiplier) const;
 
+	bool operator==(const Money& other) const;
 	bool operator< (const Money& amount) const;
 	bool operator>= (const Money& amount) const;
 
