@@ -17,6 +17,7 @@
 #include "../include/Bank.h"
 #include "../include/TXTAccountReader.h"
 #include "../include/TXTTransactionReader.h"
+#include "../include/MapContainer.h"
 
 //***************************************************************************
 // Function:    main
@@ -31,12 +32,14 @@ int main () {
 	const std::string ACCOUNTS_FILENAME = "data/Accounts.txt";
 	const std::string TRANSACTIONS_FILENAME = "data/Commands.txt";
 
-	Bank firstBank;
 	TXTAccountReader accountReader (ACCOUNTS_FILENAME);
 	TXTTransactionReader commandsReader (TRANSACTIONS_FILENAME);
 
-	accountReader.readAccounts (firstBank);
-	commandsReader.readTransactions (firstBank);
+	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer>();
+
+	Bank firstBank (accountReader, mapContainer);
+
+	commandsReader.readTransactions (std::cout, firstBank);
 
 	return EXIT_SUCCESS;
 

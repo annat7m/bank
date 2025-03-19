@@ -31,8 +31,8 @@ public:
 	Transaction (TransactionType transactionType, const Money& amount);
 	virtual ~Transaction ();
 
-	TransactionType& getType () const;
-	Money& getAmount () const;
+	TransactionType getType () const;
+	Money getAmount () const;
 
 private:
 	TransactionType mType;

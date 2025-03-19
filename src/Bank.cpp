@@ -8,20 +8,9 @@
 //***************************************************************************
 
 #include "../include/Bank.h"
+#include "../include/IContainer.h"
 #include <iostream>
 #include <fstream>
-
-//***************************************************************************
-// Constructor: Bank
-//
-// Description: Default constructor
-//
-// Parameters:  none
-//
-// Returned:    None
-//***************************************************************************
-
-Bank::Bank () {}
 
 //***************************************************************************
 // Constructor: Bank
@@ -33,8 +22,31 @@ Bank::Bank () {}
 // Returned:    None
 //***************************************************************************
 
-Bank::Bank (IAccountReader& accountReader) {
+Bank::Bank (std::shared_ptr<IContainer> container) {
+	mAccounts = container;
+}
 
+//***************************************************************************
+// Constructor: Bank
+//
+// Description: 
+//
+// Parameters:  none
+//
+// Returned:    None
+//***************************************************************************
+
+Bank::Bank (IAccountReader& accountReader, 
+	std::shared_ptr<IContainer> container) {
+	unsigned int accNumber;
+	std::shared_ptr<Account> account;
+	mAccounts = container;
+	while ((account = accountReader.readAccount ())) {
+		accNumber = account->getAccountNumber ();
+		if (!mAccounts->bAccountExists (accNumber)) {
+			mAccounts->addAccount (accNumber, account);
+		}
+	}
 }
 
 //***************************************************************************
@@ -59,8 +71,11 @@ Bank::~Bank () {}
 // Returned:    none
 //***************************************************************************
 
-void Bank::deposit (const Money& amount) {
-	
+void Bank::deposit (unsigned int accNumber, const Money& amount) {
+	std::shared_ptr<Account> account = mAccounts->getAccount (accNumber);
+	if (account) {
+		account->deposit (amount);
+	}
 }
 
 //***************************************************************************
@@ -73,8 +88,11 @@ void Bank::deposit (const Money& amount) {
 // Returned:    none
 //***************************************************************************
 
-void Bank::withdraw (const Money& amount) {
-
+void Bank::withdraw (unsigned int accNumber, const Money& amount) {
+	std::shared_ptr<Account> account = mAccounts->getAccount (accNumber);
+	if (account) {
+		account->withdraw (amount);
+	}
 }
 
 //***************************************************************************
@@ -88,10 +106,10 @@ void Bank::withdraw (const Money& amount) {
 //***************************************************************************
 
 void Bank::applyMonthlyUpdates () {
-
-	for (auto& account : mAccounts) {
+	std::shared_ptr<Account> account = mAccounts->getFirst ();
+	while (account) {
 		account->chargeMonthlyFee ();
-		account->accrueInterest ();
+		account = mAccounts->getNext ();
 	}
 }
 
@@ -106,5 +124,5 @@ void Bank::applyMonthlyUpdates () {
 //***************************************************************************
 
 void Bank::display (std::ostream& rcOutStream) const {
-	mAccounts->print(rcOutStream);
+	mAccounts->print (rcOutStream);
 }

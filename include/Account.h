@@ -30,6 +30,7 @@ public:
 	// 	const Money& amount);
 
 	Money getBalance () const;
+	unsigned int getAccountNumber () const;
 	bool operator== (unsigned int accountNum) const;
 	virtual void display (std::ostream& rcOutStream) const;
 	virtual void read (std::istream& rcInStream);
