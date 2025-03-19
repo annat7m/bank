@@ -24,6 +24,7 @@ public:
 
 	virtual void deposit (const Money& amount) override;
 	virtual void withdraw (const Money& amount) override;
+	virtual void chargeMonthlyFee () override;
 
 	virtual void display (std::ostream& rcOutStream) const override;
 	virtual void read (std::istream& rcInStream) override;
