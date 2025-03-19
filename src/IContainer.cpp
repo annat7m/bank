@@ -11,3 +11,27 @@
 #include <memory>
 #include <algorithm>
 #include <iostream>
+
+//***************************************************************************
+// Constructor: IContainer
+//
+// Description: Default constructor
+//
+// Parameters:  none
+//
+// Returned:    None
+//***************************************************************************
+
+IContainer::IContainer () {}
+
+//***************************************************************************
+// Destructor:  IContainer
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+IContainer::~IContainer () {}
