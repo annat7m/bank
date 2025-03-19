@@ -77,7 +77,7 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 	const char TIERED = 'T';
 	rcOutStream << TIERED;
 
-	rcOutStream << std::fixed << std::setprecision(2);
+	rcOutStream << std::fixed << std::setprecision (2);
 
 	for (const auto& tier : mInterestRates) {
 		rcOutStream << " $" << tier.first * 0.01;
