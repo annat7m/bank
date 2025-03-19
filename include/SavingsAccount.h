@@ -18,7 +18,7 @@ class SavingsAccount : public Account {
 
 public:
 	SavingsAccount (unsigned int accNumber, const Money& accBalance,
-		const Interest& accInterestRate,
+		std::shared_ptr<Interest>& accInterestRate,
 		const Money& minBalance, const Money& monthlyFee);
 	virtual ~SavingsAccount () override;
 

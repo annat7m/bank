@@ -26,7 +26,7 @@
 //***************************************************************************
 
 SavingsAccount::SavingsAccount (unsigned int accountNumber,
-	const Money& balance, const Interest& interestRate,
+	const Money& balance, std::shared_ptr<Interest>& interestRate,
 	const Money& minBalance, const Money& monthlyFee)
 	: Account (accountNumber, balance, interestRate) {
 
