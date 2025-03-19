@@ -166,7 +166,7 @@ bool Account::operator== (unsigned int accountNum) const {
 
 void Account::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-		<< ", " << mBalance << ", " << mInterestRate << ", ";
+		<< ", " << mBalance << ", " << *mInterestRate << ", ";
 }
 
 //***************************************************************************
