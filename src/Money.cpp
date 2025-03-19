@@ -10,6 +10,7 @@
 #include "../include/Money.h"
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: Money
@@ -192,7 +193,8 @@ long long Money::operator() () const {
 //***************************************************************************
 
 void Money::display (std::ostream& rcOutStream) const {
-	rcOutStream << mAmount;
+	rcOutStream << std::fixed << std::setprecision (2) 
+	<< static_cast<double>(mAmount);
 }
 
 //***************************************************************************

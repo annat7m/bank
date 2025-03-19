@@ -85,7 +85,7 @@ TEST(TieredInterestTests, Display) {
 	tieredInterest.addTier(Money(40000), 0.04);
 	std::stringstream stream;
 	tieredInterest.display(stream);
-	EXPECT_EQ(stream.str(), "T $100 $200 $300 $400, 1% 2% 3% 4%");
+	EXPECT_EQ(stream.str(), "T $100.00 $200.00 $300.00 $400.00, 1.00% 2.00% 3.00% 4.00%");
 }
 
 //***************************************************************************
@@ -96,11 +96,13 @@ TEST(TieredInterestTests, Display) {
 //***************************************************************************
 
 TEST(TieredInterestTests, Read) {
-	std::stringstream ss;
-	ss.str("2 10000 20000 0.01 0.02");
+	std::stringstream inputStream;
+	std::stringstream outputStream;
 	TieredInterest tieredInterest1(0);
-	tieredInterest1.read(ss);
-	std::stringstream displayStream1;
-	tieredInterest1.display(displayStream1);
-	EXPECT_EQ(displayStream1.str(), "T $100 $200, 1% 2%");
+
+	inputStream.str("2 10000 20000 0.01 0.02");
+	tieredInterest1.read(inputStream);
+	tieredInterest1.display(outputStream);
+
+	EXPECT_EQ(outputStream.str(), "T $100.00 $200.00, 1.00% 2.00%");
 }
