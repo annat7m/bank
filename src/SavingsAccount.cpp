@@ -25,9 +25,11 @@
 // Returned:    None
 //***************************************************************************
 
-SavingsAccount::SavingsAccount (int accountNumber, long long balance,
-	double interestRate, long long minBalance, long long monthlyFee)
+SavingsAccount::SavingsAccount (unsigned int accountNumber, 
+	const Money& balance, const Interest& interestRate, 
+	const Money& minBalance, const Money& monthlyFee)
 	: Account (accountNumber, balance, interestRate) {
+
 	mMinBalance = minBalance;
 	mMonthlyFee = monthlyFee;
 	if (Account::getBalance () >= minBalance) {
@@ -61,7 +63,7 @@ SavingsAccount::~SavingsAccount () {}
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::deposit (long long amount) {
+void SavingsAccount::deposit (const Money& amount) {
 	Account::deposit (amount);
 	if (Account::getBalance () >= mMinBalance) {
 		mbIsBelowMinBalance = false;
@@ -78,7 +80,7 @@ void SavingsAccount::deposit (long long amount) {
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::withdraw (long long amount) {
+void SavingsAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
 	if (Account::getBalance () < mMinBalance) {
 		mbIsBelowMinBalance = true;
@@ -97,24 +99,37 @@ void SavingsAccount::withdraw (long long amount) {
 
 void SavingsAccount::chargeMonthlyFee () {
 	if (mbIsBelowMinBalance) {
-		adjustBalance (-mMonthlyFee);
+		Account::withdraw (mMonthlyFee);
 		addTransaction (TransactionType::fee, mMonthlyFee);
 	}
 }
 
 //***************************************************************************
-// Function:    displayAccount
+// Function:    display
 //
 // Description: display savings account info
 //
-// Parameters:  none
+// Parameters:  rcOutStream - stream to output to
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::displayAccount () const {
-	std::cout << std::fixed << std::setprecision (2) << Account::getAccountNumber ()
-		<< ", $" << Account::getBalance () * Account::getInterestRate ()
-		<< ", " << Account::getInterestRate () * 100 << "%, ";
-	std::cout << mMonthlyFee << ", " << mMinBalance;
+void SavingsAccount::display (std::ostream& rcOutStream) const {
+	rcOutStream << std::fixed << std::setprecision (2);
+	rcOutStream << mMonthlyFee << ", " << mMinBalance;
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read savings account info
+//
+// Parameters:  rcInStream - stream to take input from
+//
+// Returned:    none
+//***************************************************************************
+
+void SavingsAccount::read (std::istream& rcInStream) {
+	Account::read(rcInStream);
+	rcInStream >> mMonthlyFee >> mMinBalance;
 }

@@ -14,6 +14,7 @@
 class Money {
 
 public:
+	Money ();
 	Money (const Money& amount);
 	Money (long long amount);
 	virtual ~Money ();

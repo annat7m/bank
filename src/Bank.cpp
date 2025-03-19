@@ -1,9 +1,9 @@
 //***************************************************************************
 // File name:   Bank.cpp
 // Author:      Anna Tymoshenko
-// Date:        03/04/2025
+// Date:        03/18/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
@@ -54,13 +54,13 @@ Bank::~Bank () {}
 //
 // Description: 
 //
-// Parameters:  amount - 
+// Parameters:  amount - amount to deposit to account
 //
 // Returned:    none
 //***************************************************************************
 
 void Bank::deposit (const Money& amount) {
-
+	
 }
 
 //***************************************************************************
@@ -68,7 +68,7 @@ void Bank::deposit (const Money& amount) {
 //
 // Description: 
 //
-// Parameters:  amount - 
+// Parameters:  amount - amount to withdraw from account
 //
 // Returned:    none
 //***************************************************************************
@@ -88,6 +88,7 @@ void Bank::withdraw (const Money& amount) {
 //***************************************************************************
 
 void Bank::applyMonthlyUpdates () {
+
 	for (auto& account : mAccounts) {
 		account->chargeMonthlyFee ();
 		account->accrueInterest ();
@@ -97,16 +98,13 @@ void Bank::applyMonthlyUpdates () {
 //***************************************************************************
 // Function:    display
 //
-// Description: Displays information for all accounts in the bank
+// Description: Displays information for all accounts that are in the bank
 //
 // Parameters:  none
 //
 // Returned:    none
 //***************************************************************************
 
-void Bank::display () {
-	for (const auto& account : mAccounts) {
-		account->displayAccount ();
-		std::cout << std::endl;
-	}
+void Bank::display (std::ostream& rcOutStream) const {
+	mAccounts->print(rcOutStream);
 }

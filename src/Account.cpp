@@ -8,8 +8,12 @@
 //***************************************************************************
 
 #include "../include/Account.h"
+#include "../include/Interest.h"
+#include "../include/FlatInterest.h"
+#include "../include/TieredInterest.h"
 #include "../include/Money.h"
 #include <iostream>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: Account
@@ -23,11 +27,18 @@
 // Returned:    None
 //***************************************************************************
 
-Account::Account (unsigned int accountNumber, const Money& balance, 
+Account::Account (unsigned int accountNumber, const Money& balance,
 	const Interest& interestRate) {
 	mAccountNumber = accountNumber;
 	mBalance = balance;
-	mInterestRate = interestRate;
+	if (dynamic_cast<const FlatInterest*>(&interestRate)) {
+		mInterestRate = std::make_shared<FlatInterest> (
+			*dynamic_cast<const FlatInterest*>(&interestRate));
+	}
+	else if (dynamic_cast<const TieredInterest*>(&interestRate)) {
+		mInterestRate = std::make_shared<TieredInterest> (
+			*dynamic_cast<const TieredInterest*>(&interestRate));
+	}
 }
 
 //***************************************************************************
@@ -54,7 +65,6 @@ Account::~Account () {}
 
 void Account::deposit (const Money& amount) {
 	mBalance += amount;
-	addTransaction (TransactionType::deposit, amount);
 }
 
 //***************************************************************************
@@ -70,7 +80,6 @@ void Account::deposit (const Money& amount) {
 void Account::withdraw (const Money& amount) {
 	// accounts are allowed to be negative
 	mBalance -= amount;
-	addTransaction (TransactionType::withdrawal, amount);
 }
 
 //***************************************************************************
@@ -84,21 +93,7 @@ void Account::withdraw (const Money& amount) {
 //***************************************************************************
 
 void Account::chargeMonthlyFee () {
-
-}
-
-//***************************************************************************
-// Function:    generateInterest
-//
-// Description: generate interest based on balance
-//
-// Parameters:  none
-//
-// Returned:    none
-//***************************************************************************
-
-void Account::generateInterest () {
-
+	mBalance = mInterestRate->generate (mBalance);
 }
 
 //***************************************************************************
@@ -115,22 +110,6 @@ void Account::generateInterest () {
 void Account::addTransaction (TransactionType transactionType,
 	const Money& amount) {
 	mTransactions.emplace_back (transactionType, amount);
-}
-
-//***************************************************************************
-// Function:    accrueInterest
-//
-// Description: accrue interest on a banking account
-//
-// Parameters:  none
-//
-// Returned:    none
-//***************************************************************************
-
-void Account::accrueInterest () {
-	long long interest = static_cast<long long>(mBalance * mInterestRate);
-	mBalance += interest;
-	addTransaction (TransactionType::interest, interest);
 }
 
 //***************************************************************************
@@ -158,7 +137,7 @@ Money Account::getBalance () const {
 //***************************************************************************
 
 bool Account::operator== (unsigned int accountNum) const {
-
+	return mAccountNumber == accountNum;
 }
 
 //***************************************************************************
@@ -172,7 +151,8 @@ bool Account::operator== (unsigned int accountNum) const {
 //***************************************************************************
 
 void Account::display (std::ostream& rcOutStream) const {
-
+	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
+		<< ", " << mBalance << ", " << mInterestRate << ", ";
 }
 
 //***************************************************************************
@@ -185,8 +165,19 @@ void Account::display (std::ostream& rcOutStream) const {
 // Returned:    none
 //***************************************************************************
 
-void Account::read (std::istream& rcInStream) const {
+void Account::read (std::istream& rcInStream) {
+	const char FLAT = 'F';
+	const char TIERED = 'T';
+	char interestType;
 
+	rcInStream >> mAccountNumber >> mBalance >> interestType;
+	if (interestType == FLAT) {
+		mInterestRate = std::make_shared<FlatInterest> ();
+	}
+	else if (interestType == TIERED) {
+		mInterestRate = std::make_shared<TieredInterest> ();
+	}
+	rcInStream >> *mInterestRate;
 }
 
 //***************************************************************************
@@ -202,7 +193,8 @@ void Account::read (std::istream& rcInStream) const {
 
 std::ostream& operator<< (std::ostream& rcOutStream,
 	const Account& account) {
-
+	account.display (rcOutStream);
+	return rcOutStream;
 }
 
 //***************************************************************************
@@ -216,7 +208,7 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 // Returned:    none
 //***************************************************************************
 
-std::istream& operator>> (std::istream& rcOutStream,
-	const Account& account) {
-
+std::istream& operator>> (std::istream& rcInStream, Account& account) {
+	account.read (rcInStream);
+	return rcInStream;
 }
