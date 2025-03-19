@@ -9,6 +9,8 @@ set(Sources
     Tests.cpp
 		MoneyTests.cpp
 		TieredInterestTests.cpp
+		CheckingAccountTests.cpp
+		SavingsAccountTests.cpp
 )
 
 add_executable(${This} ${Sources})

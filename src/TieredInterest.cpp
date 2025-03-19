@@ -16,6 +16,18 @@
 //***************************************************************************
 // Constructor: TieredInterest
 //
+// Description: Default constructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+TieredInterest::TieredInterest () {}
+
+//***************************************************************************
+// Constructor: TieredInterest
+//
 // Description: Initializes Tiered Interest object
 //
 // Parameters:  numOfTieres - number of tieres of interests

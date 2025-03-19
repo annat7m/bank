@@ -89,7 +89,7 @@ void CheckingAccount::withdraw (const Money& amount) {
 bool CheckingAccount::applyMinBalanceFee () {
 	if (Account::getBalance () < mMinBalance) {
 		Account::withdraw (mMinBalanceFee);
-		addTransaction (TransactionType::fee, mMinBalanceFee);
+		// addTransaction (TransactionType::fee, mMinBalanceFee);
 		return true;
 	}
 	return false;

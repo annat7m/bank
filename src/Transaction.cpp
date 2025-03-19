@@ -21,7 +21,7 @@
 // Returned:    None
 //***************************************************************************
 
-Transaction::Transaction (TransactionType transactionType, long long amount) {
+Transaction::Transaction (TransactionType transactionType, const Money& amount) {
 	mType = transactionType;
 	mAmount = amount;
 }

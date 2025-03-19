@@ -17,6 +17,7 @@
 
 class TieredInterest : public Interest {
 public:
+	TieredInterest ();
 	TieredInterest (unsigned int numOfTieres);
 	virtual ~TieredInterest () override;
 

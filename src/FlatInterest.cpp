@@ -14,6 +14,18 @@
 //***************************************************************************
 // Constructor: FlatInterest
 //
+// Description: Default constructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+FlatInterest::FlatInterest () {}
+
+//***************************************************************************
+// Constructor: FlatInterest
+//
 // Description: Initializes Flat Interest object
 //
 // Parameters:  rate - wanted interest rate

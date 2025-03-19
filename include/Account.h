@@ -26,8 +26,8 @@ public:
 	virtual void deposit (const Money& amount) = 0;
 	virtual void withdraw (const Money& amount) = 0;
 	virtual void chargeMonthlyFee ();
-	virtual void addTransaction (TransactionType transactionType,
-		const Money& amount);
+	// virtual void addTransaction (TransactionType transactionType,
+	// 	const Money& amount);
 
 	Money getBalance () const;
 	bool operator== (unsigned int accountNum) const;

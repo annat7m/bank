@@ -21,6 +21,9 @@ set (Headers
 		include/TieredInterest.h
 		include/Interest.h
 		include/FlatInterest.h
+		include/Account.h
+		include/CheckingAccount.h
+		include/SavingsAccount.h
 )
 
 set (Sources
@@ -28,6 +31,9 @@ set (Sources
 		src/TieredInterest.cpp
 		src/Interest.cpp
 		src/FlatInterest.cpp
+		src/Account.cpp
+		src/CheckingAccount.cpp
+		src/SavingsAccount.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})
