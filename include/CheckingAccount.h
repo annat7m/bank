@@ -33,6 +33,6 @@ private:
 	Money mMinBalance;
 	Money mMinBalanceFee;
 
-	bool applyMinBalanceFee ();
+	void applyMinBalanceFee ();
 
 };

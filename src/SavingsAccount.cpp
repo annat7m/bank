@@ -25,8 +25,8 @@
 // Returned:    None
 //***************************************************************************
 
-SavingsAccount::SavingsAccount (unsigned int accountNumber, 
-	const Money& balance, const Interest& interestRate, 
+SavingsAccount::SavingsAccount (unsigned int accountNumber,
+	const Money& balance, const Interest& interestRate,
 	const Money& minBalance, const Money& monthlyFee)
 	: Account (accountNumber, balance, interestRate) {
 
@@ -37,7 +37,7 @@ SavingsAccount::SavingsAccount (unsigned int accountNumber,
 	}
 	else {
 		mbIsBelowMinBalance = true;
-		chargeMonthlyFee ();
+		Account::withdraw (mMonthlyFee);
 	}
 }
 
@@ -84,6 +84,7 @@ void SavingsAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
 	if (Account::getBalance () < mMinBalance) {
 		mbIsBelowMinBalance = true;
+		Account::withdraw (mMonthlyFee);
 	}
 }
 
@@ -98,10 +99,6 @@ void SavingsAccount::withdraw (const Money& amount) {
 //***************************************************************************
 
 void SavingsAccount::chargeMonthlyFee () {
-	if (mbIsBelowMinBalance) {
-		Account::withdraw (mMonthlyFee);
-		// addTransaction (TransactionType::fee, mMonthlyFee);
-	}
 	Account::chargeMonthlyFee ();
 }
 
@@ -131,6 +128,6 @@ void SavingsAccount::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void SavingsAccount::read (std::istream& rcInStream) {
-	Account::read(rcInStream);
+	Account::read (rcInStream);
 	rcInStream >> mMonthlyFee >> mMinBalance;
 }
