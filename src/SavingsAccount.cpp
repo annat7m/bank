@@ -65,9 +65,6 @@ SavingsAccount::~SavingsAccount () {}
 
 void SavingsAccount::deposit (const Money& amount) {
 	Account::deposit (amount);
-	if (Account::getBalance () >= mMinBalance) {
-		mbIsBelowMinBalance = false;
-	}
 }
 
 //***************************************************************************
@@ -84,7 +81,6 @@ void SavingsAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
 	if (Account::getBalance () < mMinBalance) {
 		mbIsBelowMinBalance = true;
-		Account::withdraw (mMonthlyFee);
 	}
 }
 
@@ -99,7 +95,28 @@ void SavingsAccount::withdraw (const Money& amount) {
 //***************************************************************************
 
 void SavingsAccount::chargeMonthlyFee () {
-	Account::chargeMonthlyFee ();
+	if (mbIsBelowMinBalance) {
+		Account::withdraw (mMonthlyFee);
+	}
+	if (Account::getBalance () < mMinBalance) {
+		mbIsBelowMinBalance = true;
+	}
+}
+
+//***************************************************************************
+// Function:    generateInterest
+//
+// Description: apply interest rate to banking account
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void SavingsAccount::generateInterest () {
+	if (Account::getBalance () >= 0) {
+		Account::generateInterest ();
+	}
 }
 
 //***************************************************************************

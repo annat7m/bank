@@ -58,7 +58,7 @@ TXTTransactionReader::~TXTTransactionReader () {
 // Returned:    none
 //***************************************************************************
 
-void TXTTransactionReader::readTransactions (std::ostream& rcOutStream, 
+void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 	Bank& bank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';

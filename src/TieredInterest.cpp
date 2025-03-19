@@ -62,17 +62,18 @@ TieredInterest::~TieredInterest () {}
 //***************************************************************************
 
 Money TieredInterest::generate (const Money& balance) const {
-	if (balance < Money (0)) {
-		return Money (0);
-	}
+	Money result = Money (0);
 
-	for (int i = mInterestRates.size () - 1; i >= 0; --i) {
-		if (balance >= mInterestRates[i].first) {
-			return balance + (balance * mInterestRates[i].second);
+	if (balance >= Money (0)) {
+		for (int i = mInterestRates.size () - 1; i >= 0; --i) {
+			if (balance >= mInterestRates[i].first) {
+				result = balance + (balance * mInterestRates[i].second);
+				break;
+			}
 		}
 	}
 
-	return Money (0);
+	return result;
 }
 
 //***************************************************************************

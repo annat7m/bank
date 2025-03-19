@@ -76,8 +76,8 @@ Money::~Money () {}
 //***************************************************************************
 
 Money& Money::operator= (Money amount) {
-	std::swap(mAmount, amount.mAmount);
-  return *this;
+	std::swap (mAmount, amount.mAmount);
+	return *this;
 }
 
 //***************************************************************************
@@ -92,7 +92,7 @@ Money& Money::operator= (Money amount) {
 
 Money& Money::operator+= (const Money& amount) {
 	mAmount += amount.mAmount;
-  return *this;
+	return *this;
 }
 
 //***************************************************************************
@@ -107,7 +107,7 @@ Money& Money::operator+= (const Money& amount) {
 
 Money& Money::operator-= (const Money& amount) {
 	mAmount -= amount.mAmount;
-  return *this;
+	return *this;
 }
 
 //***************************************************************************
@@ -122,7 +122,7 @@ Money& Money::operator-= (const Money& amount) {
 
 Money& Money::operator*= (const Money& amount) {
 	mAmount *= amount.mAmount;
-  return *this;
+	return *this;
 }
 
 //***************************************************************************
@@ -136,7 +136,7 @@ Money& Money::operator*= (const Money& amount) {
 //***************************************************************************
 
 Money Money::operator* (double multiplier) const {
-	return Money(static_cast<long long>(mAmount * multiplier));
+	return Money (static_cast<long long>(mAmount * multiplier));
 }
 
 //***************************************************************************
@@ -207,7 +207,7 @@ long long Money::operator() () const {
 
 void Money::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2) << "$"
-	<< static_cast<double>(mAmount * 0.01);
+		<< static_cast<double>(mAmount * 0.01);
 }
 
 //***************************************************************************
@@ -237,7 +237,7 @@ void Money::read (std::istream& rcInStream) {
 
 std::ostream& operator<< (std::ostream& rcOutStream,
 	const Money& amount) {
-	amount.display(rcOutStream);
+	amount.display (rcOutStream);
 	return rcOutStream;
 }
 
@@ -253,7 +253,7 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 //***************************************************************************
 
 std::istream& operator>> (std::istream& rcInStream, Money& amount) {
-	amount.read(rcInStream);
+	amount.read (rcInStream);
 	return rcInStream;
 }
 

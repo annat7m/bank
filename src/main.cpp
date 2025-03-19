@@ -35,7 +35,7 @@ int main () {
 	TXTAccountReader accountReader (ACCOUNTS_FILENAME);
 	TXTTransactionReader commandsReader (TRANSACTIONS_FILENAME);
 
-	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer>();
+	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer> ();
 
 	Bank firstBank (accountReader, mapContainer);
 
