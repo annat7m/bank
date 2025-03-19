@@ -85,7 +85,7 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 		else if (command == PRINT) {
 			rcOutStream << "-------------" << std::endl;
 			bank.display (rcOutStream);
-			rcOutStream << std::endl << "-------------" << std::endl;
+			rcOutStream << "-------------" << std::endl;
 		}
 		else if (command == CHARGE) {
 			bank.applyMonthlyUpdates ();

@@ -10,6 +10,7 @@
 #include "../include/Interest.h"
 #include "../include/FlatInterest.h"
 #include "../include/TieredInterest.h"
+#include <memory>
 
 //***************************************************************************
 // Constructor: Interest
@@ -62,7 +63,7 @@ std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
 // Returned:    none
 //***************************************************************************
 
-std::istream& operator>>(std::istream& rcInStream, Interest& interest) {
+std::istream& operator>>(std::istream& rcInStream, std::shared_ptr<Interest>& interest) {
 	const char FLAT = 'F';
 	const char TIERED = 'T';
 	char type;
@@ -70,14 +71,14 @@ std::istream& operator>>(std::istream& rcInStream, Interest& interest) {
 	rcInStream >> type;
 
 	if (type == FLAT) {
-		interest = FlatInterest (0.0);
-		interest.read (rcInStream);
+		interest = std::make_shared<FlatInterest>(0.0);
 	}
-
 	else if (type == TIERED) {
-		interest = TieredInterest (0);
-		interest.read (rcInStream);
+		interest = std::make_shared<TieredInterest>(0);
 	}
+	if (interest) {
+		interest->read(rcInStream);
+}
 	
 	return rcInStream;
 }

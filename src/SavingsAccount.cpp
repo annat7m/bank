@@ -113,6 +113,7 @@ void SavingsAccount::chargeMonthlyFee () {
 //***************************************************************************
 
 void SavingsAccount::display (std::ostream& rcOutStream) const {
+	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
 	rcOutStream << mMonthlyFee << ", " << mMinBalance;
 }

@@ -191,7 +191,7 @@ void Account::read (std::istream& rcInStream) {
 	else if (interestType == TIERED) {
 		mInterestRate = std::make_shared<TieredInterest> ();
 	}
-	rcInStream >> *mInterestRate;
+	rcInStream >> mInterestRate;
 }
 
 //***************************************************************************

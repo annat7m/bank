@@ -118,6 +118,7 @@ void CheckingAccount::applyMinBalanceFee () {
 //***************************************************************************
 
 void CheckingAccount::display (std::ostream& rcOutStream) const {
+	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
 	rcOutStream << mMinBalance << ", " << mMinBalanceFee;
 }
