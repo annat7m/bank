@@ -11,6 +11,7 @@
 #include "../include/Interest.h"
 #include <iostream>
 #include <algorithm>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: TieredInterest
@@ -73,11 +74,15 @@ Money TieredInterest::generate (const Money& balance) const {
 //***************************************************************************
 
 void TieredInterest::display (std::ostream& rcOutStream) const {
-	rcOutStream << "T";
+	const char TIERED = 'T';
+	rcOutStream << TIERED;
+
+	rcOutStream << std::fixed << std::setprecision(2);
+
 	for (const auto& tier : mInterestRates) {
 		rcOutStream << " $" << tier.first * 0.01;
 	}
-	if (mInterestRates.size() > 0) {
+	if (mInterestRates.size () > 0) {
 		rcOutStream << ",";
 	}
 	for (const auto& tier : mInterestRates) {
@@ -96,16 +101,31 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void TieredInterest::read (std::istream& rcInStream) {
+	long long minBalance;
+	double interestRate;
+
+	std::vector<long long> minBalances;
+	std::vector<double> interestRates;
+
 	rcInStream >> mNumberOfTieres;
-	mInterestRates.clear();
+	mInterestRates.clear ();
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
-			long long minBalance;
-			double interestRate;
-
-			rcInStream >> minBalance >> interestRate;
-			mInterestRates.emplace_back(Money(minBalance), interestRate);
+		rcInStream >> minBalance;
+		minBalances.push_back (minBalance);
 	}
+
+	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
+		rcInStream >> interestRate;
+		interestRates.push_back (interestRate);
+	}
+
+	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
+		mInterestRates.emplace_back (minBalances[i], interestRates[i]);
+	}
+
+	minBalances.clear ();
+	interestRates.clear ();
 }
 
 //***************************************************************************
@@ -113,7 +133,8 @@ void TieredInterest::read (std::istream& rcInStream) {
 //
 // Description: add tier that consist of balance and rate to the vector of pairs
 //
-// Parameters:  rcInStream - stream to read from
+// Parameters:  amount		- min balance to have to apply interest rate
+//							interest	- interest rate for that balance
 //
 // Returned:    none
 //***************************************************************************

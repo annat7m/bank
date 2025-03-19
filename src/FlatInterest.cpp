@@ -9,6 +9,7 @@
 
 #include "../include/FlatInterest.h"
 #include <iostream>
+#include <iomanip>
 
 //***************************************************************************
 // Constructor: FlatInterest
@@ -64,7 +65,8 @@ Money FlatInterest::generate (const Money& balance) const {
 //***************************************************************************
 
 void FlatInterest::display (std::ostream& rcOutStream) const {
-	rcOutStream << "F " << mInterest << "%";
+	const char FLAT = 'F';
+	rcOutStream << std::setprecision(2) << FLAT << " " << mInterest << "%";
 }
 
 //***************************************************************************
