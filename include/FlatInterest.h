@@ -15,6 +15,7 @@
 
 class FlatInterest : public Interest {
 public:
+	FlatInterest ();
 	FlatInterest (double inteerst);
 	virtual ~FlatInterest () override;
 

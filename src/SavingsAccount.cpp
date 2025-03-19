@@ -100,7 +100,7 @@ void SavingsAccount::withdraw (const Money& amount) {
 void SavingsAccount::chargeMonthlyFee () {
 	if (mbIsBelowMinBalance) {
 		Account::withdraw (mMonthlyFee);
-		addTransaction (TransactionType::fee, mMonthlyFee);
+		// addTransaction (TransactionType::fee, mMonthlyFee);
 	}
 }
 

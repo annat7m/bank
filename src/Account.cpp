@@ -107,10 +107,10 @@ void Account::chargeMonthlyFee () {
 // Returned:    none
 //***************************************************************************
 
-void Account::addTransaction (TransactionType transactionType,
-	const Money& amount) {
-	mTransactions.emplace_back (transactionType, amount);
-}
+// void Account::addTransaction (TransactionType transactionType,
+// 	const Money& amount) {
+// 	mTransactions.emplace_back (transactionType, amount);
+// }
 
 //***************************************************************************
 // Function:    getBalance
