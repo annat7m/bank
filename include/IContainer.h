@@ -18,7 +18,7 @@ public:
 	IContainer ();
 	virtual ~IContainer ();
 
-	virtual void addAccount (unsigned int accNumber, 
+	virtual void addAccount (unsigned int accNumber,
 		std::shared_ptr<Account> account) = 0;
 	virtual void removeAccount (unsigned int accountNumber) = 0;
 	virtual std::shared_ptr<Account> getFirst () = 0;

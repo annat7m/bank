@@ -18,7 +18,7 @@ public:
 	MapContainer ();
 	virtual ~MapContainer ();
 
-	virtual void addAccount (unsigned int accNumber, 
+	virtual void addAccount (unsigned int accNumber,
 		std::shared_ptr<Account> account) override;
 	virtual void removeAccount (unsigned int accountNumber) override;
 	virtual std::shared_ptr<Account> getFirst () override;

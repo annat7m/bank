@@ -20,10 +20,10 @@
 //***************************************************************************
 
 TEST (MoneyConstructorTests, Constructor_LongLong_Positive) {
-	Money amount(100);
+	Money amount (100);
 	std::ostringstream stream;
-  stream << amount;
-  EXPECT_EQ(stream.str(), "$1.00");
+	stream << amount;
+	EXPECT_EQ (stream.str (), "$1.00");
 }
 
 //***************************************************************************
@@ -34,10 +34,10 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Positive) {
 //***************************************************************************
 
 TEST (MoneyConstructorTests, Constructor_LongLong_Negative) {
-	Money amount(-100);
+	Money amount (-100);
 	std::ostringstream stream;
-  stream << amount;
-  EXPECT_EQ(stream.str(), "$-1.00");
+	stream << amount;
+	EXPECT_EQ (stream.str (), "$-1.00");
 }
 
 //***************************************************************************
@@ -46,12 +46,12 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Negative) {
 // Description: testing the assignment operator of the Money object 
 //***************************************************************************
 
-TEST(MoneyConstructorTests, CopyConstructor) {
-  Money original(250);
-  Money copy = original;
+TEST (MoneyConstructorTests, CopyConstructor) {
+	Money original (250);
+	Money copy = original;
 	std::ostringstream stream;
 	stream << copy;
-  EXPECT_EQ(stream.str(), "$2.50");
+	EXPECT_EQ (stream.str (), "$2.50");
 }
 
 //***************************************************************************
@@ -60,12 +60,12 @@ TEST(MoneyConstructorTests, CopyConstructor) {
 // Description: testing the addition operator 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, SimpleAddition) {
-  Money value1(250);
-	Money value2(50);
+TEST (MoneyArithmeticTests, SimpleAddition) {
+	Money value1 (250);
+	Money value2 (50);
 	std::ostringstream stream;
 	stream << value1 + value2;
-  EXPECT_EQ(stream.str(), "$3.00");
+	EXPECT_EQ (stream.str (), "$3.00");
 }
 
 //***************************************************************************
@@ -74,13 +74,13 @@ TEST(MoneyArithmeticTests, SimpleAddition) {
 // Description: testing operator+= 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, ShortenedAddition) {
-  Money value1(250);
-	Money value2(50);
+TEST (MoneyArithmeticTests, ShortenedAddition) {
+	Money value1 (250);
+	Money value2 (50);
 	std::ostringstream stream;
 	value1 += value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "$3.00");
+	EXPECT_EQ (stream.str (), "$3.00");
 }
 
 //***************************************************************************
@@ -89,12 +89,12 @@ TEST(MoneyArithmeticTests, ShortenedAddition) {
 // Description: testing the subtraction operator 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, SimpleSubtraction) {
-  Money value1(250);
-	Money value2(50);
+TEST (MoneyArithmeticTests, SimpleSubtraction) {
+	Money value1 (250);
+	Money value2 (50);
 	std::ostringstream stream;
 	stream << value1 - value2;
-  EXPECT_EQ(stream.str(), "$2.00");
+	EXPECT_EQ (stream.str (), "$2.00");
 }
 
 //***************************************************************************
@@ -103,13 +103,13 @@ TEST(MoneyArithmeticTests, SimpleSubtraction) {
 // Description: testing operator-= 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, ShortenedSubtraction) {
-  Money value1(250);
-	Money value2(50);
+TEST (MoneyArithmeticTests, ShortenedSubtraction) {
+	Money value1 (250);
+	Money value2 (50);
 	std::ostringstream stream;
 	value1 -= value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "$2.00");
+	EXPECT_EQ (stream.str (), "$2.00");
 }
 
 //***************************************************************************
@@ -118,12 +118,12 @@ TEST(MoneyArithmeticTests, ShortenedSubtraction) {
 // Description: testing the multiplication operator 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, SimpleMultiplication) {
-  Money value1(250);
+TEST (MoneyArithmeticTests, SimpleMultiplication) {
+	Money value1 (250);
 	double value2 = 2.0;
 	std::ostringstream stream;
 	stream << value1 * value2;
-  EXPECT_EQ(stream.str(), "$5.00");
+	EXPECT_EQ (stream.str (), "$5.00");
 }
 
 //***************************************************************************
@@ -132,13 +132,13 @@ TEST(MoneyArithmeticTests, SimpleMultiplication) {
 // Description: testing operator*= 
 //***************************************************************************
 
-TEST(MoneyArithmeticTests, ShortenedMultiplication) {
-  Money value1(250);
+TEST (MoneyArithmeticTests, ShortenedMultiplication) {
+	Money value1 (250);
 	double value2 = 2.0;
 	std::ostringstream stream;
 	value1 *= value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "$5.00");
+	EXPECT_EQ (stream.str (), "$5.00");
 }
 
 //***************************************************************************
@@ -147,9 +147,9 @@ TEST(MoneyArithmeticTests, ShortenedMultiplication) {
 // Description: testing operator<
 //***************************************************************************
 
-TEST(MoneyComparisonTests, LessThan_Appropriate) {
-  Money value1(250);
-	Money value2(300);
+TEST (MoneyComparisonTests, LessThan_Appropriate) {
+	Money value1 (250);
+	Money value2 (300);
 	EXPECT_TRUE (value1 < value2);
 }
 
@@ -159,9 +159,9 @@ TEST(MoneyComparisonTests, LessThan_Appropriate) {
 // Description: testing operator<
 //***************************************************************************
 
-TEST(MoneyComparisonTests, LessThan_Inappropriate) {
-  Money value1(250);
-	Money value2(200);
+TEST (MoneyComparisonTests, LessThan_Inappropriate) {
+	Money value1 (250);
+	Money value2 (200);
 	EXPECT_FALSE (value1 < value2);
 }
 
@@ -171,9 +171,9 @@ TEST(MoneyComparisonTests, LessThan_Inappropriate) {
 // Description: testing operator>=
 //***************************************************************************
 
-TEST(MoneyComparisonTests, GraterThanOrEqual_Appropriate_Grater) {
-  Money value1(250);
-	Money value2(200);
+TEST (MoneyComparisonTests, GraterThanOrEqual_Appropriate_Grater) {
+	Money value1 (250);
+	Money value2 (200);
 	EXPECT_TRUE (value1 >= value2);
 }
 
@@ -183,9 +183,9 @@ TEST(MoneyComparisonTests, GraterThanOrEqual_Appropriate_Grater) {
 // Description: testing operator>=
 //***************************************************************************
 
-TEST(MoneyComparisonTests, GraterThanOrEqual_Appropriate_Equal) {
-  Money value1(250);
-	Money value2(250);
+TEST (MoneyComparisonTests, GraterThanOrEqual_Appropriate_Equal) {
+	Money value1 (250);
+	Money value2 (250);
 	EXPECT_TRUE (value1 >= value2);
 }
 
@@ -195,9 +195,9 @@ TEST(MoneyComparisonTests, GraterThanOrEqual_Appropriate_Equal) {
 // Description: testing operator>=
 //***************************************************************************
 
-TEST(MoneyComparisonTests, GraterThanOrEqual_Inappropriate) {
-  Money value1(250);
-	Money value2(300);
+TEST (MoneyComparisonTests, GraterThanOrEqual_Inappropriate) {
+	Money value1 (250);
+	Money value2 (300);
 	EXPECT_FALSE (value1 >= value2);
 }
 
@@ -207,13 +207,13 @@ TEST(MoneyComparisonTests, GraterThanOrEqual_Inappropriate) {
 // Description: testing operator>>
 //***************************************************************************
 
-TEST(MoneyIOTests, Input) {
-	Money value(0);
+TEST (MoneyIOTests, Input) {
+	Money value (0);
 	std::ostringstream outStream;
-	std::istringstream inStream("20000");
+	std::istringstream inStream ("20000");
 	inStream >> value;
 	outStream << value;
-  EXPECT_EQ(outStream.str(), "$200.00");
+	EXPECT_EQ (outStream.str (), "$200.00");
 }
 
 //***************************************************************************
@@ -222,9 +222,9 @@ TEST(MoneyIOTests, Input) {
 // Description: testing operator<<
 //***************************************************************************
 
-TEST(MoneyIOTests, Output) {
-	Money value(0);
+TEST (MoneyIOTests, Output) {
+	Money value (0);
 	std::ostringstream outStream;
 	outStream << value;
-  EXPECT_EQ(outStream.str(), "$0.00");
+	EXPECT_EQ (outStream.str (), "$0.00");
 }

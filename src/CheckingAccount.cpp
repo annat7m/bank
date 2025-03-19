@@ -73,7 +73,6 @@ void CheckingAccount::deposit (const Money& amount) {
 
 void CheckingAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
-	applyMinBalanceFee ();
 }
 
 //***************************************************************************
@@ -87,7 +86,23 @@ void CheckingAccount::withdraw (const Money& amount) {
 //***************************************************************************
 
 void CheckingAccount::chargeMonthlyFee () {
-	Account::chargeMonthlyFee ();
+	applyMinBalanceFee ();
+}
+
+//***************************************************************************
+// Function:    generateInterest
+//
+// Description: apply interest rate to banking account
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::generateInterest () {
+	if (Account::getBalance () >= 0) {
+		Account::generateInterest ();
+	}
 }
 
 //***************************************************************************

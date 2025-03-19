@@ -26,6 +26,7 @@ public:
 	virtual void deposit (const Money& amount) = 0;
 	virtual void withdraw (const Money& amount) = 0;
 	virtual void chargeMonthlyFee ();
+	virtual void generateInterest ();
 	// virtual void addTransaction (TransactionType transactionType,
 	// 	const Money& amount);
 

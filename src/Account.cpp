@@ -87,6 +87,20 @@ void Account::withdraw (const Money& amount) {
 //***************************************************************************
 
 void Account::chargeMonthlyFee () {
+	// mBalance = mInterestRate->generate (mBalance);
+}
+
+//***************************************************************************
+// Function:    generateInterest
+//
+// Description: apply interest rate to banking account
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void Account::generateInterest () {
 	mBalance = mInterestRate->generate (mBalance);
 }
 

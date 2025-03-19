@@ -36,7 +36,7 @@ Bank::Bank (std::shared_ptr<IContainer> container) {
 // Returned:    None
 //***************************************************************************
 
-Bank::Bank (IAccountReader& accountReader, 
+Bank::Bank (IAccountReader& accountReader,
 	std::shared_ptr<IContainer> container) {
 	unsigned int accNumber;
 	std::shared_ptr<Account> account;
@@ -90,9 +90,7 @@ void Bank::deposit (unsigned int accNumber, const Money& amount) {
 
 void Bank::withdraw (unsigned int accNumber, const Money& amount) {
 	std::shared_ptr<Account> account = mAccounts->getAccount (accNumber);
-	if (account) {
-		account->withdraw (amount);
-	}
+	account->withdraw (amount);
 }
 
 //***************************************************************************
@@ -109,6 +107,7 @@ void Bank::applyMonthlyUpdates () {
 	std::shared_ptr<Account> account = mAccounts->getFirst ();
 	while (account) {
 		account->chargeMonthlyFee ();
+		account->generateInterest ();
 		account = mAccounts->getNext ();
 	}
 }

@@ -22,7 +22,7 @@
 // Returned:    None
 //***************************************************************************
 
-Interest::Interest() {}
+Interest::Interest () {}
 
 //***************************************************************************
 // Destructor:  Interest
@@ -34,7 +34,7 @@ Interest::Interest() {}
 // Returned:    None
 //***************************************************************************
 
-Interest::~Interest() {}
+Interest::~Interest () {}
 
 //***************************************************************************
 // Function:    operator<<
@@ -64,7 +64,7 @@ std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
 //***************************************************************************
 
 std::istream& operator>>(std::istream& rcInStream, std::shared_ptr<Interest>& interest) {
-	interest->read(rcInStream);
-	
+	interest->read (rcInStream);
+
 	return rcInStream;
 }

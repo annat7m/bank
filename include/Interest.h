@@ -28,5 +28,5 @@ public:
 		std::shared_ptr<Interest>& interest);
 
 private:
-	
+
 };

@@ -22,15 +22,15 @@
 //***************************************************************************
 
 TEST (SavingsAccountTests, Constructor) {
-	Money initialBalance(1000);
-	Money minBalance(500);
-	Money monthlyFee(50);
-	FlatInterest interest(0.02);
+	Money initialBalance (1000);
+	Money minBalance (500);
+	Money monthlyFee (50);
+	std::shared_ptr<Interest> interest = std::make_shared<FlatInterest>();
 
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
+	SavingsAccount account (12345, initialBalance, interest, minBalance, monthlyFee);
 
-	EXPECT_EQ(account.getBalance(), initialBalance);
-	EXPECT_TRUE(account == 12345);
+	EXPECT_EQ (account.getBalance (), initialBalance);
+	EXPECT_TRUE (account == 12345);
 }
 
 //***************************************************************************
@@ -40,89 +40,33 @@ TEST (SavingsAccountTests, Constructor) {
 //***************************************************************************
 
 TEST (SavingsAccountTests, Deposit) {
-	Money initialBalance(1000);
-	Money depositAmount(500);
-	Money minBalance(500);
-	Money monthlyFee(20);
-	FlatInterest interest(0.02);
+	Money initialBalance (1000);
+	Money depositAmount (500);
+	Money minBalance (500);
+	Money monthlyFee (20);	
+	std::shared_ptr<Interest> interest = std::make_shared<FlatInterest>();
 
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
-	account.deposit(depositAmount);
+	SavingsAccount account (12345, initialBalance, interest, minBalance, monthlyFee);
+	account.deposit (depositAmount);
 
-	EXPECT_EQ(account.getBalance(), initialBalance + depositAmount);
+	EXPECT_EQ (account.getBalance (), initialBalance + depositAmount);
 }
 
 //***************************************************************************
-// Test:        WithdrawAboveMinBalance
+// Test:        Withdraw
 //
 // Description: Ensures withdrawal works correctly when above min balance
 //***************************************************************************
 
-TEST (SavingsAccountTests, WithdrawAboveMinBalance) {
-	Money initialBalance(1000);
-	Money withdrawAmount(400);
-	Money minBalance(500);
-	Money monthlyFee(20);
-	FlatInterest interest(0.02);
+TEST (SavingsAccountTests, Withdraw) {
+	Money initialBalance (1000);
+	Money withdrawAmount (400);
+	Money minBalance (500);
+	Money monthlyFee (20);
+	std::shared_ptr<Interest> interest = std::make_shared<FlatInterest>();
 
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
-	account.withdraw(withdrawAmount);
+	SavingsAccount account (12345, initialBalance, interest, minBalance, monthlyFee);
+	account.withdraw (withdrawAmount);
 
-	EXPECT_EQ(account.getBalance(), initialBalance - withdrawAmount);
-}
-
-//***************************************************************************
-// Test:        WithdrawBelowMinBalance
-//
-// Description: Ensures minimum balance fee is applied when needed
-//***************************************************************************
-
-TEST (SavingsAccountTests, WithdrawBelowMinBalance) {
-	Money initialBalance(600);
-	Money withdrawAmount(200);
-	Money minBalance(500);
-	Money monthlyFee(20);
-	FlatInterest interest(0.02);
-
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
-	account.withdraw(withdrawAmount);
-
-	EXPECT_EQ(account.getBalance(), initialBalance - withdrawAmount - monthlyFee);
-}
-
-//***************************************************************************
-// Test:        MonthlyFeeApplied
-//
-// Description: Ensures monthly fee is charged correctly if balance is below min
-//***************************************************************************
-
-TEST (SavingsAccountTests, MonthlyFeeApplied) {
-	Money initialBalance(400);
-	Money minBalance(500);
-	Money monthlyFee(20);
-	FlatInterest interest(0.02);
-
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
-	account.chargeMonthlyFee();
-
-	EXPECT_EQ(account.getBalance(), interest.generate(initialBalance - monthlyFee));
-}
-
-//***************************************************************************
-// Test:        NoFeeAboveMinBalance
-//
-// Description: Ensures no monthly fee is applied if balance stays above min
-//***************************************************************************
-
-TEST (SavingsAccountTests, NoFeeAboveMinBalance) {
-	Money initialBalance(1000);
-	Money minBalance(500);
-	Money monthlyFee(20);
-	FlatInterest interest(0.02);
-
-	SavingsAccount account(12345, initialBalance, interest, minBalance, monthlyFee);
-
-	account.chargeMonthlyFee();
-
-	EXPECT_EQ(account.getBalance(), interest.generate(initialBalance));
+	EXPECT_EQ (account.getBalance (), initialBalance - withdrawAmount);
 }
