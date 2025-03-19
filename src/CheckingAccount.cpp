@@ -100,13 +100,11 @@ void CheckingAccount::chargeMonthlyFee () {
 // Returned:    none
 //***************************************************************************
 
-bool CheckingAccount::applyMinBalanceFee () {
+void CheckingAccount::applyMinBalanceFee () {
 	if (Account::getBalance () < mMinBalance) {
 		Account::withdraw (mMinBalanceFee);
 		// addTransaction (TransactionType::fee, mMinBalanceFee);
-		return true;
 	}
-	return false;
 }
 
 //***************************************************************************
