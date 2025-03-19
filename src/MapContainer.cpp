@@ -7,6 +7,7 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
+#include "../include/Account.h"
 #include "../include/IContainer.h"
 #include "../include/MapContainer.h"
 #include <memory>
@@ -23,7 +24,9 @@
 // Returned:    None
 //***************************************************************************
 
-MapContainer::MapContainer () {}
+MapContainer::MapContainer () {
+	mIterator = mAccounts.begin();
+}
 
 //***************************************************************************
 // Destructor:  MapContainer
@@ -47,8 +50,9 @@ MapContainer::~MapContainer () {}
 // Returned:    none
 //***************************************************************************
 
-void MapContainer::addAccount (std::shared_ptr<Account> account) {
-
+void MapContainer::addAccount (unsigned int accNumber, 
+	std::shared_ptr<Account> account) {
+	mAccounts.insert({accNumber, account});
 }
 
 //***************************************************************************
@@ -62,7 +66,9 @@ void MapContainer::addAccount (std::shared_ptr<Account> account) {
 //***************************************************************************
 
 void MapContainer::removeAccount (unsigned int accountNumber) {
-
+	if (bAccountExists(accountNumber)) {
+		mAccounts.erase(accountNumber);
+	}
 }
 
 //***************************************************************************
@@ -76,7 +82,11 @@ void MapContainer::removeAccount (unsigned int accountNumber) {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getFirst () {
-
+	if (mAccounts.empty()) {
+		return nullptr;
+	}
+	mIterator = mAccounts.begin();
+	return mIterator->second;
 }
 
 //***************************************************************************
@@ -90,7 +100,14 @@ std::shared_ptr<Account> MapContainer::getFirst () {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getNext () {
-
+	if (mAccounts.empty()) {
+		return nullptr;
+	}
+	++mIterator;
+	if (mIterator != mAccounts.end()) {
+		return mIterator->second;
+	}
+	return nullptr;
 }
 
 //***************************************************************************
@@ -104,7 +121,7 @@ std::shared_ptr<Account> MapContainer::getNext () {
 //***************************************************************************
 
 bool MapContainer::bAccountExists (unsigned int accountNumber) {
-
+	return mAccounts.find(accountNumber) != mAccounts.end();
 }
 
 //***************************************************************************
@@ -118,5 +135,25 @@ bool MapContainer::bAccountExists (unsigned int accountNumber) {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getAccount (unsigned int accountNumber) {
+	auto toFind = mAccounts.find(accountNumber);
+	if (toFind != mAccounts.end()) {
+		return toFind->second;
+	}
+	return nullptr;
+}
 
+//***************************************************************************
+// Function:    print
+//
+// Description: print accounts in ascending order of account number
+//
+// Parameters:  rcOutStream
+//
+// Returned:    found account object
+//***************************************************************************
+
+void MapContainer::print (std::ostream& rcOutStream) const {
+	for (const auto& pair : mAccounts) {
+		pair.second->display(rcOutStream);
+	}
 }
