@@ -28,7 +28,7 @@
 //***************************************************************************
 
 CheckingAccount::CheckingAccount (unsigned int accountNumber,
-	const Money& balance, const Interest& interestRate,
+	const Money& balance, std::shared_ptr<Interest>& interestRate,
 	const Money& minBalance, const Money& minBalanceFee)
 	: Account (accountNumber, balance, interestRate) {
 	mMinBalance = minBalance;

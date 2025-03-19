@@ -14,6 +14,7 @@
 #include "../include/Money.h"
 #include <iostream>
 #include <iomanip>
+#include <memory>
 
 //***************************************************************************
 // Constructor: Account
@@ -28,17 +29,10 @@
 //***************************************************************************
 
 Account::Account (unsigned int accountNumber, const Money& balance,
-	const Interest& interestRate) {
+	std::shared_ptr<Interest>& interestRate) {
 	mAccountNumber = accountNumber;
 	mBalance = balance;
-	if (dynamic_cast<const FlatInterest*>(&interestRate)) {
-		mInterestRate = std::make_shared<FlatInterest> (
-			*dynamic_cast<const FlatInterest*>(&interestRate));
-	}
-	else if (dynamic_cast<const TieredInterest*>(&interestRate)) {
-		mInterestRate = std::make_shared<TieredInterest> (
-			*dynamic_cast<const TieredInterest*>(&interestRate));
-	}
+	mInterestRate = std::move (interestRate);
 }
 
 //***************************************************************************

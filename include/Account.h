@@ -20,7 +20,7 @@ class Account {
 
 public:
 	Account (unsigned int accountNumber, const Money& balance,
-		const Interest& interestRate);
+		std::shared_ptr<Interest>& interestRate);
 	virtual ~Account ();
 
 	virtual void deposit (const Money& amount) = 0;
