@@ -155,5 +155,6 @@ std::shared_ptr<Account> MapContainer::getAccount (unsigned int accountNumber) {
 void MapContainer::print (std::ostream& rcOutStream) const {
 	for (const auto& pair : mAccounts) {
 		pair.second->display(rcOutStream);
+		rcOutStream << std::endl;
 	}
 }

@@ -9,6 +9,7 @@
 
 #include "../include/Money.h"
 #include <iostream>
+#include <memory>
 
 #pragma once
 
@@ -24,7 +25,7 @@ public:
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
 		const Interest& interest);
 	friend std::istream& operator>> (std::istream& rcInStream,
-		Interest& interest);
+		std::shared_ptr<Interest>& interest);
 
 private:
 	
