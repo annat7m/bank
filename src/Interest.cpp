@@ -64,21 +64,7 @@ std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
 //***************************************************************************
 
 std::istream& operator>>(std::istream& rcInStream, std::shared_ptr<Interest>& interest) {
-	const char FLAT = 'F';
-	const char TIERED = 'T';
-	char type;
-
-	rcInStream >> type;
-
-	if (type == FLAT) {
-		interest = std::make_shared<FlatInterest>(0.0);
-	}
-	else if (type == TIERED) {
-		interest = std::make_shared<TieredInterest>(0);
-	}
-	if (interest) {
-		interest->read(rcInStream);
-}
+	interest->read(rcInStream);
 	
 	return rcInStream;
 }

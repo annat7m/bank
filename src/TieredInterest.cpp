@@ -133,11 +133,12 @@ void TieredInterest::read (std::istream& rcInStream) {
 	}
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
-		mInterestRates.emplace_back (minBalances[i], interestRates[i]);
+		// mInterestRates.emplace_back (minBalances[i], interestRates[i]);
+		addTier (minBalances[i], interestRates[i]);
 	}
 
-	minBalances.clear ();
-	interestRates.clear ();
+	// minBalances.clear ();
+	// interestRates.clear ();
 }
 
 //***************************************************************************
@@ -153,5 +154,5 @@ void TieredInterest::read (std::istream& rcInStream) {
 
 void TieredInterest::addTier (const Money& amount, double interest) {
 	mInterestRates.push_back ({ amount, interest });
-	std::sort (mInterestRates.begin (), mInterestRates.end ());
+	// std::sort (mInterestRates.begin (), mInterestRates.end ());
 }
