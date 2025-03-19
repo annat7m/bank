@@ -27,7 +27,7 @@ public:
 	virtual void chargeMonthlyFee () override;
 
 	virtual void display (std::ostream& rcOutStream) const override;
-	virtual void read (std::istream& rcInStream) const override;
+	virtual void read (std::istream& rcInStream) override;
 
 private:
 	Money mMinBalance;

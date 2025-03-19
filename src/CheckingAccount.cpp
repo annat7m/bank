@@ -27,8 +27,9 @@
 // Returned:    None
 //***************************************************************************
 
-CheckingAccount::CheckingAccount (int accountNumber, long long balance,
-	double interestRate, long long minBalance, long long minBalanceFee)
+CheckingAccount::CheckingAccount (unsigned int accountNumber, 
+	const Money& balance, const Interest& interestRate, 
+	const Money& minBalance, const Money& minBalanceFee)
 	: Account (accountNumber, balance, interestRate) {
 	mMinBalance = minBalance;
 	mMinBalanceFee = minBalanceFee;
@@ -56,7 +57,7 @@ CheckingAccount::~CheckingAccount () {}
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::deposit (long long amount) {
+void CheckingAccount::deposit (const Money& amount) {
 	Account::deposit (amount);
 }
 
@@ -70,12 +71,9 @@ void CheckingAccount::deposit (long long amount) {
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::withdraw (long long amount) {
+void CheckingAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
 	applyMinBalanceFee ();
-	if (Account::getBalance () < 0) {
-		adjustBalance (-Account::getBalance ());
-	}
 }
 
 //***************************************************************************
@@ -90,11 +88,8 @@ void CheckingAccount::withdraw (long long amount) {
 
 bool CheckingAccount::applyMinBalanceFee () {
 	if (Account::getBalance () < mMinBalance) {
-		adjustBalance (-mMinBalanceFee);
+		Account::withdraw (mMinBalanceFee);
 		addTransaction (TransactionType::fee, mMinBalanceFee);
-		if (Account::getBalance () < 0) {
-			adjustBalance (-Account::getBalance ());
-		}
 		return true;
 	}
 	return false;
@@ -110,9 +105,22 @@ bool CheckingAccount::applyMinBalanceFee () {
 // Returned:    none
 //***************************************************************************
 
-void CheckingAccount::displayAccount () const {
-	std::cout << std::fixed << std::setprecision (2) << Account::getAccountNumber ()
-		<< ", $" << Account::getBalance () * Account::getInterestRate ()
-		<< ", " << Account::getInterestRate () * 100 << "%, ";
-	std::cout << mMinBalance << ", " << mMinBalanceFee;
+void CheckingAccount::display (std::ostream& rcOutStream) const {
+	rcOutStream << std::fixed << std::setprecision (2);
+	rcOutStream << mMinBalance << ", " << mMinBalanceFee;
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read checking account info
+//
+// Parameters:  rcInStream - stream to take input from
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::read (std::istream& rcInStream) {
+	Account::read(rcInStream);
+	rcInStream >> mMinBalance >> mMinBalanceFee;
 }

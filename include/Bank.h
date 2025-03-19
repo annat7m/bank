@@ -27,7 +27,7 @@ public:
 	void withdraw (const Money& amount);
 
 	void applyMonthlyUpdates ();
-	void display ();
+	void display (std::ostream& rcOutStream) const;
 
 private:
 	std::shared_ptr<IContainer> mAccounts;

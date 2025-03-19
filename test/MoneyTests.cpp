@@ -23,7 +23,7 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Positive) {
 	Money amount(100);
 	std::ostringstream stream;
   stream << amount;
-  EXPECT_EQ(stream.str(), "100.00");
+  EXPECT_EQ(stream.str(), "$1.00");
 }
 
 //***************************************************************************
@@ -37,7 +37,7 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Negative) {
 	Money amount(-100);
 	std::ostringstream stream;
   stream << amount;
-  EXPECT_EQ(stream.str(), "-100.00");
+  EXPECT_EQ(stream.str(), "$-1.00");
 }
 
 //***************************************************************************
@@ -51,7 +51,7 @@ TEST(MoneyConstructorTests, CopyConstructor) {
   Money copy = original;
 	std::ostringstream stream;
 	stream << copy;
-  EXPECT_EQ(stream.str(), "250.00");
+  EXPECT_EQ(stream.str(), "$2.50");
 }
 
 //***************************************************************************
@@ -65,7 +65,7 @@ TEST(MoneyArithmeticTests, SimpleAddition) {
 	Money value2(50);
 	std::ostringstream stream;
 	stream << value1 + value2;
-  EXPECT_EQ(stream.str(), "300.00");
+  EXPECT_EQ(stream.str(), "$3.00");
 }
 
 //***************************************************************************
@@ -80,7 +80,7 @@ TEST(MoneyArithmeticTests, ShortenedAddition) {
 	std::ostringstream stream;
 	value1 += value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "300.00");
+  EXPECT_EQ(stream.str(), "$3.00");
 }
 
 //***************************************************************************
@@ -94,7 +94,7 @@ TEST(MoneyArithmeticTests, SimpleSubtraction) {
 	Money value2(50);
 	std::ostringstream stream;
 	stream << value1 - value2;
-  EXPECT_EQ(stream.str(), "200.00");
+  EXPECT_EQ(stream.str(), "$2.00");
 }
 
 //***************************************************************************
@@ -109,7 +109,7 @@ TEST(MoneyArithmeticTests, ShortenedSubtraction) {
 	std::ostringstream stream;
 	value1 -= value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "200.00");
+  EXPECT_EQ(stream.str(), "$2.00");
 }
 
 //***************************************************************************
@@ -123,7 +123,7 @@ TEST(MoneyArithmeticTests, SimpleMultiplication) {
 	double value2 = 2.0;
 	std::ostringstream stream;
 	stream << value1 * value2;
-  EXPECT_EQ(stream.str(), "500.00");
+  EXPECT_EQ(stream.str(), "$5.00");
 }
 
 //***************************************************************************
@@ -138,7 +138,7 @@ TEST(MoneyArithmeticTests, ShortenedMultiplication) {
 	std::ostringstream stream;
 	value1 *= value2;
 	stream << value1;
-  EXPECT_EQ(stream.str(), "500.00");
+  EXPECT_EQ(stream.str(), "$5.00");
 }
 
 //***************************************************************************
@@ -213,7 +213,7 @@ TEST(MoneyIOTests, Input) {
 	std::istringstream inStream("20000");
 	inStream >> value;
 	outStream << value;
-  EXPECT_EQ(outStream.str(), "20000.00");
+  EXPECT_EQ(outStream.str(), "$200.00");
 }
 
 //***************************************************************************
@@ -226,5 +226,5 @@ TEST(MoneyIOTests, Output) {
 	Money value(0);
 	std::ostringstream outStream;
 	outStream << value;
-  EXPECT_EQ(outStream.str(), "0.00");
+  EXPECT_EQ(outStream.str(), "$0.00");
 }

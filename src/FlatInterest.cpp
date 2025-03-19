@@ -66,7 +66,7 @@ Money FlatInterest::generate (const Money& balance) const {
 
 void FlatInterest::display (std::ostream& rcOutStream) const {
 	const char FLAT = 'F';
-	rcOutStream << std::setprecision (2) << FLAT << " " << mInterest << "%";
+	rcOutStream << std::setprecision (2) << FLAT << " " << mInterest * 100 << "%";
 }
 
 //***************************************************************************

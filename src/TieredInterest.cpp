@@ -80,7 +80,7 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2);
 
 	for (const auto& tier : mInterestRates) {
-		rcOutStream << " $" << tier.first * 0.01;
+		rcOutStream << " " << tier.first;
 	}
 	if (mInterestRates.size () > 0) {
 		rcOutStream << ",";

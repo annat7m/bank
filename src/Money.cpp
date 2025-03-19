@@ -15,6 +15,19 @@
 //***************************************************************************
 // Constructor: Money
 //
+// Description: Default Constructor
+//
+// Parameters:  amount - Money object to set amount to
+//
+// Returned:    None
+//***************************************************************************
+
+Money::Money () {
+}
+
+//***************************************************************************
+// Constructor: Money
+//
 // Description: Initializes a Money object with the value of another Money object
 //
 // Parameters:  amount - Money object to set amount to
@@ -193,8 +206,8 @@ long long Money::operator() () const {
 //***************************************************************************
 
 void Money::display (std::ostream& rcOutStream) const {
-	rcOutStream << std::fixed << std::setprecision (2) 
-	<< static_cast<double>(mAmount);
+	rcOutStream << std::fixed << std::setprecision (2) << "$"
+	<< static_cast<double>(mAmount) * 0.01;
 }
 
 //***************************************************************************
