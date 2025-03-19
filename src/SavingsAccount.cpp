@@ -102,6 +102,7 @@ void SavingsAccount::chargeMonthlyFee () {
 		Account::withdraw (mMonthlyFee);
 		// addTransaction (TransactionType::fee, mMonthlyFee);
 	}
+	Account::chargeMonthlyFee ();
 }
 
 //***************************************************************************

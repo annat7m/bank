@@ -27,8 +27,8 @@
 // Returned:    None
 //***************************************************************************
 
-CheckingAccount::CheckingAccount (unsigned int accountNumber, 
-	const Money& balance, const Interest& interestRate, 
+CheckingAccount::CheckingAccount (unsigned int accountNumber,
+	const Money& balance, const Interest& interestRate,
 	const Money& minBalance, const Money& minBalanceFee)
 	: Account (accountNumber, balance, interestRate) {
 	mMinBalance = minBalance;
@@ -77,6 +77,20 @@ void CheckingAccount::withdraw (const Money& amount) {
 }
 
 //***************************************************************************
+// Function:    chargeMonthlyFee
+//
+// Description: charge the checking account the monthly fee
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::chargeMonthlyFee () {
+	Account::chargeMonthlyFee ();
+}
+
+//***************************************************************************
 // Function:    applyMinBalanceFee
 //
 // Description: fee is charged if the balance falls below the minimum
@@ -121,6 +135,6 @@ void CheckingAccount::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void CheckingAccount::read (std::istream& rcInStream) {
-	Account::read(rcInStream);
+	Account::read (rcInStream);
 	rcInStream >> mMinBalance >> mMinBalanceFee;
 }
