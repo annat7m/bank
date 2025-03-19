@@ -48,7 +48,7 @@ Transaction::~Transaction () {}
 // Returned:    type of transaction
 //***************************************************************************
 
-TransactionType Transaction::getType () {
+TransactionType Transaction::getType () const {
 	return mType;
 }
 
@@ -62,6 +62,6 @@ TransactionType Transaction::getType () {
 // Returned:    amount of money that was proccessed during transaction
 //***************************************************************************
 
-long long Transaction::getAmount () {
+Money Transaction::getAmount () const {
 	return mAmount;
 }

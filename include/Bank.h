@@ -19,12 +19,12 @@
 class Bank {
 
 public:
-	Bank ();
-	Bank (IAccountReader& accountReader);
+	Bank (std::shared_ptr<IContainer> container);
+	Bank (IAccountReader& accountReader, std::shared_ptr<IContainer> container);
 	virtual ~Bank ();
 
-	void deposit (const Money& amount);
-	void withdraw (const Money& amount);
+	void deposit (unsigned int accNumber, const Money& amount);
+	void withdraw (unsigned int accNumber, const Money& amount);
 
 	void applyMonthlyUpdates ();
 	void display (std::ostream& rcOutStream) const;

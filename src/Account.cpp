@@ -127,6 +127,20 @@ Money Account::getBalance () const {
 }
 
 //***************************************************************************
+// Function:    getAccountNumber
+//
+// Description: getter function for account number
+//
+// Parameters:  none
+//
+// Returned:    amount of money that is on the balance
+//***************************************************************************
+
+unsigned int Account::getAccountNumber () const {
+	return mAccountNumber;
+}
+
+//***************************************************************************
 // Function:    operaotr==
 //
 // Description: compare if accounts are the same 

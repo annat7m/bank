@@ -19,8 +19,7 @@ public:
 	TXTAccountReader (const std::string& fileName);
 	virtual ~TXTAccountReader ();
 
-	virtual std::shared_ptr<Account> readAccount (std::ostream&
-		rcOutStream) override;
+	virtual std::shared_ptr<Account> readAccount () override;
 
 private:
 	std::ifstream mcAccountsFile;

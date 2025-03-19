@@ -7,6 +7,7 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
+#include "../include/Account.h"
 #include <iostream>
 #include <memory>
 
@@ -18,6 +19,6 @@ public:
 	IAccountReader ();
 	virtual ~IAccountReader ();
 
-	virtual std::shared_ptr<Account> readAccount (std::ostream& rcOutStream) = 0;
+	virtual std::shared_ptr<Account> readAccount () = 0;
 
 };

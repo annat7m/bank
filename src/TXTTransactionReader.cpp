@@ -58,18 +58,16 @@ TXTTransactionReader::~TXTTransactionReader () {
 // Returned:    none
 //***************************************************************************
 
-void TXTTransactionReader::readTransactions (Bank& bank) {
+void TXTTransactionReader::readTransactions (std::ostream& rcOutStream, 
+	Bank& bank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
 	const char CHARGE = 'M';
 
-	std::string line;
 	char command;
 	int accountNumber;
 	long long amount;
-
-	std::shared_ptr<Account> account;
 
 	if (!mcCommandsFile.is_open ()) {
 		return;
@@ -78,18 +76,16 @@ void TXTTransactionReader::readTransactions (Bank& bank) {
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> amount;
-			account = bank.findAccount (accountNumber);
-			account->withdraw (amount);
+			bank.withdraw (accountNumber, Money (amount));
 		}
 		else if (command == DEPOSIT) {
 			mcCommandsFile >> accountNumber >> amount;
-			account = bank.findAccount (accountNumber);
-			account->deposit (amount);
+			bank.deposit (accountNumber, Money (amount));
 		}
 		else if (command == PRINT) {
-			std::cout << "-------------" << std::endl;
-			bank.display ();
-			std::cout << "-------------" << std::endl;
+			rcOutStream << "-------------" << std::endl;
+			bank.display (rcOutStream);
+			rcOutStream << std::endl << "-------------" << std::endl;
 		}
 		else if (command == CHARGE) {
 			bank.applyMonthlyUpdates ();
