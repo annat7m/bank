@@ -10,7 +10,6 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "../include/Transaction.h"
 #include "../include/Interest.h"
 #include "../include/Money.h"
 
@@ -43,7 +42,6 @@ public:
 private:
 	unsigned int mAccountNumber;
 	Money mBalance;
-	std::shared_ptr<Interest> mInterestRate;
-	std::vector<Transaction> mTransactions;
+	std::shared_ptr<Interest> mpInterestRate;
 
 };

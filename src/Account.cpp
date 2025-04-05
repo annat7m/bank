@@ -32,7 +32,7 @@ Account::Account (unsigned int accountNumber, const Money& balance,
 	std::shared_ptr<Interest>& interestRate) {
 	mAccountNumber = accountNumber;
 	mBalance = balance;
-	mInterestRate = std::move (interestRate);
+	mpInterestRate = std::move (interestRate);
 }
 
 //***************************************************************************
@@ -87,7 +87,7 @@ void Account::withdraw (const Money& amount) {
 //***************************************************************************
 
 void Account::chargeMonthlyFee () {
-	// mBalance = mInterestRate->generate (mBalance);
+	// mBalance = mpInterestRate->generate (mBalance);
 }
 
 //***************************************************************************
@@ -101,7 +101,7 @@ void Account::chargeMonthlyFee () {
 //***************************************************************************
 
 void Account::generateInterest () {
-	mBalance = mInterestRate->generate (mBalance);
+	mBalance = mpInterestRate->generate (mBalance);
 }
 
 //***************************************************************************
@@ -174,7 +174,7 @@ bool Account::operator== (unsigned int accountNum) const {
 
 void Account::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-		<< ", " << mBalance << ", " << *mInterestRate << ", ";
+		<< ", " << mBalance << ", " << *mpInterestRate << ", ";
 }
 
 //***************************************************************************
@@ -194,12 +194,12 @@ void Account::read (std::istream& rcInStream) {
 
 	rcInStream >> mAccountNumber >> mBalance >> interestType;
 	if (interestType == FLAT) {
-		mInterestRate = std::make_shared<FlatInterest> ();
+		mpInterestRate = std::make_shared<FlatInterest> ();
 	}
 	else if (interestType == TIERED) {
-		mInterestRate = std::make_shared<TieredInterest> ();
+		mpInterestRate = std::make_shared<TieredInterest> ();
 	}
-	rcInStream >> mInterestRate;
+	rcInStream >> mpInterestRate;
 }
 
 //***************************************************************************
