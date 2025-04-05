@@ -95,9 +95,6 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 	for (const auto& tier : mInterestRates) {
 		rcOutStream << " " << tier.first;
 	}
-	if (mInterestRates.size () > 0) {
-		rcOutStream << ",";
-	}
 	for (const auto& tier : mInterestRates) {
 		rcOutStream << " " << tier.second * 100 << "%";
 	}

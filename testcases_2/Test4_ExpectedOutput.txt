@@ -1,128 +1,4 @@
-==95394== Memcheck, a memory error detector
-==95394== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
-==95394== Using Valgrind-3.20.0-5147d671e4-20221024 and LibVEX; rerun with -h for copyright info
-==95394== Command: bin/main data/Accounts.txt data/Commands.txt
-==95394== 
---95394-- Valgrind options:
---95394--    -v
---95394--    --leak-check=yes
---95394--    --track-origins=yes
---95394--    --leak-check=full
---95394--    --show-leak-kinds=all
---95394-- Contents of /proc/version:
---95394--   Linux version 6.8.0-1021-azure (buildd@lcy02-amd64-045) (x86_64-linux-gnu-gcc-11 (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #25~22.04.1-Ubuntu SMP Thu Jan 16 21:37:09 UTC 2025
---95394-- 
---95394-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
---95394-- Page sizes: currently 4096, max supported 4096
---95394-- Valgrind library directory: /usr/libexec/valgrind
---95394-- Reading syms from /workspaces/bank-tymo7256/bin/main
---95394-- Reading syms from /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
---95394--   Considering /usr/lib/debug/.build-id/f4/bc47db467906580a47640e01e6d901e2642a7b.debug ..
---95394--   .. build-id is valid
---95394-- Reading syms from /usr/libexec/valgrind/memcheck-amd64-linux
---95394--    object doesn't have a symbol table
---95394--    object doesn't have a dynamic symbol table
---95394-- Scheduler: using generic scheduler lock implementation.
---95394-- Reading suppressions file: /usr/libexec/valgrind/default.supp
-==95394== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-95394-by-vscode-on-codespaces-0625dc
-==95394== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-95394-by-vscode-on-codespaces-0625dc
-==95394== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-95394-by-vscode-on-codespaces-0625dc
-==95394== 
-==95394== TO CONTROL THIS PROCESS USING vgdb (which you probably
-==95394== don't want to do, unless you know exactly what you're doing,
-==95394== or are doing some strange experiment):
-==95394==   /usr/bin/vgdb --pid=95394 ...command...
-==95394== 
-==95394== TO DEBUG THIS PROCESS USING GDB: start GDB like this
-==95394==   /path/to/gdb bin/main
-==95394== and then give GDB the following command
-==95394==   target remote | /usr/bin/vgdb --pid=95394
-==95394== --pid is optional if only one valgrind process is running
-==95394== 
---95394-- REDIR: 0x40238e0 (ld-linux-x86-64.so.2:strlen) redirected to 0x580bda92 (???)
---95394-- REDIR: 0x40220c0 (ld-linux-x86-64.so.2:index) redirected to 0x580bdaac (???)
---95394-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
---95394--    object doesn't have a symbol table
---95394-- Reading syms from /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so
---95394--    object doesn't have a symbol table
-==95394== WARNING: new redirection conflicts with existing -- ignoring it
---95394--     old: 0x040238e0 (strlen              ) R-> (0000.0) 0x580bda92 ???
---95394--     new: 0x040238e0 (strlen              ) R-> (2007.0) 0x04846da0 strlen
---95394-- REDIR: 0x40222e0 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4847ec0 (strcmp)
---95394-- REDIR: 0x4021550 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x484bcb0 (mempcpy)
---95394-- Reading syms from /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.30
---95394--    object doesn't have a symbol table
---95394-- Reading syms from /usr/lib/x86_64-linux-gnu/libm.so.6
---95394--   Considering /usr/lib/debug/.build-id/6d/201df2cb50847f0ed42da4158c3a608d578f03.debug ..
---95394--   .. build-id is valid
---95394-- Reading syms from /usr/lib/x86_64-linux-gnu/libgcc_s.so.1
---95394--    object doesn't have a symbol table
---95394-- Reading syms from /usr/lib/x86_64-linux-gnu/libc.so.6
---95394--   Considering /usr/lib/debug/.build-id/c0/47672cae7964324658491e7dee26748ae5d2f8.debug ..
---95394--   .. build-id is valid
-==95394== WARNING: new redirection conflicts with existing -- ignoring it
---95394--     old: 0x04c095d0 (memalign            ) R-> (1011.0) 0x04845ff0 memalign
---95394--     new: 0x04c095d0 (memalign            ) R-> (1017.0) 0x04845fc0 aligned_alloc
-==95394== WARNING: new redirection conflicts with existing -- ignoring it
---95394--     old: 0x04c095d0 (memalign            ) R-> (1011.0) 0x04845ff0 memalign
---95394--     new: 0x04c095d0 (memalign            ) R-> (1017.0) 0x04845f90 aligned_alloc
-==95394== WARNING: new redirection conflicts with existing -- ignoring it
---95394--     old: 0x04c095d0 (memalign            ) R-> (1011.0) 0x04845ff0 memalign
---95394--     new: 0x04c095d0 (memalign            ) R-> (1017.0) 0x04845fc0 aligned_alloc
-==95394== WARNING: new redirection conflicts with existing -- ignoring it
---95394--     old: 0x04c095d0 (memalign            ) R-> (1011.0) 0x04845ff0 memalign
---95394--     new: 0x04c095d0 (memalign            ) R-> (1017.0) 0x04845f90 aligned_alloc
---95394-- REDIR: 0x4023a80 (ld-linux-x86-64.so.2:strncmp) redirected to 0x48476f0 (strncmp)
---95394-- REDIR: 0x4c0f510 (libc.so.6:strnlen) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f5a0 (libc.so.6:strpbrk) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0d6c0 (libc.so.6:strcmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c224a0 (libc.so.6:wcsnlen) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c800 (libc.so.6:memset) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c20de0 (libc.so.6:wcslen) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0be30 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c20c10 (libc.so.6:wcschr) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0d5b0 (libc.so.6:index) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f5d0 (libc.so.6:rindex) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c20ca0 (libc.so.6:wcscmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0ca40 (libc.so.6:stpncpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c211f0 (libc.so.6:wmemchr) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f3c0 (libc.so.6:strncmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0cab0 (libc.so.6:strcasecmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0e920 (libc.so.6:strcspn) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c20d30 (libc.so.6:wcscpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0d530 (libc.so.6:strcat) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f2b0 (libc.so.6:strncasecmp_l) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0bd40 (libc.so.6:bcmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c770 (libc.so.6:memrchr) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0d630 (libc.so.6:strchrnul) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0e8a0 (libc.so.6:strcpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0cb50 (libc.so.6:strcasecmp_l) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f180 (libc.so.6:strlen) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f460 (libc.so.6:strncpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c9c0 (libc.so.6:stpcpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c550 (libc.so.6:memmove) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
-==95394== Preferring higher priority redirection:
---95394--     old: 0x04cc2940 (__memcpy_avx_unalign) R-> (2018.0) 0x048492a0 __memcpy_avx_unaligned_erms
---95394--     new: 0x04cc2940 (__memcpy_avx_unalign) R-> (2018.1) 0x0484ad40 memmove
---95394-- REDIR: 0x4c0bcc0 (libc.so.6:memchr) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f790 (libc.so.6:strspn) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c660 (libc.so.6:mempcpy) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0f210 (libc.so.6:strncasecmp) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4c0c900 (libc.so.6:rawmemchr) redirected to 0x48371b0 (_vgnU_ifunc_wrapper)
---95394-- REDIR: 0x4cc8a10 (libc.so.6:__strrchr_avx2) redirected to 0x4846780 (rindex)
---95394-- REDIR: 0x4c088f0 (libc.so.6:malloc) redirected to 0x4840790 (malloc)
---95394-- REDIR: 0x4cc60c0 (libc.so.6:__strlen_avx2) redirected to 0x4846c80 (strlen)
---95394-- REDIR: 0x4cc21e0 (libc.so.6:__memcmp_avx2_movbe) redirected to 0x484a460 (bcmp)
---95394-- REDIR: 0x4cc57d0 (libc.so.6:__strcmp_avx2) redirected to 0x4847dc0 (strcmp)
---95394-- REDIR: 0x4900570 (libstdc++.so.6:operator new(unsigned long)) redirected to 0x4840f10 (operator new(unsigned long))
---95394-- REDIR: 0x4cc2940 (libc.so.6:__memcpy_avx_unaligned_erms) redirected to 0x484ad40 (memmove)
---95394-- REDIR: 0x4cc53a0 (libc.so.6:__strchr_avx2) redirected to 0x4846960 (index)
---95394-- REDIR: 0x49005d0 (libstdc++.so.6:operator new[](unsigned long)) redirected to 0x48421f0 (operator new[](unsigned long))
---95394-- REDIR: 0x48fe8d0 (libstdc++.so.6:operator delete(void*)) redirected to 0x48437b0 (operator delete(void*))
 -------------
---95394-- REDIR: 0x4cc28f0 (libc.so.6:__mempcpy_avx_unaligned_erms) redirected to 0x484b8b0 (mempcpy)
---95394-- REDIR: 0x4cc55e0 (libc.so.6:__strchrnul_avx2) redirected to 0x484b790 (strchrnul)
---95394-- REDIR: 0x4cc1f40 (libc.so.6:__memchr_avx2) redirected to 0x4847f40 (memchr)
 1, $7.22, F 3.00%, $1.00, $5.00
 2, $924.71, F 1.00%, $1.00, $5.00
 3, $744.56, F 5.00%, $1.00, $5.00
@@ -225,7 +101,7 @@
 100, $233.95, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-52.79, F 3.00%, $1.00, $5.00
+1, $-44.79, F 3.00%, $1.00, $5.00
 2, $135.28, F 1.00%, $1.00, $5.00
 3, $820.86, F 5.00%, $1.00, $5.00
 4, $772.96, F 1.00%, $80.00, $11.50
@@ -315,7 +191,7 @@
 88, $989.32, F 5.00%, $10.00, $3.50
 89, $615.90, F 8.00%, $3.50, $10.00
 90, $73.65, F 1.00%, $3.50, $10.00
-91, $32.40, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $32.44, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $137.66, F 1.00%, $3.50, $10.00
 93, $962.08, F 2.00%, $10.00, $3.50
 94, $413.50, F 1.00%, $3.50, $10.00
@@ -327,7 +203,7 @@
 100, $248.18, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-57.79, F 3.00%, $1.00, $5.00
+1, $-45.79, F 3.00%, $1.00, $5.00
 2, $136.63, F 1.00%, $1.00, $5.00
 3, $861.90, F 5.00%, $1.00, $5.00
 4, $780.68, F 1.00%, $80.00, $11.50
@@ -417,7 +293,7 @@
 88, $1038.78, F 5.00%, $10.00, $3.50
 89, $665.17, F 8.00%, $3.50, $10.00
 90, $74.38, F 1.00%, $3.50, $10.00
-91, $-67.61, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $-71.05, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $139.03, F 1.00%, $3.50, $10.00
 93, $981.32, F 2.00%, $10.00, $3.50
 94, $417.63, F 1.00%, $3.50, $10.00
@@ -429,7 +305,7 @@
 100, $255.62, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-57.79, F 3.00%, $1.00, $5.00
+1, $-45.79, F 3.00%, $1.00, $5.00
 2, $136.63, F 1.00%, $1.00, $5.00
 3, $861.90, F 5.00%, $1.00, $5.00
 4, $780.68, F 1.00%, $80.00, $11.50
@@ -519,7 +395,7 @@
 88, $1038.78, F 5.00%, $10.00, $3.50
 89, $665.17, F 8.00%, $3.50, $10.00
 90, $74.38, F 1.00%, $3.50, $10.00
-91, $3.49, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $0.05, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $139.03, F 1.00%, $3.50, $10.00
 93, $981.32, F 2.00%, $10.00, $3.50
 94, $417.63, F 1.00%, $3.50, $10.00
@@ -531,7 +407,7 @@
 100, $21.67, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-62.79, F 3.00%, $1.00, $5.00
+1, $-46.79, F 3.00%, $1.00, $5.00
 2, $137.99, F 1.00%, $1.00, $5.00
 3, $904.99, F 5.00%, $1.00, $5.00
 4, $788.48, F 1.00%, $80.00, $11.50
@@ -621,7 +497,7 @@
 88, $1090.71, F 5.00%, $10.00, $3.50
 89, $718.38, F 8.00%, $3.50, $10.00
 90, $75.12, F 1.00%, $3.50, $10.00
-91, $4.16, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $-3.45, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $140.42, F 1.00%, $3.50, $10.00
 93, $1000.94, F 2.00%, $10.00, $3.50
 94, $421.80, F 1.00%, $3.50, $10.00
@@ -633,7 +509,7 @@
 100, $22.32, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-62.79, F 3.00%, $1.00, $5.00
+1, $-46.79, F 3.00%, $1.00, $5.00
 2, $137.99, F 1.00%, $1.00, $5.00
 3, $904.99, F 5.00%, $1.00, $5.00
 4, $788.48, F 1.00%, $80.00, $11.50
@@ -723,7 +599,7 @@
 88, $1090.71, F 5.00%, $10.00, $3.50
 89, $718.38, F 8.00%, $3.50, $10.00
 90, $75.12, F 1.00%, $3.50, $10.00
-91, $-992.08, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $-999.69, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $140.42, F 1.00%, $3.50, $10.00
 93, $1000.94, F 2.00%, $10.00, $3.50
 94, $421.80, F 1.00%, $3.50, $10.00
@@ -735,7 +611,7 @@
 100, $22.32, F 3.00%, $10.00, $3.50
 -------------
 -------------
-1, $-67.79, F 3.00%, $1.00, $5.00
+1, $-47.79, F 3.00%, $1.00, $5.00
 2, $139.36, F 1.00%, $1.00, $5.00
 3, $950.23, F 5.00%, $1.00, $5.00
 4, $796.36, F 1.00%, $80.00, $11.50
@@ -825,7 +701,7 @@
 88, $1145.24, F 5.00%, $10.00, $3.50
 89, $775.85, F 8.00%, $3.50, $10.00
 90, $75.87, F 1.00%, $3.50, $10.00
-91, $-992.10, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
+91, $-1003.19, T $0.01 $0.02 $0.03 $0.04 $0.05 $0.06 $0.07 $0.08 $0.09 $0.10 $0.11 $0.12 $0.13 $0.14 $0.15 $0.16 $0.17 $0.18 $0.19 $0.20 1.00% 2.00% 3.00% 4.00% 100.00% 6.00% 7.00% 8.00% 900.00% 10.00% 11.00% 12.00% 13.00% 14.00% 15.00% 16.00% 17.00% 18.00% 19.00% 20.00%, $3.50, $0.02
 92, $141.82, F 1.00%, $3.50, $10.00
 93, $1020.95, F 2.00%, $10.00, $3.50
 94, $426.01, F 1.00%, $3.50, $10.00
@@ -836,13 +712,3 @@
 99, $171.65, F 1.00%, $10.00, $3.50
 100, $22.98, F 3.00%, $10.00, $3.50
 -------------
---95394-- REDIR: 0x48fe900 (libstdc++.so.6:operator delete[](void*)) redirected to 0x4844990 (operator delete[](void*))
---95394-- REDIR: 0x4c08eb0 (libc.so.6:free) redirected to 0x4843180 (free)
-==95394== 
-==95394== HEAP SUMMARY:
-==95394==     in use at exit: 0 bytes in 0 blocks
-==95394==   total heap usage: 446 allocs, 446 frees, 122,475 bytes allocated
-==95394== 
-==95394== All heap blocks were freed -- no leaks are possible
-==95394== 
-==95394== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
