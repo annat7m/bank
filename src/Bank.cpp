@@ -22,8 +22,8 @@
 // Returned:    None
 //***************************************************************************
 
-Bank::Bank (std::shared_ptr<IContainer> container) {
-	mAccounts = container;
+Bank::Bank (std::shared_ptr<IContainer> pcContainer) {
+	mpAccounts = pcContainer;
 }
 
 //***************************************************************************
@@ -36,15 +36,15 @@ Bank::Bank (std::shared_ptr<IContainer> container) {
 // Returned:    None
 //***************************************************************************
 
-Bank::Bank (IAccountReader& accountReader,
-	std::shared_ptr<IContainer> container) {
+Bank::Bank (IAccountReader& rcAccountReader,
+	std::shared_ptr<IContainer> pcContainer) {
 	unsigned int accNumber;
 	std::shared_ptr<Account> account;
-	mAccounts = container;
-	while ((account = accountReader.readAccount ())) {
+	mpAccounts = pcContainer;
+	while ((account = rcAccountReader.readAccount ())) {
 		accNumber = account->getAccountNumber ();
-		if (!mAccounts->bAccountExists (accNumber)) {
-			mAccounts->addAccount (accNumber, account);
+		if (!mpAccounts->bAccountExists (accNumber)) {
+			mpAccounts->addAccount (accNumber, account);
 		}
 	}
 }
@@ -72,7 +72,7 @@ Bank::~Bank () {}
 //***************************************************************************
 
 void Bank::deposit (unsigned int accNumber, const Money& amount) {
-	std::shared_ptr<Account> account = mAccounts->getAccount (accNumber);
+	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
 	if (account) {
 		account->deposit (amount);
 	}
@@ -89,7 +89,7 @@ void Bank::deposit (unsigned int accNumber, const Money& amount) {
 //***************************************************************************
 
 void Bank::withdraw (unsigned int accNumber, const Money& amount) {
-	std::shared_ptr<Account> account = mAccounts->getAccount (accNumber);
+	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
 	account->withdraw (amount);
 }
 
@@ -104,11 +104,11 @@ void Bank::withdraw (unsigned int accNumber, const Money& amount) {
 //***************************************************************************
 
 void Bank::applyMonthlyUpdates () {
-	std::shared_ptr<Account> account = mAccounts->getFirst ();
+	std::shared_ptr<Account> account = mpAccounts->getFirst ();
 	while (account) {
 		account->chargeMonthlyFee ();
 		account->generateInterest ();
-		account = mAccounts->getNext ();
+		account = mpAccounts->getNext ();
 	}
 }
 
@@ -123,5 +123,5 @@ void Bank::applyMonthlyUpdates () {
 //***************************************************************************
 
 void Bank::display (std::ostream& rcOutStream) const {
-	mAccounts->print (rcOutStream);
+	mpAccounts->print (rcOutStream);
 }

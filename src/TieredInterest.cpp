@@ -62,7 +62,7 @@ TieredInterest::~TieredInterest () {}
 //***************************************************************************
 
 Money TieredInterest::generate (const Money& balance) const {
-	Money result = Money (0);
+	Money result = balance;
 
 	if (balance >= Money (0)) {
 		for (int i = mInterestRates.size () - 1; i >= 0; --i) {

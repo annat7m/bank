@@ -28,12 +28,12 @@
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
-int main () {
-	const std::string ACCOUNTS_FILENAME = "data/Accounts.txt";
-	const std::string TRANSACTIONS_FILENAME = "data/Commands.txt";
+int main (int argc, char *argv[]) {
+	std::string accountsFileName = argv[1];
+	std::string commandsFileName = argv[2];
 
-	TXTAccountReader accountReader (ACCOUNTS_FILENAME);
-	TXTTransactionReader commandsReader (TRANSACTIONS_FILENAME);
+	TXTAccountReader accountReader (accountsFileName);
+	TXTTransactionReader commandsReader (commandsFileName);
 
 	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer> ();
 

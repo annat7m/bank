@@ -7,7 +7,7 @@
         {
             "name": "lldb - debug",
             "request": "launch",
-            "args": [],
+            "args": ["data/Accounts.txt", "data/Commands.txt"],
             "cwd": "${workspaceFolder}",  
             "type":  "lldb", // install CodeLLDB
             "program": "${workspaceFolder}/bin/main", // warnings if no default is given

@@ -35,7 +35,8 @@ bin/main: bin src/*.cpp include/*.h
 	${compiler} -std=${CPP_VERSION} -o bin/main ${CFLAGS} src/*.cpp
 
 valgrind: bin/main
-	valgrind ${VALGRIND_FLAGS} bin/main
+
+	valgrind ${VALGRIND_FLAGS} bin/main data/Accounts.txt data/Commands.txt
 
 printAll:
 	enscript ${ENSCRIPT_FLAGS} include/*.h src/*.cpp test/*.cpp | ps2pdf - bin/src.pdf

@@ -118,7 +118,6 @@ void CheckingAccount::generateInterest () {
 void CheckingAccount::applyMinBalanceFee () {
 	if (Account::getBalance () < mMinBalance) {
 		Account::withdraw (mMinBalanceFee);
-		// addTransaction (TransactionType::fee, mMinBalanceFee);
 	}
 }
 
@@ -135,7 +134,7 @@ void CheckingAccount::applyMinBalanceFee () {
 void CheckingAccount::display (std::ostream& rcOutStream) const {
 	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
-	rcOutStream << mMinBalance << ", " << mMinBalanceFee;
+	rcOutStream << mMinBalanceFee << ", " << mMinBalance;
 }
 
 //***************************************************************************
@@ -150,5 +149,5 @@ void CheckingAccount::display (std::ostream& rcOutStream) const {
 
 void CheckingAccount::read (std::istream& rcInStream) {
 	Account::read (rcInStream);
-	rcInStream >> mMinBalance >> mMinBalanceFee;
+	rcInStream >> mMinBalanceFee >> mMinBalance;
 }
