@@ -96,7 +96,7 @@ std::shared_ptr<Account> TXTAccountReader::readAccount () {
 			interest = std::make_shared<FlatInterest>(rate);
 			mcAccountsFile >> monthlyFee >> minMonthlyBalance;
 			account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
-				interest, monthlyFee, minMonthlyBalance);
+				interest, minMonthlyBalance, monthlyFee);
 		}
 
 		else if (interestType == TIERED) {
@@ -104,7 +104,7 @@ std::shared_ptr<Account> TXTAccountReader::readAccount () {
 			mcAccountsFile >> interest;
 			mcAccountsFile >> monthlyFee >> minMonthlyBalance;
 			account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
-				interest, monthlyFee, minMonthlyBalance);
+				interest, minMonthlyBalance, monthlyFee);
 		}
 	}
 	else if (accountType == CHECKING) {
@@ -113,7 +113,7 @@ std::shared_ptr<Account> TXTAccountReader::readAccount () {
 			interest = std::make_shared<FlatInterest>(rate);
 			mcAccountsFile >> MinBalance >> MinBalanceFee;
 			account = std::make_shared<CheckingAccount> (accountNumber, initialBalance,
-				interest, MinBalance, MinBalanceFee);
+				interest, MinBalanceFee, MinBalance);
 		}
 
 		else if (interestType == TIERED) {
@@ -121,7 +121,7 @@ std::shared_ptr<Account> TXTAccountReader::readAccount () {
 			mcAccountsFile >> interest;
 			mcAccountsFile >> MinBalance >> MinBalanceFee;
 			account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
-				interest, MinBalance, MinBalanceFee);
+				interest, MinBalanceFee, MinBalance);
 		}
 	}
 
