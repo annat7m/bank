@@ -59,6 +59,7 @@ CheckingAccount::~CheckingAccount () {}
 
 void CheckingAccount::deposit (const Money& amount) {
 	Account::deposit (amount);
+	applyMinBalanceFee();
 }
 
 //***************************************************************************
@@ -73,6 +74,7 @@ void CheckingAccount::deposit (const Money& amount) {
 
 void CheckingAccount::withdraw (const Money& amount) {
 	Account::withdraw (amount);
+	applyMinBalanceFee();
 }
 
 //***************************************************************************
@@ -86,7 +88,7 @@ void CheckingAccount::withdraw (const Money& amount) {
 //***************************************************************************
 
 void CheckingAccount::chargeMonthlyFee () {
-	applyMinBalanceFee ();
+	// applyMinBalanceFee ();
 }
 
 //***************************************************************************
@@ -134,7 +136,7 @@ void CheckingAccount::applyMinBalanceFee () {
 void CheckingAccount::display (std::ostream& rcOutStream) const {
 	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
-	rcOutStream << mMinBalanceFee << ", " << mMinBalance;
+	rcOutStream << mMinBalance << ", " << mMinBalanceFee;
 }
 
 //***************************************************************************

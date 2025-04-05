@@ -147,5 +147,5 @@ void SavingsAccount::display (std::ostream& rcOutStream) const {
 
 void SavingsAccount::read (std::istream& rcInStream) {
 	Account::read (rcInStream);
-	rcInStream >> mMinBalance >> mMonthlyFee;
+	rcInStream >> mMonthlyFee >> mMinBalance;
 }
