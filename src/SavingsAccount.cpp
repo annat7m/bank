@@ -132,7 +132,7 @@ void SavingsAccount::generateInterest () {
 void SavingsAccount::display (std::ostream& rcOutStream) const {
 	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
-	rcOutStream << mMinBalance << ", " << mMonthlyFee;
+	rcOutStream << mMonthlyFee << ", " << mMinBalance;
 }
 
 //***************************************************************************
@@ -147,5 +147,5 @@ void SavingsAccount::display (std::ostream& rcOutStream) const {
 
 void SavingsAccount::read (std::istream& rcInStream) {
 	Account::read (rcInStream);
-	rcInStream >> mMonthlyFee >> mMinBalance;
+	rcInStream >> mMinBalance >> mMonthlyFee;
 }
