@@ -22,17 +22,17 @@
 // Description: Initializes Bank Account object
 //
 // Parameters:  accountNumber - account number
-//							balance				- initial balance of the account
-//							interestRate	- interest rate
+//							rcBalance				- initial balance of the account
+//							rpcInterestRate	- interest rate
 //
 // Returned:    None
 //***************************************************************************
 
-Account::Account (unsigned int accountNumber, const Money& balance,
-	std::shared_ptr<Interest>& interestRate) {
+Account::Account (unsigned int accountNumber, const Money& rcBalance,
+	std::shared_ptr<Interest>& rpcInterestRate) {
 	mAccountNumber = accountNumber;
-	mBalance = balance;
-	mpInterestRate = std::move (interestRate);
+	mBalance = rcBalance;
+	mpInterestRate = std::move (rpcInterestRate);
 }
 
 //***************************************************************************
@@ -52,13 +52,13 @@ Account::~Account () {}
 //
 // Description: apply deposit operation on account
 //
-// Parameters:  amount - amount deposited
+// Parameters:  rcAmount - amount deposited
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::deposit (const Money& amount) {
-	mBalance += amount;
+void Account::deposit (const Money& rcAmount) {
+	mBalance += rcAmount;
 }
 
 //***************************************************************************
@@ -66,14 +66,14 @@ void Account::deposit (const Money& amount) {
 //
 // Description: withdraw money from account
 //
-// Parameters:  amount - amount withdrawn
+// Parameters:  cAmount - amount withdrawn
 //
 // Returned:    none
 //***************************************************************************
 
-void Account::withdraw (const Money& amount) {
+void Account::withdraw (const Money& rcAmount) {
 	// accounts are allowed to be negative
-	mBalance -= amount;
+	mBalance -= rcAmount;
 }
 
 //***************************************************************************
@@ -86,9 +86,7 @@ void Account::withdraw (const Money& amount) {
 // Returned:    none
 //***************************************************************************
 
-void Account::chargeMonthlyFee () {
-	// mBalance = mpInterestRate->generate (mBalance);
-}
+void Account::chargeMonthlyFee () {}
 
 //***************************************************************************
 // Function:    generateInterest
@@ -103,22 +101,6 @@ void Account::chargeMonthlyFee () {
 void Account::generateInterest () {
 	mBalance = mpInterestRate->generate (mBalance);
 }
-
-//***************************************************************************
-// Function:    addTransaction
-//
-// Description: add a transaction that was made using banking account
-//
-// Parameters:  TransactionType	- type of transaction that was made
-//							amount					- amount of the transaction
-//
-// Returned:    none
-//***************************************************************************
-
-// void Account::addTransaction (TransactionType transactionType,
-// 	const Money& amount) {
-// 	mTransactions.emplace_back (transactionType, amount);
-// }
 
 //***************************************************************************
 // Function:    getBalance
@@ -208,14 +190,14 @@ void Account::read (std::istream& rcInStream) {
 // Description: display account info to the screen 
 //
 // Parameters:  rcOutStream	- steam to output to
-//							account			- account to output
+//							cAccount			- account to output
 //
 // Returned:    none
 //***************************************************************************
 
 std::ostream& operator<< (std::ostream& rcOutStream,
-	const Account& account) {
-	account.display (rcOutStream);
+	const Account& cAccount) {
+	cAccount.display (rcOutStream);
 	return rcOutStream;
 }
 
@@ -225,12 +207,12 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 // Description: read account info from the stream 
 //
 // Parameters:  rcOutStream - steam to input from
-//							account			- account to input
+//							cAccount			- account to input
 //
 // Returned:    none
 //***************************************************************************
 
-std::istream& operator>> (std::istream& rcInStream, Account& account) {
-	account.read (rcInStream);
+std::istream& operator>> (std::istream& rcInStream, Account& cAccount) {
+	cAccount.read (rcInStream);
 	return rcInStream;
 }

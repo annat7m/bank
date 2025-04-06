@@ -42,13 +42,13 @@ Interest::~Interest () {}
 // Description: display interest rate to the stream
 //
 // Parameters:  rcOutStream	- stream to write to
-//							interest		- ineterest rate to display
+//							rcInterest	- ineterest rate to display
 //
 // Returned:    none
 //***************************************************************************
 
-std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
-	interest.display (rcOutStream);
+std::ostream& operator<< (std::ostream& rcOutStream, const Interest& rcInterest) {
+	rcInterest.display (rcOutStream);
 	return rcOutStream;
 }
 
@@ -57,14 +57,14 @@ std::ostream& operator<< (std::ostream& rcOutStream, const Interest& interest) {
 //
 // Description: read flat interest rate from the stream
 //
-// Parameters:  rcInStream - stream to read from
-//							interest		- ineterest rate to display
+// Parameters:  rcInStream	- stream to read from
+//							rpcInterest	- ineterest rate to display
 //
 // Returned:    none
 //***************************************************************************
 
-std::istream& operator>>(std::istream& rcInStream, std::shared_ptr<Interest>& interest) {
-	interest->read (rcInStream);
-
+std::istream& operator>>(std::istream& rcInStream,
+	std::shared_ptr<Interest>& rpcInterest) {
+	rpcInterest->read (rcInStream);
 	return rcInStream;
 }

@@ -54,16 +54,16 @@ FlatInterest::~FlatInterest () {}
 //
 // Description: apply flat interest rate on balance
 //
-// Parameters:  none
+// Parameters:  rcBalance - balance used to generate interest on
 //
 // Returned:    balance with applied interest
 //***************************************************************************
 
-Money FlatInterest::generate (const Money& balance) const {
-	if (balance < Money (0)) {
-		return Money (0);
+Money FlatInterest::generate (const Money& rcBalance) const {
+	if (rcBalance < Money (0)) {
+		return rcBalance;
 	}
-	return balance + (balance * mInterest);
+	return rcBalance + (rcBalance * mInterest);
 }
 
 //***************************************************************************

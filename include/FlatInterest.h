@@ -16,10 +16,10 @@
 class FlatInterest : public Interest {
 public:
 	FlatInterest ();
-	FlatInterest (double inteerst);
+	FlatInterest (double rate);
 	virtual ~FlatInterest () override;
 
-	virtual Money generate (const Money& balance) const override;
+	virtual Money generate (const Money& rcBalance) const override;
 	virtual void display (std::ostream& rcOutStream) const override;
 	virtual void read (std::istream& rcInStream) override;
 

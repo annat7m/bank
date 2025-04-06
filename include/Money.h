@@ -15,19 +15,19 @@ class Money {
 
 public:
 	Money ();
-	Money (const Money& amount);
+	Money (const Money& rcMoney);
 	Money (long long amount);
 	virtual ~Money ();
 
-	Money& operator= (Money amount);
-	Money& operator+= (const Money& amount);
-	Money& operator-= (const Money& amount);
-	Money& operator*= (const Money& amount);
+	Money& operator= (Money other);
+	Money& operator+= (const Money& rcOther);
+	Money& operator-= (const Money& rcOther);
+	Money& operator*= (const Money& rcOther);
 	Money operator* (double multiplier) const;
 
-	bool operator==(const Money& other) const;
-	bool operator< (const Money& amount) const;
-	bool operator>= (const Money& amount) const;
+	bool operator==(const Money& rcOther) const;
+	bool operator< (const Money& rcOther) const;
+	bool operator>= (const Money& rcOther) const;
 
 	long long operator () () const;
 
@@ -35,9 +35,9 @@ public:
 	void read (std::istream& rcInStream);
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
-		const Money& amount);
+		const Money& rcAmount);
 	friend std::istream& operator>> (std::istream& rcInStream,
-		Money& amount);
+		Money& rcAmount);
 
 private:
 	long long mAmount;

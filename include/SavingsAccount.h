@@ -17,13 +17,13 @@
 class SavingsAccount : public Account {
 
 public:
-	SavingsAccount (unsigned int accNumber, const Money& accBalance,
-		std::shared_ptr<Interest>& accInterestRate,
-		const Money& minBalance, const Money& monthlyFee);
+	SavingsAccount (unsigned int accountNumber, const Money& rcBalance,
+		std::shared_ptr<Interest>& rpcInterestRate,
+		const Money& rcMinBalance, const Money& rcMonthlyFee);
 	virtual ~SavingsAccount () override;
 
-	virtual void deposit (const Money& amount) override;
-	virtual void withdraw (const Money& amount) override;
+	virtual void deposit (const Money& rcAmount) override;
+	virtual void withdraw (const Money& rcAmount) override;
 	virtual void chargeMonthlyFee () override;
 	virtual void generateInterest () override;
 

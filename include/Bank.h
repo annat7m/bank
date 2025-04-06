@@ -23,8 +23,8 @@ public:
 	Bank (IAccountReader& rcAccountReader, std::shared_ptr<IContainer> pcContainer);
 	virtual ~Bank ();
 
-	void deposit (unsigned int accNumber, const Money& amount);
-	void withdraw (unsigned int accNumber, const Money& amount);
+	void deposit (unsigned int accNumber, const Money& rcAmount);
+	void withdraw (unsigned int accNumber, const Money& rcAmount);
 
 	void applyMonthlyUpdates ();
 	void display (std::ostream& rcOutStream) const;

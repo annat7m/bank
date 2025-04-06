@@ -18,15 +18,13 @@ public:
 	Interest ();
 	virtual ~Interest ();
 
-	virtual Money generate (const Money& balance) const = 0;
+	virtual Money generate (const Money& rcBalance) const = 0;
 	virtual void display (std::ostream& rcOutStream) const = 0;
 	virtual void read (std::istream& rcInStream) = 0;
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
-		const Interest& interest);
+		const Interest& rcInterest);
 	friend std::istream& operator>> (std::istream& rcInStream,
-		std::shared_ptr<Interest>& interest);
-
-private:
+		std::shared_ptr<Interest>& rpcInterest);
 
 };

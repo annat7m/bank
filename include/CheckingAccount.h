@@ -17,13 +17,13 @@
 class CheckingAccount : public Account {
 
 public:
-	CheckingAccount (unsigned int accNumber, const Money& accBalance,
-		std::shared_ptr<Interest>& accInterestRate,
-		const Money& minBalance, const Money& minBalanceFee);
+	CheckingAccount (unsigned int accNumber, const Money& rcBalance,
+		std::shared_ptr<Interest>& rpcInterestRate,
+		const Money& rcMinBalance, const Money& rcMinBalanceFee);
 	virtual ~CheckingAccount () override;
 
-	virtual void deposit (const Money& amount) override;
-	virtual void withdraw (const Money& amount) override;
+	virtual void deposit (const Money& rcAmount) override;
+	virtual void withdraw (const Money& rcAmount) override;
 	virtual void chargeMonthlyFee () override;
 	virtual void generateInterest () override;
 
@@ -31,8 +31,8 @@ public:
 	virtual void read (std::istream& rcInStream) override;
 
 private:
-	Money mMinBalance;
-	Money mMinBalanceFee;
+	Money mcMinBalance;
+	Money mcMinBalanceFee;
 	bool mbIsBelowMinBalance = false;
 	
 	void applyMinBalanceFee ();
