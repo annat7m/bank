@@ -59,18 +59,18 @@ CheckingAccount::~CheckingAccount () {}
 //***************************************************************************
 
 void CheckingAccount::deposit (const Money& rcAmount) {
-  bool wasBelowMin = Account::getBalance() < mcMinBalance;
+	bool wasBelowMin = Account::getBalance () < mcMinBalance;
 
-  Account::deposit(rcAmount);
-	
-  if (wasBelowMin && (Account::getBalance() < mcMinBalance)) {
-    Account::withdraw(mcMinBalanceFee);
-    mbIsBelowMinBalance = true;
-  }
+	Account::deposit (rcAmount);
 
-  if (Account::getBalance() >= mcMinBalance) {
-    mbIsBelowMinBalance = false;
-  }
+	if (wasBelowMin && (Account::getBalance () < mcMinBalance)) {
+		Account::withdraw (mcMinBalanceFee);
+		mbIsBelowMinBalance = true;
+	}
+
+	if (Account::getBalance () >= mcMinBalance) {
+		mbIsBelowMinBalance = false;
+	}
 }
 
 //***************************************************************************
