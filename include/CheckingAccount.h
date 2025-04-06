@@ -33,7 +33,8 @@ public:
 private:
 	Money mMinBalance;
 	Money mMinBalanceFee;
-
+	bool mbIsBelowMinBalance = false;
+	
 	void applyMinBalanceFee ();
 
 };
