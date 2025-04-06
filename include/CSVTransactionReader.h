@@ -1,24 +1,23 @@
 //***************************************************************************
-// File name:   TXTTransactionReader.h
+// File name:   CSVTransactionReader.h
 // Author:      Anna Tymoshenko
-// Date:        03/15/2025
+// Date:        04/05/2025
 // Class:       CS485
-// Assignment:  Assignment 4 - Bank 2
+// Assignment:  Assignment 5 - Bank 3
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include "../include/Bank.h"
-#include "../include/ITransactionReader.h"
 #include <iostream>
 #include <fstream>
+#include <string>
+#include "../include/ITransactionReader.h"
 
 #pragma once
 
-class TXTTransactionReader : public ITransactionReader {
-
+class CSVTransactionReader : public ITransactionReader {
 public:
-	TXTTransactionReader (const std::string& rcFileName);
-	virtual ~TXTTransactionReader ();
+	CSVTransactionReader (const std::string& rcFileName);
+	~CSVTransactionReader ();
 
 	virtual void readTransactions (std::ostream& rcOutStream, 
 		Bank& rcBank) override;

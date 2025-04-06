@@ -59,7 +59,7 @@ TXTTransactionReader::~TXTTransactionReader () {
 //***************************************************************************
 
 void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
-	Bank& bank) {
+	Bank& rcBank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
@@ -76,19 +76,19 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> amount;
-			bank.withdraw (accountNumber, Money (amount));
+			rcBank.withdraw (accountNumber, Money (amount));
 		}
 		else if (command == DEPOSIT) {
 			mcCommandsFile >> accountNumber >> amount;
-			bank.deposit (accountNumber, Money (amount));
+			rcBank.deposit (accountNumber, Money (amount));
 		}
 		else if (command == PRINT) {
 			rcOutStream << "-------------" << std::endl;
-			bank.display (rcOutStream);
+			rcBank.display (rcOutStream);
 			rcOutStream << "-------------" << std::endl;
 		}
 		else if (command == CHARGE) {
-			bank.applyMonthlyUpdates ();
+			rcBank.applyMonthlyUpdates ();
 		}
 	}
 }
