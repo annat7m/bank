@@ -114,7 +114,7 @@ void SavingsAccount::chargeMonthlyFee () {
 //***************************************************************************
 
 void SavingsAccount::generateInterest () {
-	if (Account::getBalance () >= 0) {
+	if (Account::getBalance () >= Money(0, Account::getBalance().getCurrency())) {
 		Account::generateInterest ();
 	}
 }

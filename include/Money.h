@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include <iostream>
+#include "../include/Currency.h"
 
 #pragma once
 
@@ -16,13 +17,13 @@ class Money {
 public:
 	Money ();
 	Money (const Money& rcMoney);
-	Money (long long amount);
+	Money (long long amount, Currency cCurrency);
 	virtual ~Money ();
 
 	Money& operator= (Money other);
 	Money& operator+= (const Money& rcOther);
 	Money& operator-= (const Money& rcOther);
-	Money& operator*= (const Money& rcOther);
+	// Money& operator*= (const Money& rcOther);
 	Money operator* (double multiplier) const;
 
 	bool operator==(const Money& rcOther) const;
@@ -30,6 +31,8 @@ public:
 	bool operator>= (const Money& rcOther) const;
 
 	long long operator () () const;
+
+	Currency getCurrency() const;
 
 	void display (std::ostream& rcOutStream) const;
 	void read (std::istream& rcInStream);
@@ -41,6 +44,7 @@ public:
 
 private:
 	long long mAmount;
+	Currency mcCurrency;
 
 };
 

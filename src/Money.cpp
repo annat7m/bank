@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "../include/Money.h"
+#include "../include/CurrencyMismatchException.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -44,13 +45,14 @@ Money::Money (const Money& rcMoney) {
 //
 // Description: Initializes a Money object with a long long integer value
 //
-// Parameters:  other - amount as a long long data type to set Money object to
+// Parameters:  amount - amount as a long long data type to set Money object to
 //
 // Returned:    None
 //***************************************************************************
 
-Money::Money (long long other) {
-	mAmount = other;
+Money::Money (long long amount, Currency cCurrency) {
+	mAmount = amount;
+	mcCurrency = cCurrency;
 }
 
 //***************************************************************************
@@ -91,6 +93,9 @@ Money& Money::operator= (Money other) {
 //***************************************************************************
 
 Money& Money::operator+= (const Money& rcOther) {
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	mAmount += rcOther.mAmount;
 	return *this;
 }
@@ -106,6 +111,9 @@ Money& Money::operator+= (const Money& rcOther) {
 //***************************************************************************
 
 Money& Money::operator-= (const Money& rcOther) {
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	mAmount -= rcOther.mAmount;
 	return *this;
 }
@@ -120,10 +128,10 @@ Money& Money::operator-= (const Money& rcOther) {
 // Returned:    updated Money object
 //***************************************************************************
 
-Money& Money::operator*= (const Money& rcOther) {
-	mAmount *= rcOther.mAmount;
-	return *this;
-}
+// Money& Money::operator*= (const Money& rcOther) {
+// 	mAmount *= rcOther.mAmount;
+// 	return *this;
+// }
 
 //***************************************************************************
 // Function:    operator*
@@ -136,7 +144,7 @@ Money& Money::operator*= (const Money& rcOther) {
 //***************************************************************************
 
 Money Money::operator* (double multiplier) const {
-	return Money (static_cast<long long>(mAmount * multiplier));
+	return Money (static_cast<long long>(mAmount * multiplier), mcCurrency);
 }
 
 //***************************************************************************
@@ -150,6 +158,9 @@ Money Money::operator* (double multiplier) const {
 //***************************************************************************
 
 bool Money::operator== (const Money& rcOther) const {
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount == rcOther.mAmount;
 }
 
@@ -164,6 +175,9 @@ bool Money::operator== (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator< (const Money& rcOther) const {
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount < rcOther.mAmount;
 }
 
@@ -178,6 +192,9 @@ bool Money::operator< (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator>= (const Money& rcOther) const {
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount >= rcOther.mAmount;
 }
 
@@ -196,6 +213,21 @@ long long Money::operator() () const {
 }
 
 //***************************************************************************
+// Function:    getCurrency
+//
+// Description: currency getter
+//
+// Parameters:  none
+//
+// Returned:    currency of the money object
+//***************************************************************************
+
+Currency Money::getCurrency() const {
+	return mcCurrency;
+}
+
+
+//***************************************************************************
 // Function:    display
 //
 // Description: display the Money object to the stream
@@ -206,7 +238,7 @@ long long Money::operator() () const {
 //***************************************************************************
 
 void Money::display (std::ostream& rcOutStream) const {
-	rcOutStream << std::fixed << std::setprecision (2) << "$"
+	rcOutStream << std::fixed << std::setprecision (2) << mcCurrency
 		<< static_cast<double>(mAmount * 0.01);
 }
 
@@ -221,7 +253,7 @@ void Money::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void Money::read (std::istream& rcInStream) {
-	rcInStream >> mAmount;
+	rcInStream >> mcCurrency >> mAmount;
 }
 
 //***************************************************************************
@@ -270,7 +302,7 @@ std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 
 Money operator+ (Money cAmount1, const Money& rcAmount2) {
 	cAmount1 += rcAmount2;
-	return cAmount1 ();
+	return cAmount1;
 }
 
 //***************************************************************************
@@ -287,5 +319,5 @@ Money operator+ (Money cAmount1, const Money& rcAmount2) {
 
 Money operator- (Money cAmount1, const Money& rcAmount2) {
 	cAmount1 -= rcAmount2;
-	return cAmount1 ();
+	return cAmount1;
 }

@@ -15,7 +15,7 @@
 
 class CurrencyMismatchException : public std::exception {
 	public:
-	CurrencyMismatchException (Currency currency1, Currency currency2);
+	CurrencyMismatchException (Currency cCurrency1, Currency cCurrency2);
 	CurrencyMismatchException (const CurrencyMismatchException& rcOther);
 	~CurrencyMismatchException ();
 
@@ -26,6 +26,6 @@ class CurrencyMismatchException : public std::exception {
 	private:
 	Currency mCurrency1;
 	Currency mCurrency2;
-	char* mpszMessage;
+	char* mpszMessage = nullptr;
 
 };
