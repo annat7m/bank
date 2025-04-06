@@ -33,6 +33,7 @@ CheckingAccount::CheckingAccount (unsigned int accountNumber,
 	: Account (accountNumber, balance, interestRate) {
 	mMinBalance = minBalance;
 	mMinBalanceFee = minBalanceFee;
+	mbIsBelowMinBalance = (balance < mMinBalance);
 }
 
 //***************************************************************************
@@ -58,8 +59,18 @@ CheckingAccount::~CheckingAccount () {}
 //***************************************************************************
 
 void CheckingAccount::deposit (const Money& amount) {
-	Account::deposit (amount);
-	applyMinBalanceFee();
+  bool wasBelowMin = Account::getBalance() < mMinBalance;
+
+  Account::deposit(amount);
+	
+  if (wasBelowMin && (Account::getBalance() < mMinBalance)) {
+    Account::withdraw(mMinBalanceFee);
+    mbIsBelowMinBalance = true;
+  }
+
+  if (Account::getBalance() >= mMinBalance) {
+    mbIsBelowMinBalance = false;
+  }
 }
 
 //***************************************************************************
@@ -73,8 +84,14 @@ void CheckingAccount::deposit (const Money& amount) {
 //***************************************************************************
 
 void CheckingAccount::withdraw (const Money& amount) {
+	bool wasAboveMin = Account::getBalance () >= mMinBalance;
+
 	Account::withdraw (amount);
-	applyMinBalanceFee();
+
+	if (wasAboveMin && (Account::getBalance () < mMinBalance)) {
+		Account::withdraw (mMinBalanceFee);
+		mbIsBelowMinBalance = true;
+	}
 }
 
 //***************************************************************************
@@ -88,7 +105,9 @@ void CheckingAccount::withdraw (const Money& amount) {
 //***************************************************************************
 
 void CheckingAccount::chargeMonthlyFee () {
-	// applyMinBalanceFee ();
+	// if (Account::getBalance () < mMinBalance) {
+	// 	Account::withdraw (mMinBalanceFee);
+	// }
 }
 
 //***************************************************************************
@@ -118,8 +137,9 @@ void CheckingAccount::generateInterest () {
 //***************************************************************************
 
 void CheckingAccount::applyMinBalanceFee () {
-	if (Account::getBalance () < mMinBalance) {
+	if (Account::getBalance () < mMinBalance && !mbIsBelowMinBalance) {
 		Account::withdraw (mMinBalanceFee);
+		mbIsBelowMinBalance = true;
 	}
 }
 
@@ -136,7 +156,7 @@ void CheckingAccount::applyMinBalanceFee () {
 void CheckingAccount::display (std::ostream& rcOutStream) const {
 	Account::display (rcOutStream);
 	rcOutStream << std::fixed << std::setprecision (2);
-	rcOutStream << mMinBalanceFee << ", " << mMinBalance;
+	rcOutStream << mMinBalance << ", " << mMinBalanceFee;
 }
 
 //***************************************************************************
@@ -151,5 +171,5 @@ void CheckingAccount::display (std::ostream& rcOutStream) const {
 
 void CheckingAccount::read (std::istream& rcInStream) {
 	Account::read (rcInStream);
-	rcInStream >> mMinBalanceFee >> mMinBalance;
+	rcInStream >> mMinBalance >> mMinBalanceFee;
 }
