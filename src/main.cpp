@@ -32,7 +32,7 @@
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
-int main (int argc, char *argv[]) {
+int main (int argc, char* argv[]) {
 	std::string accountsFileName = argv[1];
 	std::string commandsFileName = argv[2];
 
