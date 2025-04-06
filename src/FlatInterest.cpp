@@ -60,7 +60,7 @@ FlatInterest::~FlatInterest () {}
 //***************************************************************************
 
 Money FlatInterest::generate (const Money& rcBalance) const {
-	if (rcBalance < Money (0)) {
+	if (rcBalance < Money (0, rcBalance.getCurrency())) {
 		return rcBalance;
 	}
 	return rcBalance + (rcBalance * mInterest);

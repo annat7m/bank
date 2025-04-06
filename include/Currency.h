@@ -22,12 +22,13 @@ enum class CurrencyType : char {
 class Currency {
 
 public:
+	Currency () = default;
 	Currency (CurrencyType eType);
 	Currency (std::string type);
-	virtual ~Currency ();
+	~Currency ();
 
-	bool operator== (const Currency& rcOtherCurrency) const;
-	bool operator!= (const Currency& rcOtherCurrency) const;
+	bool operator== (const Currency& rcOther) const;
+	bool operator!= (const Currency& rcOther) const;
 
 	void display (std::ostream& rcOutStream) const;
 	void read (std::istream& rcInStream);
@@ -38,6 +39,6 @@ public:
 		Currency& rcCurrency);
 
 private:
-	CurrencyType mCurrencyType;
+	CurrencyType meCurrencyType;
 
 };

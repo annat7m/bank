@@ -10,6 +10,7 @@
 #include "../include/TXTTransactionReader.h"
 #include "../include/CheckingAccount.h"
 #include "../include/SavingsAccount.h"
+#include "../include/CurrencyMismatchException.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -68,6 +69,7 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 	char command;
 	int accountNumber;
 	long long amount;
+	std::string currencyString;
 
 	if (!mcCommandsFile.is_open ()) {
 		return;
@@ -75,12 +77,18 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
-			mcCommandsFile >> accountNumber >> amount;
-			rcBank.withdraw (accountNumber, Money (amount));
+			mcCommandsFile >> accountNumber >> currencyString >> amount;
+			try {
+				Currency cCurrency(currencyString);
+				rcBank.withdraw(accountNumber, Money(amount, cCurrency));
+			} catch (const CurrencyMismatchException&) {}
 		}
 		else if (command == DEPOSIT) {
-			mcCommandsFile >> accountNumber >> amount;
-			rcBank.deposit (accountNumber, Money (amount));
+			mcCommandsFile >> accountNumber >> currencyString >> amount;
+			try {
+				Currency cCurrency(currencyString);
+				rcBank.deposit(accountNumber, Money(amount, cCurrency));
+			} catch (const CurrencyMismatchException&) {}
 		}
 		else if (command == PRINT) {
 			rcOutStream << "-------------" << std::endl;

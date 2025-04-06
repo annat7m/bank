@@ -12,6 +12,7 @@
 #include "../include/FlatInterest.h"
 #include "../include/TieredInterest.h"
 #include "../include/Money.h"
+#include "../include/CurrencyMismatchException.h"
 #include <iostream>
 #include <iomanip>
 #include <memory>
@@ -58,7 +59,9 @@ Account::~Account () {}
 //***************************************************************************
 
 void Account::deposit (const Money& rcAmount) {
-	mBalance += rcAmount;
+	try {
+		mBalance += rcAmount;
+	} catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -72,8 +75,10 @@ void Account::deposit (const Money& rcAmount) {
 //***************************************************************************
 
 void Account::withdraw (const Money& rcAmount) {
-	// accounts are allowed to be negative
-	mBalance -= rcAmount;
+	try {
+		// accounts are allowed to be negative
+		mBalance -= rcAmount;
+	} catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -99,7 +104,9 @@ void Account::chargeMonthlyFee () {}
 //***************************************************************************
 
 void Account::generateInterest () {
-	mBalance = mpInterestRate->generate (mBalance);
+	try {
+		mBalance = mpInterestRate->generate (mBalance);
+	} catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
