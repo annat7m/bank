@@ -45,14 +45,15 @@ MapContainer::~MapContainer () {}
 //
 // Description: add account to the map
 //
-// Parameters:  account - account object to put into a map
+// Parameters:  accountNumber - account number
+//							pcAccount	- pointer to an Account
 //
 // Returned:    none
 //***************************************************************************
 
-void MapContainer::addAccount (unsigned int accNumber,
-	std::shared_ptr<Account> account) {
-	mAccounts.insert ({ accNumber, account });
+void MapContainer::addAccount (unsigned int accountNumber,
+	std::shared_ptr<Account> pcAccount) {
+	mAccounts.insert ({ accountNumber, pcAccount });
 }
 
 //***************************************************************************
@@ -147,7 +148,7 @@ std::shared_ptr<Account> MapContainer::getAccount (unsigned int accountNumber) {
 //
 // Description: print accounts in ascending order of account number
 //
-// Parameters:  rcOutStream
+// Parameters:  rcOutStream - stream to write to
 //
 // Returned:    found account object
 //***************************************************************************

@@ -21,16 +21,16 @@
 //
 // Description: Open the file for reading
 //
-// Parameters:  none
+// Parameters:  rcFileName - name of the file to open
 //
 // Returned:    None
 //***************************************************************************
 
-TXTAccountReader::TXTAccountReader (const std::string& fileName) {
-	mcAccountsFile.open (fileName);
+TXTAccountReader::TXTAccountReader (const std::string& rcFileName) {
+	mcAccountsFile.open (rcFileName);
 	if (!mcAccountsFile.is_open ()) {
 		throw std::system_error (errno, std::system_category (),
-			"Error: Could not open file: " + fileName + "\n");
+			"Error: Could not open file: " + rcFileName + "\n");
 	}
 }
 

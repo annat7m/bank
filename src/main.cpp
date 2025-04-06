@@ -24,7 +24,11 @@
 //
 // Description: Make Bank functional
 //
-// Parameters:  none
+// Parameters:  argc - number of command-line arguments
+//              argv - an array of C-style strings representing command-line
+//                     arguments:
+//                     argv[1] should be the path to the Accounts file
+//                     argv[2] should be the path to the Commands file
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************

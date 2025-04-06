@@ -16,7 +16,7 @@
 class TXTAccountReader : public IAccountReader {
 
 public:
-	TXTAccountReader (const std::string& fileName);
+	TXTAccountReader (const std::string& rcFileName);
 	virtual ~TXTAccountReader ();
 
 	virtual std::shared_ptr<Account> readAccount () override;

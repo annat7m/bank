@@ -19,16 +19,16 @@
 //
 // Description: Open the file for reading
 //
-// Parameters:  none
+// Parameters:  rcFileName - name of the file to open
 //
 // Returned:    None
 //***************************************************************************
 
-TXTTransactionReader::TXTTransactionReader (const std::string& fileName) {
-	mcCommandsFile.open (fileName);
+TXTTransactionReader::TXTTransactionReader (const std::string& rcFileName) {
+	mcCommandsFile.open (rcFileName);
 	if (!mcCommandsFile.is_open ()) {
 		throw std::system_error (errno, std::system_category (),
-			"Error: Could not open file: " + fileName + "\n");
+			"Error: Could not open file: " + rcFileName + "\n");
 	}
 }
 

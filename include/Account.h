@@ -18,16 +18,14 @@
 class Account {
 
 public:
-	Account (unsigned int accountNumber, const Money& balance,
-		std::shared_ptr<Interest>& interestRate);
+	Account (unsigned int accountNumber, const Money& rcBalance,
+		std::shared_ptr<Interest>& rpcInterestRate);
 	virtual ~Account ();
 
-	virtual void deposit (const Money& amount) = 0;
-	virtual void withdraw (const Money& amount) = 0;
+	virtual void deposit (const Money& rcAmount) = 0;
+	virtual void withdraw (const Money& rcAmount) = 0;
 	virtual void chargeMonthlyFee ();
 	virtual void generateInterest ();
-	// virtual void addTransaction (TransactionType transactionType,
-	// 	const Money& amount);
 
 	Money getBalance () const;
 	unsigned int getAccountNumber () const;
@@ -36,8 +34,8 @@ public:
 	virtual void read (std::istream& rcInStream);
 
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
-		const Account& account);
-	friend std::istream& operator>> (std::istream& rcInStream, Account& account);
+		const Account& rcAccount);
+	friend std::istream& operator>> (std::istream& rcInStream, Account& rcAccount);
 
 private:
 	unsigned int mAccountNumber;

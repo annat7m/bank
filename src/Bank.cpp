@@ -15,9 +15,9 @@
 //***************************************************************************
 // Constructor: Bank
 //
-// Description: 
+// Description: Initializes Bank with a given container to manage accounts
 //
-// Parameters:  none
+// Parameters:  pcContainer - shared pointer to an IContainer object
 //
 // Returned:    None
 //***************************************************************************
@@ -29,9 +29,12 @@ Bank::Bank (std::shared_ptr<IContainer> pcContainer) {
 //***************************************************************************
 // Constructor: Bank
 //
-// Description: 
+// Description: Initializes Bank and reads all account data using the given
+//              IAccountReader object. Each account is added to the container
+//              if it doesn't already exist
 //
-// Parameters:  none
+// Parameters:  rcAccountReader	- a reference to an account reader object
+//              pcContainer			- shared pointer to an IContainer object
 //
 // Returned:    None
 //***************************************************************************
@@ -64,33 +67,35 @@ Bank::~Bank () {}
 //***************************************************************************
 // Function:    deposit
 //
-// Description: 
+// Description: Deposits the specified amount of money into the given account
 //
-// Parameters:  amount - amount to deposit to account
+// Parameters:  accNumber	- the account number to deposit into
+//              amount		- amount to deposit to account
 //
 // Returned:    none
 //***************************************************************************
 
-void Bank::deposit (unsigned int accNumber, const Money& amount) {
+void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
 	if (account) {
-		account->deposit (amount);
+		account->deposit (rcAmount);
 	}
 }
 
 //***************************************************************************
 // Function:    withdraw
 //
-// Description: 
+// Description: Withdraws the specified amount of money from the given account
 //
-// Parameters:  amount - amount to withdraw from account
+// Parameters:  accNumber	- the account number to withdraw from
+//              amount		- amount to withdraw from account
 //
 // Returned:    none
 //***************************************************************************
 
-void Bank::withdraw (unsigned int accNumber, const Money& amount) {
+void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-	account->withdraw (amount);
+	account->withdraw (rcAmount);
 }
 
 //***************************************************************************
@@ -115,9 +120,9 @@ void Bank::applyMonthlyUpdates () {
 //***************************************************************************
 // Function:    display
 //
-// Description: Displays information for all accounts that are in the bank
+// Description: Displays all accounts stored in the container
 //
-// Parameters:  none
+// Parameters:  rcOutStream - output stream to write to
 //
 // Returned:    none
 //***************************************************************************

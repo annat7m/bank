@@ -18,6 +18,6 @@ public:
 	ITransactionReader ();
 	virtual ~ITransactionReader ();
 
-	virtual void readTransactions (std::ostream& rcOutStream, Bank& bank) = 0;
+	virtual void readTransactions (std::ostream& rcOutStream, Bank& rcBank) = 0;
 
 };

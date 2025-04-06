@@ -56,18 +56,18 @@ TieredInterest::~TieredInterest () {}
 //
 // Description: apply tiered interest rate on balance
 //
-// Parameters:  none
+// Parameters:  rcBalance - to apply ninterest on this balance
 //
 // Returned:    balance with applied interest
 //***************************************************************************
 
-Money TieredInterest::generate (const Money& balance) const {
-	Money result = balance;
+Money TieredInterest::generate (const Money& rcBalance) const {
+	Money result = rcBalance;
 
-	if (balance >= Money (0)) {
+	if (rcBalance >= Money (0)) {
 		for (int i = mInterestRates.size () - 1; i >= 0; --i) {
-			if (balance >= mInterestRates[i].first) {
-				result = balance + (balance * mInterestRates[i].second);
+			if (rcBalance >= mInterestRates[i].first) {
+				result = rcBalance + (rcBalance * mInterestRates[i].second);
 				break;
 			}
 		}
@@ -131,12 +131,9 @@ void TieredInterest::read (std::istream& rcInStream) {
 	}
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
-		// mInterestRates.emplace_back (minBalances[i], interestRates[i]);
 		addTier (minBalances[i], interestRates[i]);
 	}
 
-	// minBalances.clear ();
-	// interestRates.clear ();
 }
 
 //***************************************************************************
@@ -144,13 +141,12 @@ void TieredInterest::read (std::istream& rcInStream) {
 //
 // Description: add tier that consist of balance and rate to the vector of pairs
 //
-// Parameters:  amount		- min balance to have to apply interest rate
+// Parameters:  rcAmount		- min balance to have to apply interest rate
 //							interest	- interest rate for that balance
 //
 // Returned:    none
 //***************************************************************************
 
-void TieredInterest::addTier (const Money& amount, double interest) {
-	mInterestRates.push_back ({ amount, interest });
-	// std::sort (mInterestRates.begin (), mInterestRates.end ());
+void TieredInterest::addTier (const Money& rcAmount, double interest) {
+	mInterestRates.push_back ({ rcAmount, interest });
 }

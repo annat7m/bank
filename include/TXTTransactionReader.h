@@ -17,7 +17,7 @@
 class TXTTransactionReader : public ITransactionReader {
 
 public:
-	TXTTransactionReader (const std::string& fileName);
+	TXTTransactionReader (const std::string& rcFileName);
 	virtual ~TXTTransactionReader ();
 
 	virtual void readTransactions (std::ostream& rcOutStream, Bank& bank) override;

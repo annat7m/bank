@@ -21,11 +21,11 @@ public:
 	TieredInterest (unsigned int numOfTieres);
 	virtual ~TieredInterest () override;
 
-	virtual Money generate (const Money& balance) const override;
+	virtual Money generate (const Money& rcBalance) const override;
 	virtual void display (std::ostream& rcOutStream) const override;
 	virtual void read (std::istream& rcInStream) override;
 
-	void addTier (const Money& amount, double interest);
+	void addTier (const Money& rcAmount, double interest);
 
 private:
 	unsigned int mNumberOfTieres;

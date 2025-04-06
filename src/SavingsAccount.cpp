@@ -17,22 +17,22 @@
 // Description: Initializes Savings Account object in Banking system
 //
 // Parameters:  accountNumber - account number
-//              balance       - initial balance
-//              interestRate  - annual interest rate
-//              minBalance    - minimum balance allowed
-//              monthlyFee 		- fee charged every month
+//              rcBalance       - initial balance
+//              rpcInterestRate  - annual interest rate
+//              rcMinBalance    - minimum balance allowed
+//              rcMonthlyFee 		- fee charged every month
 //
 // Returned:    None
 //***************************************************************************
 
 SavingsAccount::SavingsAccount (unsigned int accountNumber,
-	const Money& balance, std::shared_ptr<Interest>& interestRate,
-	const Money& minBalance, const Money& monthlyFee)
-	: Account (accountNumber, balance, interestRate) {
+	const Money& rcBalance, std::shared_ptr<Interest>& rpcInterestRate,
+	const Money& rcMinBalance, const Money& rcMonthlyFee)
+	: Account (accountNumber, rcBalance, rpcInterestRate) {
 
-	mMinBalance = minBalance;
-	mMonthlyFee = monthlyFee;
-	if (Account::getBalance () >= minBalance) {
+	mMinBalance = rcMinBalance;
+	mMonthlyFee = rcMonthlyFee;
+	if (Account::getBalance () >= rcMinBalance) {
 		mbIsBelowMinBalance = false;
 	}
 	else {
@@ -58,13 +58,13 @@ SavingsAccount::~SavingsAccount () {}
 //
 // Description: apply deposit operation on savings account
 //
-// Parameters:  amount - amount deposited
+// Parameters:  rcAmount - amount deposited
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::deposit (const Money& amount) {
-	Account::deposit (amount);
+void SavingsAccount::deposit (const Money& rcAmount) {
+	Account::deposit (rcAmount);
 }
 
 //***************************************************************************
@@ -72,13 +72,13 @@ void SavingsAccount::deposit (const Money& amount) {
 //
 // Description: withdraw money from savings account
 //
-// Parameters:  amount - amount withdrawn
+// Parameters:  rcAmount - amount withdrawn
 //
 // Returned:    none
 //***************************************************************************
 
-void SavingsAccount::withdraw (const Money& amount) {
-	Account::withdraw (amount);
+void SavingsAccount::withdraw (const Money& rcAmount) {
+	Account::withdraw (rcAmount);
 	if (Account::getBalance () < mMinBalance) {
 		mbIsBelowMinBalance = true;
 	}
