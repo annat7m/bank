@@ -78,17 +78,17 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			try {
+			// try {
 				Currency cCurrency(currencyString);
 				rcBank.withdraw(accountNumber, Money(amount, cCurrency));
-			} catch (const CurrencyMismatchException&) {}
+			// } catch (const CurrencyMismatchException&) {}
 		}
 		else if (command == DEPOSIT) {
 			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			try {
+			// try {
 				Currency cCurrency(currencyString);
 				rcBank.deposit(accountNumber, Money(amount, cCurrency));
-			} catch (const CurrencyMismatchException&) {}
+			// } catch (const CurrencyMismatchException&) {}
 		}
 		else if (command == PRINT) {
 			rcOutStream << "-------------" << std::endl;

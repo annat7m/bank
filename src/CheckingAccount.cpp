@@ -34,7 +34,12 @@ CheckingAccount::CheckingAccount (unsigned int accountNumber,
 	: Account (accountNumber, rcBalance, rpcInterestRate) {
 	mcMinBalance = rcMinBalance;
 	mcMinBalanceFee = rcMinBalanceFee;
-	mbIsBelowMinBalance = (rcBalance < mcMinBalance);
+	// try {
+		mbIsBelowMinBalance = (rcBalance < mcMinBalance);
+	// }
+	// catch (const CurrencyMismatchException&) {
+	// 	mbIsBelowMinBalance = true;
+	// }
 }
 
 //***************************************************************************
@@ -60,7 +65,7 @@ CheckingAccount::~CheckingAccount () {}
 //***************************************************************************
 
 void CheckingAccount::deposit (const Money& rcAmount) {
-	try {
+	// try {
 		bool wasBelowMin = Account::getBalance () < mcMinBalance;
 
 		Account::deposit (rcAmount);
@@ -73,8 +78,8 @@ void CheckingAccount::deposit (const Money& rcAmount) {
 		if (Account::getBalance () >= mcMinBalance) {
 			mbIsBelowMinBalance = false;
 		}
-	}
-	catch (const CurrencyMismatchException&) {}
+	// }
+	// catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -88,7 +93,7 @@ void CheckingAccount::deposit (const Money& rcAmount) {
 //***************************************************************************
 
 void CheckingAccount::withdraw (const Money& rcAmount) {
-	try {
+	// try {
 		bool wasAboveMin = Account::getBalance () >= mcMinBalance;
 
 		Account::withdraw (rcAmount);
@@ -97,8 +102,8 @@ void CheckingAccount::withdraw (const Money& rcAmount) {
 			Account::withdraw (mcMinBalanceFee);
 			mbIsBelowMinBalance = true;
 		}
-	}
-	catch (const CurrencyMismatchException&) {}
+	// }
+	// catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -126,12 +131,12 @@ void CheckingAccount::chargeMonthlyFee () {
 //***************************************************************************
 
 void CheckingAccount::generateInterest () {
-	try {
+	// try {
 		if (Account::getBalance () >= Money (0, Account::getBalance ().getCurrency ())) {
 			Account::generateInterest ();
 		}
-	}
-	catch (const CurrencyMismatchException&) {}
+	// }
+	// catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -145,13 +150,13 @@ void CheckingAccount::generateInterest () {
 //***************************************************************************
 
 void CheckingAccount::applyMinBalanceFee () {
-	try {
+	// try {
 		if (Account::getBalance () < mcMinBalance && !mbIsBelowMinBalance) {
 			Account::withdraw (mcMinBalanceFee);
 			mbIsBelowMinBalance = true;
 		}
-	}
-	catch (const CurrencyMismatchException&) {}
+	// }
+	// catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************

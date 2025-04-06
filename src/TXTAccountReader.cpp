@@ -12,6 +12,7 @@
 #include "../include/SavingsAccount.h"
 #include "../include/FlatInterest.h"
 #include "../include/TieredInterest.h"
+#include "../include/CurrencyMismatchException.h"
 #include <fstream>
 #include <sstream>
 #include <iostream>
@@ -82,53 +83,60 @@ std::shared_ptr<Account> TXTAccountReader::readAccount () {
 		return nullptr;
 	}
 
-	mcAccountsFile >> accountType;
+	// try { 
 
-	mcAccountsFile >> accountNumber >> initialBalance >> interestType;
+		mcAccountsFile >> accountType;
+		mcAccountsFile >> accountNumber >> initialBalance >> interestType;
 
-	if (mcAccountsFile.fail ()) {
-		return nullptr;
-	}
-
-	if (accountType == SAVINGS) {
-		if (interestType == FLAT) {
-			mcAccountsFile >> rate;
-			interest = std::make_shared<FlatInterest>(rate);
-			mcAccountsFile >> monthlyFee >> minMonthlyBalance;
-			account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
-				interest, minMonthlyBalance, monthlyFee);
+		if (mcAccountsFile.fail ()) {
+			return nullptr;
 		}
 
-		else if (interestType == TIERED) {
-			interest = std::make_shared<TieredInterest>();
-			mcAccountsFile >> interest;
-			mcAccountsFile >> monthlyFee >> minMonthlyBalance;
-			account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
-				interest, minMonthlyBalance, monthlyFee);
-		}
-	}
-	else if (accountType == CHECKING) {
-		if (interestType == FLAT) {
-			mcAccountsFile >> rate;
-			interest = std::make_shared<FlatInterest>(rate);
-			mcAccountsFile >> MinBalance >> MinBalanceFee;
-			account = std::make_shared<CheckingAccount>(accountNumber, initialBalance,
-				interest, MinBalance, MinBalanceFee);
-		}
-	
-		else if (interestType == TIERED) {
-			interest = std::make_shared<TieredInterest>();
-			mcAccountsFile >> interest;
-			mcAccountsFile >> MinBalance >> MinBalanceFee;
-			account = std::make_shared<CheckingAccount>(accountNumber, initialBalance,  // corrected!
-				interest, MinBalance, MinBalanceFee);
-		}
-	}
-	
+		if (accountType == SAVINGS) {
+			if (interestType == FLAT) {
+				mcAccountsFile >> rate;
+				interest = std::make_shared<FlatInterest> (rate);
+				mcAccountsFile >> monthlyFee >> minMonthlyBalance;
+				account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
+					interest, minMonthlyBalance, monthlyFee);
 
-	if (mcAccountsFile.fail ()) {
-		return nullptr;
-	}
+			}
+
+			else if (interestType == TIERED) {
+				interest = std::make_shared<TieredInterest> ();
+				mcAccountsFile >> interest;
+				mcAccountsFile >> monthlyFee >> minMonthlyBalance;
+				account = std::make_shared<SavingsAccount> (accountNumber, initialBalance,
+					interest, minMonthlyBalance, monthlyFee);
+			}
+		}
+		else if (accountType == CHECKING) {
+			if (interestType == FLAT) {
+				mcAccountsFile >> rate;
+				interest = std::make_shared<FlatInterest> (rate);
+				mcAccountsFile >> MinBalance >> MinBalanceFee;
+				account = std::make_shared<CheckingAccount> (accountNumber, initialBalance,
+					interest, MinBalance, MinBalanceFee);
+			}
+
+			else if (interestType == TIERED) {
+				interest = std::make_shared<TieredInterest> ();
+				mcAccountsFile >> interest;
+				mcAccountsFile >> MinBalance >> MinBalanceFee;
+				account = std::make_shared<CheckingAccount> (accountNumber, initialBalance,
+					interest, MinBalance, MinBalanceFee);
+
+			}
+		}
+
+		if (mcAccountsFile.fail ()) {
+			return nullptr;
+		}
+
+	// }
+	// catch (const CurrencyMismatchException&) {
+	// 	return nullptr;
+	// }
 
 	return account;
 

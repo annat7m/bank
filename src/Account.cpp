@@ -59,9 +59,9 @@ Account::~Account () {}
 //***************************************************************************
 
 void Account::deposit (const Money& rcAmount) {
-	try {
+	// try {
 		mBalance += rcAmount;
-	} catch (const CurrencyMismatchException&) {}
+	// } catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -75,10 +75,10 @@ void Account::deposit (const Money& rcAmount) {
 //***************************************************************************
 
 void Account::withdraw (const Money& rcAmount) {
-	try {
+	// try {
 		// accounts are allowed to be negative
 		mBalance -= rcAmount;
-	} catch (const CurrencyMismatchException&) {}
+	// } catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -104,9 +104,9 @@ void Account::chargeMonthlyFee () {}
 //***************************************************************************
 
 void Account::generateInterest () {
-	try {
+	// try {
 		mBalance = mpInterestRate->generate (mBalance);
-	} catch (const CurrencyMismatchException&) {}
+	// } catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************

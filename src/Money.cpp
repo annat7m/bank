@@ -93,9 +93,9 @@ Money& Money::operator= (Money other) {
 //***************************************************************************
 
 Money& Money::operator+= (const Money& rcOther) {
-	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	}
+	// if (mcCurrency != rcOther.mcCurrency) {
+	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	// }
 	mAmount += rcOther.mAmount;
 	return *this;
 }
@@ -111,9 +111,9 @@ Money& Money::operator+= (const Money& rcOther) {
 //***************************************************************************
 
 Money& Money::operator-= (const Money& rcOther) {
-	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	}
+	// if (mcCurrency != rcOther.mcCurrency) {
+	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	// }
 	mAmount -= rcOther.mAmount;
 	return *this;
 }
@@ -158,9 +158,9 @@ Money Money::operator* (double multiplier) const {
 //***************************************************************************
 
 bool Money::operator== (const Money& rcOther) const {
-	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	}
+	// if (mcCurrency != rcOther.mcCurrency) {
+	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	// }
 	return mAmount == rcOther.mAmount;
 }
 
@@ -175,9 +175,9 @@ bool Money::operator== (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator< (const Money& rcOther) const {
-	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	}
+	// if (mcCurrency != rcOther.mcCurrency) {
+	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	// }
 	return mAmount < rcOther.mAmount;
 }
 
@@ -192,9 +192,9 @@ bool Money::operator< (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator>= (const Money& rcOther) const {
-	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	}
+	// if (mcCurrency != rcOther.mcCurrency) {
+	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	// }
 	return mAmount >= rcOther.mAmount;
 }
 
