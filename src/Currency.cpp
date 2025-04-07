@@ -51,9 +51,6 @@ Currency::Currency (std::string type) {
 	else if (type == "YEN") {
 		meCurrencyType = CurrencyType::YEN;
 	}
-	// else {
-	// 	throw std::invalid_argument ("Invalid currency type string: " + type);
-	// }
 }
 
 //***************************************************************************

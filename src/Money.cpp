@@ -81,10 +81,12 @@ Money& Money::operator= (Money other) {
 //***************************************************************************
 
 Money& Money::operator+= (const Money& rcOther) {
-	// if (mcCurrency != rcOther.mcCurrency) {
-	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	// }
-	mAmount += rcOther.mAmount;
+	if (mcCurrency == rcOther.mcCurrency) {
+		mAmount += rcOther.mAmount;
+	}
+	else {
+		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+	}
 	return *this;
 }
 
@@ -99,27 +101,14 @@ Money& Money::operator+= (const Money& rcOther) {
 //***************************************************************************
 
 Money& Money::operator-= (const Money& rcOther) {
-	// if (mcCurrency != rcOther.mcCurrency) {
-	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	// }
-	mAmount -= rcOther.mAmount;
+	if (mcCurrency == rcOther.mcCurrency) {
+		mAmount -= rcOther.mAmount;
+	}
+	else {
+		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+	}
 	return *this;
 }
-
-//***************************************************************************
-// Function:    operator*=
-//
-// Description: multiply money by some existing Money object
-//
-// Parameters:  rcOther - amount to multiply by
-//
-// Returned:    updated Money object
-//***************************************************************************
-
-// Money& Money::operator*= (const Money& rcOther) {
-// 	mAmount *= rcOther.mAmount;
-// 	return *this;
-// }
 
 //***************************************************************************
 // Function:    operator*
@@ -146,9 +135,9 @@ Money Money::operator* (double multiplier) const {
 //***************************************************************************
 
 bool Money::operator== (const Money& rcOther) const {
-	// if (mcCurrency != rcOther.mcCurrency) {
-	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	// }
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount == rcOther.mAmount;
 }
 
@@ -163,9 +152,9 @@ bool Money::operator== (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator< (const Money& rcOther) const {
-	// if (mcCurrency != rcOther.mcCurrency) {
-	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	// }
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount < rcOther.mAmount;
 }
 
@@ -180,9 +169,9 @@ bool Money::operator< (const Money& rcOther) const {
 //***************************************************************************
 
 bool Money::operator>= (const Money& rcOther) const {
-	// if (mcCurrency != rcOther.mcCurrency) {
-	// 	throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
-	// }
+	if (mcCurrency != rcOther.mcCurrency) {
+		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+	}
 	return mAmount >= rcOther.mAmount;
 }
 
@@ -210,7 +199,7 @@ long long Money::operator() () const {
 // Returned:    currency of the money object
 //***************************************************************************
 
-Currency Money::getCurrency() const {
+Currency Money::getCurrency () const {
 	return mcCurrency;
 }
 
@@ -244,7 +233,7 @@ void Money::read (std::istream& rcInStream) {
 	std::string currencyStr;
 	long long amount;
 	rcInStream >> currencyStr >> amount;
-	mcCurrency = Currency(currencyStr);
+	mcCurrency = Currency (currencyStr);
 	mAmount = amount;
 }
 
@@ -293,7 +282,7 @@ std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 //***************************************************************************
 
 Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
-	return Money(rcAmount1() + rcAmount2(), rcAmount1.getCurrency());
+	return Money (rcAmount1 () + rcAmount2 (), rcAmount1.getCurrency ());
 }
 
 //***************************************************************************
@@ -309,5 +298,5 @@ Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
 //***************************************************************************
 
 Money operator- (const Money& rcAmount1, const Money& rcAmount2) {
-	return Money(rcAmount1() - rcAmount2(), rcAmount1.getCurrency());
+	return Money (rcAmount1 () - rcAmount2 (), rcAmount1.getCurrency ());
 }

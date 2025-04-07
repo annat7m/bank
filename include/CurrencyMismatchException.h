@@ -26,6 +26,6 @@ class CurrencyMismatchException : public std::exception {
 	private:
 	Currency mCurrency1;
 	Currency mCurrency2;
-	char* mpszMessage = nullptr;
+	std::string mcMessage;
 
 };

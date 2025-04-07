@@ -77,12 +77,8 @@ Bank::~Bank () {}
 //***************************************************************************
 
 void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
-	// std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-	// try {
-		std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-		account->deposit (rcAmount);
-	// }
-	// catch (const CurrencyMismatchException&) {}
+	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
+	account->deposit (rcAmount);
 }
 
 //***************************************************************************
@@ -97,11 +93,8 @@ void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 //***************************************************************************
 
 void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
-	// try {
-		std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-		account->withdraw (rcAmount);
-	// }
-	// catch (const CurrencyMismatchException&) {}
+	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
+	account->withdraw (rcAmount);
 }
 
 //***************************************************************************
@@ -117,11 +110,8 @@ void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 void Bank::applyMonthlyUpdates () {
 	std::shared_ptr<Account> account = mpAccounts->getFirst ();
 	while (account) {
-		// try {
-			account->chargeMonthlyFee ();
-			account->generateInterest ();
-		// }
-		// catch (const CurrencyMismatchException&) {}
+		account->chargeMonthlyFee ();
+		account->generateInterest ();
 		account = mpAccounts->getNext ();
 	}
 }

@@ -15,7 +15,6 @@
 class Money {
 
 public:
-	// Money ();
 	Money (const Money& rcMoney);
 	Money (long long amount, Currency cCurrency);
 	virtual ~Money ();
@@ -23,7 +22,6 @@ public:
 	Money& operator= (Money other);
 	Money& operator+= (const Money& rcOther);
 	Money& operator-= (const Money& rcOther);
-	// Money& operator*= (const Money& rcOther);
 	Money operator* (double multiplier) const;
 
 	bool operator==(const Money& rcOther) const;
