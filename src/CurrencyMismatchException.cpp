@@ -87,5 +87,5 @@ CurrencyMismatchException& CurrencyMismatchException::operator=(
 //***************************************************************************
 
 const char* CurrencyMismatchException::what () const noexcept {
-	return mcMessage.c_str();
+	return mcMessage.c_str ();
 }

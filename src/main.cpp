@@ -1,9 +1,9 @@
 //***************************************************************************
 // File name:   main.cpp
 // Author:      Anna Tymoshenko
-// Date:        03/06/2025
+// Date:        04/07/2025
 // Class:       CS485
-// Assignment:  Assignment 3 - Bank Accounts
+// Assignment:  Assignment 5 - Bank 3
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 

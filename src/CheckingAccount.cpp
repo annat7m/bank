@@ -18,12 +18,12 @@
 //
 // Description: Initializes Checking Account object in Banking system
 //
-// Parameters:  accountNumber - account number
+// Parameters:  accountNumber 	- account number
 //              rcBalance       - initial balance
-//              rpcInterestRate  - annual interest rate
+//              rpcInterestRate - annual interest rate
 //              rcMinBalance    - minimum balance allowed
 //              rcMinBalanceFee - fee charged if the balance falls below the 
-//															minimum
+//																minimum
 //
 // Returned:    None
 //***************************************************************************
