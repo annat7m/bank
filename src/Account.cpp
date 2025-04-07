@@ -30,9 +30,8 @@
 //***************************************************************************
 
 Account::Account (unsigned int accountNumber, const Money& rcBalance,
-	std::shared_ptr<Interest>& rpcInterestRate) {
+	std::shared_ptr<Interest>& rpcInterestRate) : mBalance(rcBalance) {
 	mAccountNumber = accountNumber;
-	mBalance = rcBalance;
 	mpInterestRate = std::move (rpcInterestRate);
 }
 

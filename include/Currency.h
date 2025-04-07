@@ -22,7 +22,7 @@ enum class CurrencyType : char {
 class Currency {
 
 public:
-	Currency () = default;
+	Currency ();
 	Currency (CurrencyType eType);
 	Currency (std::string type);
 	~Currency ();

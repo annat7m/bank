@@ -16,19 +16,6 @@
 //***************************************************************************
 // Constructor: Money
 //
-// Description: Default Constructor
-//
-// Parameters:  none
-//
-// Returned:    None
-//***************************************************************************
-
-Money::Money () {
-}
-
-//***************************************************************************
-// Constructor: Money
-//
 // Description: Initializes a Money object with the value of another Money object
 //
 // Parameters:  rcMoney - Money object to set amount to
@@ -38,6 +25,7 @@ Money::Money () {
 
 Money::Money (const Money& rcMoney) {
 	mAmount = rcMoney.mAmount;
+	mcCurrency = rcMoney.mcCurrency;
 }
 
 //***************************************************************************
@@ -253,7 +241,11 @@ void Money::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void Money::read (std::istream& rcInStream) {
-	rcInStream >> mcCurrency >> mAmount;
+	std::string currencyStr;
+	long long amount;
+	rcInStream >> currencyStr >> amount;
+	mcCurrency = Currency(currencyStr);
+	mAmount = amount;
 }
 
 //***************************************************************************
@@ -300,9 +292,8 @@ std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 // Returned:    updated Money object
 //***************************************************************************
 
-Money operator+ (Money cAmount1, const Money& rcAmount2) {
-	cAmount1 += rcAmount2;
-	return cAmount1;
+Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
+	return Money(rcAmount1() + rcAmount2(), rcAmount1.getCurrency());
 }
 
 //***************************************************************************
@@ -317,7 +308,6 @@ Money operator+ (Money cAmount1, const Money& rcAmount2) {
 // Returned:    updated Money object
 //***************************************************************************
 
-Money operator- (Money cAmount1, const Money& rcAmount2) {
-	cAmount1 -= rcAmount2;
-	return cAmount1;
+Money operator- (const Money& rcAmount1, const Money& rcAmount2) {
+	return Money(rcAmount1() - rcAmount2(), rcAmount1.getCurrency());
 }

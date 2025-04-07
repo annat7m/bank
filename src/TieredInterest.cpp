@@ -64,7 +64,7 @@ TieredInterest::~TieredInterest () {}
 Money TieredInterest::generate (const Money& rcBalance) const {
 	Money result = rcBalance;
 
-	if (rcBalance >= Money (0, rcBalance.getCurrency())) {
+	if (rcBalance >= Money (0, rcBalance.getCurrency ())) {
 		for (int i = mInterestRates.size () - 1; i >= 0; --i) {
 			if (rcBalance >= mInterestRates[i].first) {
 				result = rcBalance + (rcBalance * mInterestRates[i].second);
@@ -111,23 +111,23 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 //***************************************************************************
 
 void TieredInterest::read (std::istream& rcInStream) {
-	std::string currencyString;
 
 	std::vector<Money> minBalances;
 	double interestRate;
 
 	rcInStream >> mNumberOfTieres;
-	mInterestRates.clear();
+	mInterestRates.clear ();
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
 		long long balance;
+		std::string currencyString;
 		rcInStream >> currencyString >> balance;
-		minBalances.emplace_back(balance, Currency(currencyString));
+		minBalances.emplace_back (balance, Currency (currencyString));
 	}
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
 		rcInStream >> interestRate;
-		addTier(minBalances[i], interestRate);
+		addTier (minBalances[i], interestRate);
 	}
 }
 
