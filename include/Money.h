@@ -15,7 +15,7 @@
 class Money {
 
 public:
-	Money ();
+	// Money ();
 	Money (const Money& rcMoney);
 	Money (long long amount, Currency cCurrency);
 	virtual ~Money ();
@@ -49,5 +49,5 @@ private:
 };
 
 // non-member, non-friend operators
-Money operator+(Money amount1, const Money& amount2);
-Money operator-(Money amount1, const Money& amount2);
+Money operator+(const Money& rcAmount1, const Money& rcAmount2);
+Money operator-(const Money& rcAmount1, const Money& rcAmount2);

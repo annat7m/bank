@@ -12,6 +12,8 @@
 #include <fstream>
 #include <iomanip>
 
+Currency::Currency () {}
+
 //***************************************************************************
 // Constructor: Currency
 //

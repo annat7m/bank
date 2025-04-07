@@ -31,9 +31,9 @@
 CheckingAccount::CheckingAccount (unsigned int accountNumber,
 	const Money& rcBalance, std::shared_ptr<Interest>& rpcInterestRate,
 	const Money& rcMinBalance, const Money& rcMinBalanceFee)
-	: Account (accountNumber, rcBalance, rpcInterestRate) {
-	mcMinBalance = rcMinBalance;
-	mcMinBalanceFee = rcMinBalanceFee;
+	: Account (accountNumber, rcBalance, rpcInterestRate),
+	mcMinBalance(rcMinBalance), mcMinBalanceFee(rcMinBalanceFee) {
+
 	// try {
 		mbIsBelowMinBalance = (rcBalance < mcMinBalance);
 	// }

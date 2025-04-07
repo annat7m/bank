@@ -29,10 +29,9 @@
 SavingsAccount::SavingsAccount (unsigned int accountNumber,
 	const Money& rcBalance, std::shared_ptr<Interest>& rpcInterestRate,
 	const Money& rcMinBalance, const Money& rcMonthlyFee)
-	: Account (accountNumber, rcBalance, rpcInterestRate) {
+	: Account (accountNumber, rcBalance, rpcInterestRate), 
+	mMinBalance(rcMinBalance), mMonthlyFee(rcMonthlyFee) {
 
-	mMinBalance = rcMinBalance;
-	mMonthlyFee = rcMonthlyFee;
 	// try {
 		if (Account::getBalance () >= rcMinBalance) {
 			mbIsBelowMinBalance = false;

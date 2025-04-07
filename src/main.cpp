@@ -15,6 +15,9 @@
 #include <fstream>
 
 #include "../include/Bank.h"
+#include "../include/Account.h"
+#include "../include/CheckingAccount.h"
+#include "../include/FlatInterest.h"
 #include "../include/TXTAccountReader.h"
 #include "../include/TXTTransactionReader.h"
 #include "../include/MapContainer.h"
