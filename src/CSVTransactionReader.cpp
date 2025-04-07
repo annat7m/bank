@@ -1,7 +1,7 @@
 //***************************************************************************
 // File name:   CSVTransactionReader.cpp
 // Author:      Anna Tymoshenko
-// Date:        04/05/2025
+// Date:        04/06/2025
 // Class:       CS485
 // Assignment:  Assignment 5 - Bank 3
 // Purpose:     Practice Object Oriented Design Skills
@@ -53,45 +53,59 @@ CSVTransactionReader::~CSVTransactionReader () {
 //
 // Description: read file with commands amd process the data according to it
 //
-// Parameters:  none
+// Parameters:  rcOutStream	- stream to output account to when command is P
+//							rcBank			- Bank object to perform needed operations on
 //
 // Returned:    none
 //***************************************************************************
 
 void CSVTransactionReader::readTransactions (std::ostream& rcOutStream,
 	Bank& rcBank) {
-	// const char WITHDRAW = 'W';
-	// const char DEPOSIT = 'D';
-	// const char PRINT = 'P';
-	// const char CHARGE = 'M';
+	const char WITHDRAW = 'W';
+	const char DEPOSIT = 'D';
+	const char PRINT = 'P';
+	const char CHARGE = 'M';
 
-	// char command;
-	// int accountNumber;
-	// long long amount;
-	// std::string currencyString;
+	std::string line;
 
-	// if (!mcCommandsFile.is_open ()) {
-	// 	return;
-	// }
+	while (std::getline (mcCommandsFile, line)) {
+		if (line.empty ()) {
+			continue;
+		}
 
-	// while (mcCommandsFile >> command) {
-	// 	if (command == WITHDRAW) {
-	// 		mcCommandsFile >> accountNumber >> currencyString >> amount;
-	// 		Currency cCurrency(currencyString);
-	// 		rcBank.withdraw (accountNumber, Money (amount, cCurrency));
-	// 	}
-	// 	else if (command == DEPOSIT) {
-	// 		mcCommandsFile >> accountNumber >> currencyString >> amount;
-	// 		Currency cCurrency(currencyString);
-	// 		rcBank.deposit (accountNumber, Money (amount, cCurrency));
-	// 	}
-	// 	else if (command == PRINT) {
-	// 		rcOutStream << "-------------" << std::endl;
-	// 		rcBank.display (rcOutStream);
-	// 		rcOutStream << "-------------" << std::endl;
-	// 	}
-	// 	else if (command == CHARGE) {
-	// 		rcBank.applyMonthlyUpdates ();
-	// 	}
-	// }
+		std::stringstream cStrStream (line);
+		std::string cLine;
+		std::getline (cStrStream, cLine, ',');
+
+		char command = cLine[0];
+
+		if (command == WITHDRAW || command == DEPOSIT) {
+			std::getline (cStrStream, cLine, ',');
+			int accountNumber = std::stoi (cLine);
+
+			std::getline (cStrStream, cLine, ',');
+			std::stringstream currencyStream (cLine);
+			std::string currencyStr;
+			long long amount;
+
+			currencyStream >> currencyStr >> amount;
+			Currency currency (currencyStr);
+			Money money (amount, currency);
+
+			if (command == WITHDRAW) {
+				rcBank.withdraw (accountNumber, money);
+			}
+			else {
+				rcBank.deposit (accountNumber, money);
+			}
+		}
+		else if (command == PRINT) {
+			rcOutStream << "-------------" << std::endl;
+			rcBank.display (rcOutStream);
+			rcOutStream << "-------------" << std::endl;
+		}
+		else if (command == CHARGE) {
+			rcBank.applyMonthlyUpdates ();
+		}
+	}
 }
