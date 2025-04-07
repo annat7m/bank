@@ -46,7 +46,7 @@ MapContainer::~MapContainer () {}
 // Description: add account to the map
 //
 // Parameters:  accountNumber - account number
-//							pcAccount	- pointer to an Account
+//							pcAccount			- pointer to an Account
 //
 // Returned:    none
 //***************************************************************************
@@ -136,12 +136,12 @@ bool MapContainer::bAccountExists (unsigned int accountNumber) {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getAccount (unsigned int accountNumber) {
-	auto toFind = mAccounts.find(accountNumber);
-  if (toFind == mAccounts.end()) {
-    throw std::range_error("Error: Account number " 
-			+ std::to_string(accountNumber) + " not found.");
-  }
-  return toFind->second;
+	auto toFind = mAccounts.find (accountNumber);
+	if (toFind == mAccounts.end ()) {
+		throw std::range_error ("Error: Account number "
+			+ std::to_string (accountNumber) + " not found");
+	}
+	return toFind->second;
 }
 
 //***************************************************************************

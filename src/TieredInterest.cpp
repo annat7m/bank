@@ -136,7 +136,7 @@ void TieredInterest::read (std::istream& rcInStream) {
 //
 // Description: add tier that consist of balance and rate to the vector of pairs
 //
-// Parameters:  rcAmount		- min balance to have to apply interest rate
+// Parameters:  rcAmount	- min balance to have to apply interest rate
 //							interest	- interest rate for that balance
 //
 // Returned:    none

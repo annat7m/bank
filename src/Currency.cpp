@@ -104,19 +104,17 @@ bool Currency::operator!= (const Currency& rcOther) const {
 //***************************************************************************
 
 void Currency::display (std::ostream& rcOutStream) const {
-	switch (meCurrencyType) {
-	case CurrencyType::USD:
+	if (meCurrencyType == CurrencyType::USD) {
 		rcOutStream << "USD";
-		break;
-	case CurrencyType::GBP:
+	}
+	else if (meCurrencyType == CurrencyType::GBP) {
 		rcOutStream << "GBP";
-		break;
-	case CurrencyType::EUR:
+	}
+	else if (meCurrencyType == CurrencyType::EUR) {
 		rcOutStream << "EUR";
-		break;
-	case CurrencyType::YEN:
+	}
+	else if (meCurrencyType == CurrencyType::YEN) {
 		rcOutStream << "YEN";
-		break;
 	}
 }
 

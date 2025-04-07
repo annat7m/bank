@@ -17,9 +17,9 @@
 //
 // Description: Initializes Savings Account object in Banking system
 //
-// Parameters:  accountNumber - account number
+// Parameters:  accountNumber 	- account number
 //              rcBalance       - initial balance
-//              rpcInterestRate  - annual interest rate
+//              rpcInterestRate - annual interest rate
 //              rcMinBalance    - minimum balance allowed
 //              rcMonthlyFee 		- fee charged every month
 //
@@ -114,7 +114,8 @@ void SavingsAccount::chargeMonthlyFee () {
 //***************************************************************************
 
 void SavingsAccount::generateInterest () {
-	if (Account::getBalance () >= Money (0, Account::getBalance ().getCurrency ())) {
+	if (Account::getBalance () >= Money (0,
+		Account::getBalance ().getCurrency ())) {
 		Account::generateInterest ();
 	}
 }

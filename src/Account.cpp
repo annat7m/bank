@@ -30,7 +30,7 @@
 //***************************************************************************
 
 Account::Account (unsigned int accountNumber, const Money& rcBalance,
-	std::shared_ptr<Interest>& rpcInterestRate) : mBalance(rcBalance) {
+	std::shared_ptr<Interest>& rpcInterestRate) : mBalance (rcBalance) {
 	mAccountNumber = accountNumber;
 	mpInterestRate = std::move (rpcInterestRate);
 }
@@ -60,7 +60,8 @@ Account::~Account () {}
 void Account::deposit (const Money& rcAmount) {
 	try {
 		mBalance += rcAmount;
-	} catch (const CurrencyMismatchException&) {}
+	}
+	catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -77,7 +78,8 @@ void Account::withdraw (const Money& rcAmount) {
 	try {
 		// accounts are allowed to be negative
 		mBalance -= rcAmount;
-	} catch (const CurrencyMismatchException&) {}
+	}
+	catch (const CurrencyMismatchException&) {}
 }
 
 //***************************************************************************
@@ -103,7 +105,7 @@ void Account::chargeMonthlyFee () {}
 //***************************************************************************
 
 void Account::generateInterest () {
-		mBalance = mpInterestRate->generate (mBalance);
+	mBalance = mpInterestRate->generate (mBalance);
 }
 
 //***************************************************************************

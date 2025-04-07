@@ -33,7 +33,8 @@ Money::Money (const Money& rcMoney) {
 //
 // Description: Initializes a Money object with a long long integer value
 //
-// Parameters:  amount - amount as a long long data type to set Money object to
+// Parameters:  amount		- amount as a long long data type to set Money object to
+//							cCurrency	- currency object to set money's currency
 //
 // Returned:    None
 //***************************************************************************
@@ -203,7 +204,6 @@ Currency Money::getCurrency () const {
 	return mcCurrency;
 }
 
-
 //***************************************************************************
 // Function:    display
 //
@@ -275,7 +275,7 @@ std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 // Description: non-friend, non-member operator, performs addition of two
 //							Money objects
 //
-// Parameters:  cAmount1	- first Money operand
+// Parameters:  rcAmount1	- first Money operand
 //							rcAmount2	- second Money operand
 //
 // Returned:    updated Money object
@@ -294,7 +294,7 @@ Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
 // Description: non-friend, non-member operator, performs subtraction of two
 //							Money objects
 //
-// Parameters:  cAmount1	- first Money operand
+// Parameters:  rcAmount1	- first Money operand
 //							rcAmount2	- second Money operand
 //
 // Returned:    updated Money object
