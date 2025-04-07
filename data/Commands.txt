@@ -1,4 +1,3 @@
-P
 W 1 USD 100
 D 2 GBP 100
 P

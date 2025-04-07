@@ -24,6 +24,7 @@ CurrencyMismatchException::CurrencyMismatchException (Currency cCurrency1,
 	Currency cCurrency2) {
 	mCurrency1 = cCurrency1;
 	mCurrency2 = cCurrency2;
+	mcMessage = "Currency mismatch";
 }
 
 //***************************************************************************
@@ -40,7 +41,7 @@ CurrencyMismatchException::CurrencyMismatchException (
 	const CurrencyMismatchException& rcOther) {
 	mCurrency1 = rcOther.mCurrency1;
 	mCurrency2 = rcOther.mCurrency2;
-	mpszMessage = rcOther.mpszMessage;
+	mcMessage = rcOther.mcMessage;
 }
 
 //***************************************************************************
@@ -70,7 +71,7 @@ CurrencyMismatchException& CurrencyMismatchException::operator=(
 	CurrencyMismatchException cOther) {
 	std::swap (mCurrency1, cOther.mCurrency1);
 	std::swap (mCurrency2, cOther.mCurrency2);
-	std::swap (mpszMessage, cOther.mpszMessage);
+	std::swap (mcMessage, cOther.mcMessage);
 	return *this;
 }
 
@@ -86,5 +87,5 @@ CurrencyMismatchException& CurrencyMismatchException::operator=(
 //***************************************************************************
 
 const char* CurrencyMismatchException::what () const noexcept {
-	return "Currency mismatch";
+	return mcMessage.c_str();
 }

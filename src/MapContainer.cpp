@@ -136,11 +136,12 @@ bool MapContainer::bAccountExists (unsigned int accountNumber) {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getAccount (unsigned int accountNumber) {
-	auto toFind = mAccounts.find (accountNumber);
-	if (toFind != mAccounts.end ()) {
-		return toFind->second;
-	}
-	return nullptr;
+	auto toFind = mAccounts.find(accountNumber);
+  if (toFind == mAccounts.end()) {
+    throw std::range_error("Error: Account number " 
+			+ std::to_string(accountNumber) + " not found.");
+  }
+  return toFind->second;
 }
 
 //***************************************************************************
