@@ -16,7 +16,7 @@ enable_testing()
 add_subdirectory(googletest)
 
 set (Headers
-    include/placeholder.h
+		include/Currency.h
 		include/Money.h
 		include/TieredInterest.h
 		include/Interest.h
@@ -24,9 +24,11 @@ set (Headers
 		include/Account.h
 		include/CheckingAccount.h
 		include/SavingsAccount.h
+		include/CurrencyMismatchException.h
 )
 
 set (Sources
+		src/Currency.cpp
 		src/Money.cpp
 		src/TieredInterest.cpp
 		src/Interest.cpp
@@ -34,6 +36,7 @@ set (Sources
 		src/Account.cpp
 		src/CheckingAccount.cpp
 		src/SavingsAccount.cpp
+		src/CurrencyMismatchException.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})

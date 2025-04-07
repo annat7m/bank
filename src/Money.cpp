@@ -136,7 +136,7 @@ Money Money::operator* (double multiplier) const {
 
 bool Money::operator== (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
 	}
 	return mAmount == rcOther.mAmount;
 }
@@ -153,7 +153,7 @@ bool Money::operator== (const Money& rcOther) const {
 
 bool Money::operator< (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
 	}
 	return mAmount < rcOther.mAmount;
 }
@@ -170,7 +170,7 @@ bool Money::operator< (const Money& rcOther) const {
 
 bool Money::operator>= (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException(mcCurrency, rcOther.mcCurrency);
+		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
 	}
 	return mAmount >= rcOther.mAmount;
 }
@@ -282,6 +282,9 @@ std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 //***************************************************************************
 
 Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
+	if (rcAmount1.getCurrency () != rcAmount2.getCurrency ()) {
+		throw CurrencyMismatchException (rcAmount1.getCurrency (), rcAmount2.getCurrency ());
+	}
 	return Money (rcAmount1 () + rcAmount2 (), rcAmount1.getCurrency ());
 }
 
@@ -298,5 +301,9 @@ Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
 //***************************************************************************
 
 Money operator- (const Money& rcAmount1, const Money& rcAmount2) {
+	if (rcAmount1.getCurrency () != rcAmount2.getCurrency ()) {
+		throw CurrencyMismatchException (rcAmount1.getCurrency (),
+			rcAmount2.getCurrency ());
+	}
 	return Money (rcAmount1 () - rcAmount2 (), rcAmount1.getCurrency ());
 }
