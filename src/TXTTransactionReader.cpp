@@ -54,7 +54,8 @@ TXTTransactionReader::~TXTTransactionReader () {
 //
 // Description: read file with commands amd process the data according to it
 //
-// Parameters:  none
+// Parameters:  rcOutStream	- stream to output account to when command is P
+//							rcBank			- Bank object to perform needed operations on
 //
 // Returned:    none
 //***************************************************************************
@@ -78,17 +79,13 @@ void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
 	while (mcCommandsFile >> command) {
 		if (command == WITHDRAW) {
 			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			// try {
-				Currency cCurrency(currencyString);
-				rcBank.withdraw(accountNumber, Money(amount, cCurrency));
-			// } catch (const CurrencyMismatchException&) {}
+			Currency cCurrency (currencyString);
+			rcBank.withdraw (accountNumber, Money (amount, cCurrency));
 		}
 		else if (command == DEPOSIT) {
 			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			// try {
-				Currency cCurrency(currencyString);
-				rcBank.deposit(accountNumber, Money(amount, cCurrency));
-			// } catch (const CurrencyMismatchException&) {}
+			Currency cCurrency (currencyString);
+			rcBank.deposit (accountNumber, Money (amount, cCurrency));
 		}
 		else if (command == PRINT) {
 			rcOutStream << "-------------" << std::endl;

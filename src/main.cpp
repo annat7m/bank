@@ -20,6 +20,7 @@
 #include "../include/FlatInterest.h"
 #include "../include/TXTAccountReader.h"
 #include "../include/TXTTransactionReader.h"
+#include "../include/CSVTransactionReader.h"
 #include "../include/MapContainer.h"
 
 //***************************************************************************
@@ -36,18 +37,29 @@
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
 int main (int argc, char* argv[]) {
+	if (argc != 3) {
+		std::cerr << "Usage: " << argv[0] << " accountsFile commandsFile\n";
+		return EXIT_FAILURE;
+	}
+
 	std::string accountsFileName = argv[1];
 	std::string commandsFileName = argv[2];
 
 	TXTAccountReader accountReader (accountsFileName);
-	TXTTransactionReader commandsReader (commandsFileName);
+
+	std::shared_ptr<ITransactionReader> commandsReader;
+
+	if (commandsFileName.ends_with (".csv")) {
+		commandsReader = std::make_shared<CSVTransactionReader> (commandsFileName);
+	}
+	else if (commandsFileName.ends_with (".txt")) {
+		commandsReader = std::make_shared<TXTTransactionReader> (commandsFileName);
+	}
 
 	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer> ();
-
 	Bank firstBank (accountReader, mapContainer);
 
-	commandsReader.readTransactions (std::cout, firstBank);
+	commandsReader->readTransactions (std::cout, firstBank);
 
 	return EXIT_SUCCESS;
-
 }
