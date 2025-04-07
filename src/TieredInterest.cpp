@@ -112,7 +112,6 @@ void TieredInterest::display (std::ostream& rcOutStream) const {
 
 void TieredInterest::read (std::istream& rcInStream) {
 	std::string currencyString;
-	Currency currency;
 
 	std::vector<Money> minBalances;
 	double interestRate;
@@ -123,8 +122,7 @@ void TieredInterest::read (std::istream& rcInStream) {
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
 		long long balance;
 		rcInStream >> currencyString >> balance;
-		currency = Currency(currencyString);
-		minBalances.emplace_back(balance, currency);
+		minBalances.emplace_back(balance, Currency(currencyString));
 	}
 
 	for (unsigned int i = 0; i < mNumberOfTieres; ++i) {
