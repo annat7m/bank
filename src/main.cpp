@@ -37,6 +37,7 @@
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
 int main (int argc, char* argv[]) {
+
 	if (argc != 3) {
 		std::cerr << "Usage: " << argv[0] << " accountsFile commandsFile\n";
 		return EXIT_FAILURE;
@@ -59,7 +60,13 @@ int main (int argc, char* argv[]) {
 	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer> ();
 	Bank firstBank (accountReader, mapContainer);
 
-	commandsReader->readTransactions (std::cout, firstBank);
+	try {
+		commandsReader->readTransactions (std::cout, firstBank);
+	}
+	catch (const std::range_error& e) {
+		std::cerr << e.what () << std::endl;
+		return EXIT_FAILURE;
+	}
 
 	return EXIT_SUCCESS;
 }
