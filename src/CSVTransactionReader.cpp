@@ -56,10 +56,10 @@ CSVTransactionReader::~CSVTransactionReader () {
 // Parameters:  rcOutStream	- stream to output account to when command is P
 //							rcBank			- Bank object to perform needed operations on
 //
-// Returned:    none
+// Returned:    
 //***************************************************************************
 
-void CSVTransactionReader::readTransactions (std::ostream& rcOutStream,
+std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream& rcOutStream,
 	Bank& rcBank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';

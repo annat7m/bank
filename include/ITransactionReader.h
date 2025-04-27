@@ -8,6 +8,7 @@
 //***************************************************************************
 
 #include "../include/Bank.h"
+#include "../include/ICommand.h"
 #include <iostream>
 
 #pragma once
@@ -18,6 +19,7 @@ public:
 	ITransactionReader ();
 	virtual ~ITransactionReader ();
 
-	virtual void readTransactions (std::ostream& rcOutStream, Bank& rcBank) = 0;
+	virtual std::shared_ptr<ICommand> readTransactions (std::ostream& rcOutStream, 
+		Bank& rcBank) = 0;
 
 };
