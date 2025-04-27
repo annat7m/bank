@@ -57,11 +57,11 @@ TXTTransactionReader::~TXTTransactionReader () {
 // Parameters:  rcOutStream	- stream to output account to when command is P
 //							rcBank			- Bank object to perform needed operations on
 //
-// Returned:    none
+// Returned:    
 //***************************************************************************
 
-void TXTTransactionReader::readTransactions (std::ostream& rcOutStream,
-	Bank& rcBank) {
+std::shared_ptr<ICommand> TXTTransactionReader::readTransactions
+(std::ostream& rcOutStream, Bank& rcBank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';

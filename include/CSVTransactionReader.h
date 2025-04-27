@@ -19,7 +19,7 @@ public:
 	CSVTransactionReader (const std::string& rcFileName);
 	~CSVTransactionReader ();
 
-	virtual void readTransactions (std::ostream& rcOutStream, 
+	virtual std::shared_ptr<ICommand> readTransactions (std::ostream& rcOutStream, 
 		Bank& rcBank) override;
 
 private:
