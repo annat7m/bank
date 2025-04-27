@@ -101,7 +101,7 @@ std::shared_ptr<Account> MapContainer::getFirst () {
 //***************************************************************************
 
 std::shared_ptr<Account> MapContainer::getNext () {
-	if (mAccounts.empty ()) {
+	if (mAccounts.empty () || mIterator == mAccounts.end()) {
 		return nullptr;
 	}
 	++mIterator;

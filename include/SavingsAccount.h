@@ -14,6 +14,8 @@
 
 #pragma once
 
+class AccountVisitor;
+
 class SavingsAccount : public Account {
 
 public:
@@ -29,6 +31,8 @@ public:
 
 	virtual void display (std::ostream& rcOutStream) const override;
 	virtual void read (std::istream& rcInStream) override;
+
+	virtual void accept (AccountVisitor& rcAccountVisitor) override;
 
 private:
 	Money mMinBalance;

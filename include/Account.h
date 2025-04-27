@@ -15,6 +15,8 @@
 
 #pragma once
 
+class AccountVisitor;
+
 class Account {
 
 public:
@@ -36,6 +38,8 @@ public:
 	friend std::ostream& operator<< (std::ostream& rcOutStream,
 		const Account& rcAccount);
 	friend std::istream& operator>> (std::istream& rcInStream, Account& rcAccount);
+
+	virtual void accept (AccountVisitor& rcAccountVisitor) = 0;
 
 private:
 	unsigned int mAccountNumber;

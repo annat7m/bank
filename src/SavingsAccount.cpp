@@ -9,6 +9,8 @@
 
 #include "../include/SavingsAccount.h"
 #include "../include/CurrencyMismatchException.h"
+#include "../include/AccountVisitor.h"
+
 #include <iostream>
 #include <iomanip>
 
@@ -149,4 +151,18 @@ void SavingsAccount::display (std::ostream& rcOutStream) const {
 void SavingsAccount::read (std::istream& rcInStream) {
 	Account::read (rcInStream);
 	rcInStream >> mMinBalance >> mMonthlyFee;
+}
+
+//***************************************************************************
+// Function:    accept
+//
+// Description: Accept a visitor for a savings account
+//
+// Parameters:  rcAccountVisitor - reference to the visitor
+//
+// Returned:    none
+//***************************************************************************
+
+void SavingsAccount::accept (AccountVisitor& rcAccountVisitor) {
+	rcAccountVisitor.visit (*this);
 }
