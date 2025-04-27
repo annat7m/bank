@@ -3,7 +3,7 @@
 // Author:      Anna Tymoshenko
 // Date:        04/07/2025
 // Class:       CS485
-// Assignment:  Assignment 5 - Bank 3
+// Assignment:  Assignment 6 - Bank 4
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
@@ -46,22 +46,27 @@ int main (int argc, char* argv[]) {
 	std::string accountsFileName = argv[1];
 	std::string commandsFileName = argv[2];
 
-	TXTAccountReader accountReader (accountsFileName);
+	TXTAccountReader cAccountReader (accountsFileName);
 
-	std::shared_ptr<ITransactionReader> commandsReader;
+	std::shared_ptr<ITransactionReader> pcCommandsReader;
 
 	if (commandsFileName.ends_with (".csv")) {
-		commandsReader = std::make_shared<CSVTransactionReader> (commandsFileName);
+		pcCommandsReader = std::make_shared<CSVTransactionReader> (commandsFileName);
 	}
 	else if (commandsFileName.ends_with (".txt")) {
-		commandsReader = std::make_shared<TXTTransactionReader> (commandsFileName);
+		pcCommandsReader = std::make_shared<TXTTransactionReader> (commandsFileName);
 	}
 
 	std::shared_ptr<IContainer> mapContainer = std::make_shared<MapContainer> ();
-	Bank firstBank (accountReader, mapContainer);
+	Bank firstBank (cAccountReader, mapContainer);
 
 	try {
-		commandsReader->readTransactions (std::cout, firstBank);
+		std::shared_ptr<ICommand> pcCommand;
+
+		while ((pcCommand =
+			pcCommandsReader->readTransactions (std::cout, firstBank)) != nullptr) {
+			pcCommand->execute ();
+		}
 	}
 	catch (const std::range_error& e) {
 		std::cerr << e.what () << std::endl;
