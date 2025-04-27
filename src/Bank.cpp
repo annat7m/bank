@@ -10,6 +10,8 @@
 #include "../include/Bank.h"
 #include "../include/IContainer.h"
 #include "../include/CurrencyMismatchException.h"
+#include "../include/PrintVisitor.h"
+#include "../include/MonthlyVisitor.h"
 
 #include <iostream>
 #include <fstream>
@@ -77,14 +79,14 @@ Bank::~Bank () {}
 // Description: Deposits the specified amount of money into the given account
 //
 // Parameters:  accNumber	- the account number to deposit into
-//              amount		- amount to deposit to account
+//              pcAccount	- amount to deposit to account
 //
 // Returned:    none
 //***************************************************************************
 
 void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
-	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-	account->deposit (rcAmount);
+	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
+	pcAccount->deposit (rcAmount);
 }
 
 //***************************************************************************
@@ -93,14 +95,14 @@ void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 // Description: Withdraws the specified amount of money from the given account
 //
 // Parameters:  accNumber	- the account number to withdraw from
-//              amount		- amount to withdraw from account
+//              pcAccount	- amount to withdraw from account
 //
 // Returned:    none
 //***************************************************************************
 
 void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
-	std::shared_ptr<Account> account = mpAccounts->getAccount (accNumber);
-	account->withdraw (rcAmount);
+	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
+	pcAccount->withdraw (rcAmount);
 }
 
 //***************************************************************************
@@ -114,11 +116,12 @@ void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 //***************************************************************************
 
 void Bank::applyMonthlyUpdates () {
-	std::shared_ptr<Account> account = mpAccounts->getFirst ();
-	while (account) {
-		account->chargeMonthlyFee ();
-		account->generateInterest ();
-		account = mpAccounts->getNext ();
+	MonthlyVisitor cMonthlyVisitor;
+
+	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
+	while (pcAccount) {
+		pcAccount->accept (cMonthlyVisitor); 
+		pcAccount = mpAccounts->getNext ();
 	}
 }
 
@@ -133,5 +136,11 @@ void Bank::applyMonthlyUpdates () {
 //***************************************************************************
 
 void Bank::display (std::ostream& rcOutStream) const {
-	mpAccounts->print (rcOutStream);
+	PrintVisitor cPrintVisitor (rcOutStream);
+
+	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
+	while (pcAccount) {
+		pcAccount->accept (cPrintVisitor);
+		pcAccount = mpAccounts->getNext ();
+	}
 }
