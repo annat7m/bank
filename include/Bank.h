@@ -7,12 +7,14 @@
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
 
-#include <iostream>
-#include <vector>
-#include <memory>
 #include "../include/Account.h"
 #include "../include/IAccountReader.h"
 #include "../include/IContainer.h"
+#include "../include/ICommand.h"
+
+#include <iostream>
+#include <vector>
+#include <memory>
 
 #pragma once
 
@@ -31,5 +33,6 @@ public:
 
 private:
 	std::shared_ptr<IContainer> mpAccounts;
+	std::shared_ptr<ICommand> mpCommands;
 
 };

@@ -10,6 +10,7 @@
 #include "../include/Bank.h"
 #include "../include/IContainer.h"
 #include "../include/CurrencyMismatchException.h"
+
 #include <iostream>
 #include <fstream>
 
@@ -42,15 +43,20 @@ Bank::Bank (std::shared_ptr<IContainer> pcContainer) {
 
 Bank::Bank (IAccountReader& rcAccountReader,
 	std::shared_ptr<IContainer> pcContainer) {
+
 	unsigned int accNumber;
 	std::shared_ptr<Account> account;
+
 	mpAccounts = pcContainer;
+	mpCommands = nullptr;
+
 	while ((account = rcAccountReader.readAccount ())) {
 		accNumber = account->getAccountNumber ();
 		if (!mpAccounts->bAccountExists (accNumber)) {
 			mpAccounts->addAccount (accNumber, account);
 		}
 	}
+
 }
 
 //***************************************************************************

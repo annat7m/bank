@@ -11,9 +11,16 @@
 #include "../include/CheckingAccount.h"
 #include "../include/SavingsAccount.h"
 #include "../include/CurrencyMismatchException.h"
+
+#include "../include/WithdrawCommand.h"
+#include "../include/DepositCommand.h"
+#include "../include/PrintCommand.h"
+#include "../include/MonthlyCommand.h"
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <memory>
 
 //***************************************************************************
 // Constructor: TXTTransactionReader
@@ -57,11 +64,11 @@ TXTTransactionReader::~TXTTransactionReader () {
 // Parameters:  rcOutStream	- stream to output account to when command is P
 //							rcBank			- Bank object to perform needed operations on
 //
-// Returned:    
+// Returned:    a shared_ptr to the created Command
 //***************************************************************************
 
-std::shared_ptr<ICommand> TXTTransactionReader::readTransactions
-(std::ostream& rcOutStream, Bank& rcBank) {
+std::shared_ptr<ICommand> TXTTransactionReader::readTransactions (std::ostream&
+	rcOutStream, Bank& rcBank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
@@ -73,27 +80,32 @@ std::shared_ptr<ICommand> TXTTransactionReader::readTransactions
 	std::string currencyString;
 
 	if (!mcCommandsFile.is_open ()) {
-		return;
+		return nullptr;
 	}
 
-	while (mcCommandsFile >> command) {
-		if (command == WITHDRAW) {
-			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			Currency cCurrency (currencyString);
-			rcBank.withdraw (accountNumber, Money (amount, cCurrency));
-		}
-		else if (command == DEPOSIT) {
-			mcCommandsFile >> accountNumber >> currencyString >> amount;
-			Currency cCurrency (currencyString);
-			rcBank.deposit (accountNumber, Money (amount, cCurrency));
-		}
-		else if (command == PRINT) {
-			rcOutStream << "-------------" << std::endl;
-			rcBank.display (rcOutStream);
-			rcOutStream << "-------------" << std::endl;
-		}
-		else if (command == CHARGE) {
-			rcBank.applyMonthlyUpdates ();
-		}
+	if (!(mcCommandsFile >> command)) {
+		return nullptr;
 	}
+
+	if (command == WITHDRAW) {
+		mcCommandsFile >> accountNumber >> currencyString >> amount;
+		Currency cCurrency (currencyString);
+		return std::make_shared<WithdrawCommand> (std::make_shared<Bank> (rcBank),
+			accountNumber, Money (amount, cCurrency));
+	}
+	else if (command == DEPOSIT) {
+		mcCommandsFile >> accountNumber >> currencyString >> amount;
+		Currency cCurrency (currencyString);
+		return std::make_shared<DepositCommand> (std::make_shared<Bank> (rcBank),
+			accountNumber, Money (amount, cCurrency));
+	}
+	else if (command == PRINT) {
+		return std::make_shared<PrintCommand> (std::make_shared<Bank> (rcBank),
+			rcOutStream);
+	}
+	else if (command == CHARGE) {
+		return std::make_shared<MonthlyCommand> (std::make_shared<Bank> (rcBank));
+	}
+
+	return nullptr;
 }

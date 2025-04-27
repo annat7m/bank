@@ -10,9 +10,16 @@
 #include "../include/CSVTransactionReader.h"
 #include "../include/CheckingAccount.h"
 #include "../include/SavingsAccount.h"
+
+#include "../include/WithdrawCommand.h"
+#include "../include/DepositCommand.h"
+#include "../include/PrintCommand.h"
+#include "../include/MonthlyCommand.h"
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <memory>
 
 //***************************************************************************
 // Constructor: CSVTransactionReader
@@ -56,11 +63,11 @@ CSVTransactionReader::~CSVTransactionReader () {
 // Parameters:  rcOutStream	- stream to output account to when command is P
 //							rcBank			- Bank object to perform needed operations on
 //
-// Returned:    
+// Returned:    a shared_ptr to the created Command
 //***************************************************************************
 
-std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream& rcOutStream,
-	Bank& rcBank) {
+std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
+	rcOutStream, Bank& rcBank) {
 	const char WITHDRAW = 'W';
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
@@ -93,19 +100,22 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream& 
 			Money money (amount, currency);
 
 			if (command == WITHDRAW) {
-				rcBank.withdraw (accountNumber, money);
+				return std::make_shared<WithdrawCommand> (std::make_shared<Bank> (rcBank),
+					accountNumber, money);
 			}
 			else {
-				rcBank.deposit (accountNumber, money);
+				return std::make_shared<DepositCommand> (std::make_shared<Bank> (rcBank),
+					accountNumber, money);
 			}
 		}
 		else if (command == PRINT) {
-			rcOutStream << "-------------" << std::endl;
-			rcBank.display (rcOutStream);
-			rcOutStream << "-------------" << std::endl;
+			return std::make_shared<PrintCommand> (std::make_shared<Bank> (rcBank),
+				rcOutStream);
 		}
 		else if (command == CHARGE) {
-			rcBank.applyMonthlyUpdates ();
+			return std::make_shared<MonthlyCommand> (std::make_shared<Bank> (rcBank));
 		}
 	}
+
+	return nullptr;
 }
