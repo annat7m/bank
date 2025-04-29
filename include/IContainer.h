@@ -29,4 +29,6 @@ public:
 
 	virtual void print (std::ostream& rcOutStream) const = 0;
 
+	void applyVisitor (AccountVisitor& rcVisitor);
+
 };
