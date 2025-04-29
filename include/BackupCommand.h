@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <memory>
+#include <string>
 #include "../include/ICommand.h"
 #include "../include/Bank.h"
 
@@ -17,15 +18,15 @@
 class BackupCommand : public ICommand {
 
 public:
-	BackupCommand (std::shared_ptr<Bank> cpBank, std::ostream& rcOutStream_S,
-		std::ostream& rcOutStream_C);
+	BackupCommand (std::shared_ptr<Bank> cpBank, const std::string& rcFileName_C,
+		const std::string& rcFileName_S);
 	virtual ~BackupCommand ();
 
 	virtual void execute () override;
 
 private:
 	std::shared_ptr<Bank> mpcBank;
-	std::ostream& mrcOutStream_S;
-	std::ostream& mrcOutStream_C;
+	std::string mcFileName_C;
+	std::string mcFileName_S;
 
 };

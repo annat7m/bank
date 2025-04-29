@@ -17,14 +17,14 @@
 class BackupVisitor : public AccountVisitor {
 
 public:
-	BackupVisitor (std::ostream& rcOutStream_S, std::ostream& rcOutStream_C);
+	BackupVisitor (std::ostream& rcOutStream_C, std::ostream& rcOutStream_S);
 	virtual ~BackupVisitor ();
 
 	virtual void visit (CheckingAccount& rcCheckingAccount) override;
 	virtual void visit (SavingsAccount& rcSavingsAccount) override;
 
 private:
-	std::ostream& mrcOutStream_S;
 	std::ostream& mrcOutStream_C;
+	std::ostream& mrcOutStream_S;
 
 };
