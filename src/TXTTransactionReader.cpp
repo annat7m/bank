@@ -16,6 +16,7 @@
 #include "../include/DepositCommand.h"
 #include "../include/PrintCommand.h"
 #include "../include/MonthlyCommand.h"
+#include "../include/BackupCommand.h"
 
 #include <fstream>
 #include <sstream>
@@ -73,6 +74,7 @@ std::shared_ptr<ICommand> TXTTransactionReader::readTransactions (std::ostream&
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
 	const char CHARGE = 'M';
+	const char BACKUP = 'B';
 
 	char command;
 	int accountNumber;
@@ -105,6 +107,13 @@ std::shared_ptr<ICommand> TXTTransactionReader::readTransactions (std::ostream&
 	}
 	else if (command == CHARGE) {
 		return std::make_shared<MonthlyCommand> (std::make_shared<Bank> (rcBank));
+	}
+	else if (command == BACKUP) {
+		std::string cCheckingFileName;
+		std::string cSavingFileName;
+		mcCommandsFile >> cCheckingFileName >> cSavingFileName;
+		return std::make_shared<BackupCommand> (std::make_shared<Bank> (rcBank),
+			cCheckingFileName, cSavingFileName);
 	}
 
 	return nullptr;
