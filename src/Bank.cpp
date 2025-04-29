@@ -119,12 +119,7 @@ void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 
 void Bank::applyMonthlyUpdates () {
 	MonthlyVisitor cMonthlyVisitor;
-
-	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
-	while (pcAccount) {
-		pcAccount->accept (cMonthlyVisitor);
-		pcAccount = mpAccounts->getNext ();
-	}
+	mpAccounts->applyVisitor (cMonthlyVisitor);
 }
 
 //***************************************************************************
@@ -139,12 +134,7 @@ void Bank::applyMonthlyUpdates () {
 
 void Bank::display (std::ostream& rcOutStream) const {
 	PrintVisitor cPrintVisitor (rcOutStream);
-
-	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
-	while (pcAccount) {
-		pcAccount->accept (cPrintVisitor);
-		pcAccount = mpAccounts->getNext ();
-	}
+	mpAccounts->applyVisitor (cPrintVisitor);
 }
 
 //***************************************************************************
@@ -164,10 +154,5 @@ void Bank::display (std::ostream& rcOutStream) const {
 void Bank::backupAccounts (std::ostream& rcOutStream_S,
 	std::ostream& rcOutStream_C) {
 	BackupVisitor cBackupVisitor (rcOutStream_S, rcOutStream_C);
-
-	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
-	while (pcAccount) {
-		pcAccount->accept (cBackupVisitor);
-		pcAccount = mpAccounts->getNext ();
-	}
+	mpAccounts->applyVisitor (cBackupVisitor);
 }
