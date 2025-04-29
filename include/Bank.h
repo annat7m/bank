@@ -22,7 +22,8 @@ class Bank {
 
 public:
 	Bank (std::shared_ptr<IContainer> pcContainer);
-	Bank (IAccountReader& rcAccountReader, std::shared_ptr<IContainer> pcContainer);
+	Bank (IAccountReader& rcAccountReader, 
+		std::shared_ptr<IContainer> pcContainer);
 	virtual ~Bank ();
 
 	void deposit (unsigned int accNumber, const Money& rcAmount);
@@ -30,6 +31,8 @@ public:
 
 	void applyMonthlyUpdates ();
 	void display (std::ostream& rcOutStream) const;
+	void backupAccounts (std::ostream& rcOutStream_S, 
+		std::ostream& rcOutStream_C);
 
 private:
 	std::shared_ptr<IContainer> mpAccounts;
