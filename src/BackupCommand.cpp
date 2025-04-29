@@ -8,10 +8,12 @@
 //***************************************************************************
 
 #include "../include/BackupCommand.h"
+#include "../include/BackupVisitor.h"
 #include "../include/Bank.h"
 
 #include <iostream>
 #include <memory>
+#include <fstream>
 
 //***************************************************************************
 // Constructor: BackupCommand
@@ -19,18 +21,17 @@
 // Description: Initializes BackupCommand with Bank pointer and two streams
 //
 // Parameters:  cpBank    		- pointer to the Bank object
-//              rcOutStream_S	- reference to the output stream for savings
-//															accounts
-//							rcOutStream_C	- reference to the output stream for checking
-//															accounts
+//							rcFileName_C	- file to store all checking accounts
+//							rcFileName_S	- file to store all savings accounts
 //
 // Returned:    None
 //***************************************************************************
 
-BackupCommand::BackupCommand (std::shared_ptr<Bank> cpBank, 
-	std::ostream& rcOutStream_S, std::ostream& rcOutStream_C) 
-	: mpcBank (cpBank), mrcOutStream_S (rcOutStream_S), 
-	mrcOutStream_C (rcOutStream_C) {}
+BackupCommand::BackupCommand (std::shared_ptr<Bank> cpBank,
+	const std::string& rcFileName_C, const std::string& rcFileName_S)
+	: mpcBank (cpBank), mcFileName_C (rcFileName_C),
+	mcFileName_S (rcFileName_S) {
+}
 
 //***************************************************************************
 // Destructor:  BackupCommand
@@ -56,5 +57,16 @@ BackupCommand::~BackupCommand () {}
 //***************************************************************************
 
 void BackupCommand::execute () {
-	mpcBank->backupAccounts(mrcOutStream_S, mrcOutStream_C);
+	std::ofstream cOut_C (mcFileName_C);
+	std::ofstream cOut_S (mcFileName_S);
+
+	if (!cOut_C.is_open () || !cOut_S.is_open ()) {
+		throw std::system_error (errno, std::system_category (), 
+		"Error: Could not open backup files.");
+	}
+
+	mpcBank->backupAccounts (cOut_C, cOut_S);
+
+	cOut_C.close ();
+	cOut_S.close ();
 }
