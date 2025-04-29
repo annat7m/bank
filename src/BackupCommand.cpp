@@ -33,7 +33,7 @@ BackupCommand::BackupCommand (std::shared_ptr<Bank> cpBank,
 	mrcOutStream_C (rcOutStream_C) {}
 
 //***************************************************************************
-// Destructor:  PrintCommand
+// Destructor:  BackupCommand
 //
 // Description: Default destructor
 //
@@ -56,5 +56,5 @@ BackupCommand::~BackupCommand () {}
 //***************************************************************************
 
 void BackupCommand::execute () {
-	// use visitor pattern
+	mpcBank->backupAccounts(mrcOutStream_S, mrcOutStream_C);
 }

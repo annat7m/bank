@@ -10,8 +10,10 @@
 #include "../include/Bank.h"
 #include "../include/IContainer.h"
 #include "../include/CurrencyMismatchException.h"
+
 #include "../include/PrintVisitor.h"
 #include "../include/MonthlyVisitor.h"
+#include "../include/BackupVisitor.h"
 
 #include <iostream>
 #include <fstream>
@@ -120,7 +122,7 @@ void Bank::applyMonthlyUpdates () {
 
 	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
 	while (pcAccount) {
-		pcAccount->accept (cMonthlyVisitor); 
+		pcAccount->accept (cMonthlyVisitor);
 		pcAccount = mpAccounts->getNext ();
 	}
 }
@@ -141,6 +143,31 @@ void Bank::display (std::ostream& rcOutStream) const {
 	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
 	while (pcAccount) {
 		pcAccount->accept (cPrintVisitor);
+		pcAccount = mpAccounts->getNext ();
+	}
+}
+
+//***************************************************************************
+// Function:    backupAccounts
+//
+// Description: Displays all savings to its assigned file and checking accounts
+//							to its
+//
+// Parameters:  rcOutStream_S	- reference to the output stream for savings
+//															accounts
+//							rcOutStream_C	- reference to the output stream for checking
+//															accounts
+//
+// Returned:    none
+//***************************************************************************
+
+void Bank::backupAccounts (std::ostream& rcOutStream_S,
+	std::ostream& rcOutStream_C) {
+	BackupVisitor cBackupVisitor (rcOutStream_S, rcOutStream_C);
+
+	std::shared_ptr<Account> pcAccount = mpAccounts->getFirst ();
+	while (pcAccount) {
+		pcAccount->accept (cBackupVisitor);
 		pcAccount = mpAccounts->getNext ();
 	}
 }
