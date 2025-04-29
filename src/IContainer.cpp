@@ -35,3 +35,21 @@ IContainer::IContainer () {}
 //***************************************************************************
 
 IContainer::~IContainer () {}
+
+//***************************************************************************
+// Function:    applyVisitor
+//
+// Description: Apply a visitor on all accounts
+//
+// Parameters:  rcVisitor - type of visitor to accept
+//
+// Returned:    none
+//***************************************************************************
+
+void IContainer::applyVisitor (AccountVisitor& rcVisitor) {
+	std::shared_ptr<Account> pcAccount = getFirst ();
+	while (pcAccount) {
+		pcAccount->accept (rcVisitor);
+		pcAccount = getNext ();
+	}
+}
