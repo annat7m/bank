@@ -15,6 +15,7 @@
 #include "../include/DepositCommand.h"
 #include "../include/PrintCommand.h"
 #include "../include/MonthlyCommand.h"
+#include "../include/BackupCommand.h"
 
 #include <fstream>
 #include <sstream>
@@ -72,6 +73,7 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 	const char DEPOSIT = 'D';
 	const char PRINT = 'P';
 	const char CHARGE = 'M';
+	const char BACKUP = 'B';
 
 	std::string line;
 
@@ -114,6 +116,16 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 		}
 		else if (command == CHARGE) {
 			return std::make_shared<MonthlyCommand> (std::make_shared<Bank> (rcBank));
+		}
+		else if (command == BACKUP) {
+			std::string cCheckingFileName;
+			std::string cSavingFileName;
+
+			std::getline (cStrStream, cCheckingFileName, ',');
+			std::getline (cStrStream, cSavingFileName, ',');
+			
+			return std::make_shared<BackupCommand> (std::make_shared<Bank> (rcBank),
+				cCheckingFileName, cSavingFileName);
 		}
 	}
 
