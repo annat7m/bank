@@ -9,6 +9,7 @@
 
 #include "../include/Money.h"
 #include "../include/CurrencyMismatchException.h"
+#include "../include/CurrencyConversionTable.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -82,11 +83,12 @@ Money& Money::operator= (Money other) {
 //***************************************************************************
 
 Money& Money::operator+= (const Money& rcOther) {
-	if (mcCurrency == rcOther.mcCurrency) {
-		mAmount += rcOther.mAmount;
+	if (mcCurrency != rcOther.mcCurrency) {
+		Money converted = rcOther.convertTo (mcCurrency);
+		mAmount += converted.mAmount;
 	}
 	else {
-		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+		mAmount += rcOther.mAmount;
 	}
 	return *this;
 }
@@ -102,11 +104,12 @@ Money& Money::operator+= (const Money& rcOther) {
 //***************************************************************************
 
 Money& Money::operator-= (const Money& rcOther) {
-	if (mcCurrency == rcOther.mcCurrency) {
-		mAmount -= rcOther.mAmount;
+	if (mcCurrency != rcOther.mcCurrency) {
+		Money converted = rcOther.convertTo (mcCurrency);
+		mAmount -= converted.mAmount;
 	}
 	else {
-		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+		mAmount -= rcOther.mAmount;
 	}
 	return *this;
 }
@@ -137,9 +140,10 @@ Money Money::operator* (double multiplier) const {
 
 bool Money::operator== (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+		Money converted = rcOther.convertTo (mcCurrency);
+		return mAmount == converted.mAmount;
 	}
-	return mAmount == rcOther.mAmount;
+	else return mAmount == rcOther.mAmount;
 }
 
 //***************************************************************************
@@ -154,9 +158,10 @@ bool Money::operator== (const Money& rcOther) const {
 
 bool Money::operator< (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+		Money converted = rcOther.convertTo (mcCurrency);
+		return mAmount < converted.mAmount;
 	}
-	return mAmount < rcOther.mAmount;
+	else return mAmount < rcOther.mAmount;
 }
 
 //***************************************************************************
@@ -171,9 +176,10 @@ bool Money::operator< (const Money& rcOther) const {
 
 bool Money::operator>= (const Money& rcOther) const {
 	if (mcCurrency != rcOther.mcCurrency) {
-		throw CurrencyMismatchException (mcCurrency, rcOther.mcCurrency);
+		Money converted = rcOther.convertTo (mcCurrency);
+		return mAmount >= converted.mAmount;
 	}
-	return mAmount >= rcOther.mAmount;
+	else return mAmount >= rcOther.mAmount;
 }
 
 //***************************************************************************
@@ -267,6 +273,33 @@ std::ostream& operator<< (std::ostream& rcOutStream, const Money& rcAmount) {
 std::istream& operator>> (std::istream& rcInStream, Money& rcAmount) {
 	rcAmount.read (rcInStream);
 	return rcInStream;
+}
+
+//***************************************************************************
+// Function:    convertTo
+//
+// Description: convert the currency to another currency using provided table
+//							sigleton with rates
+//
+// Parameters:  rcNewCurrency - currency we are converting to
+//
+// Returned:    money object with updates currency and value
+//***************************************************************************
+
+Money Money::convertTo (const Currency& rcNewCurrency) const {
+	if (mcCurrency == rcNewCurrency) {
+		return *this;
+	}
+	CurrencyConversionTable& table = CurrencyConversionTable::getInstance ();
+
+	if (!table.bConversionExists (mcCurrency, rcNewCurrency)) {
+		throw CurrencyMismatchException (mcCurrency, rcNewCurrency);
+	}
+
+	double rate = table.getRate (mcCurrency, rcNewCurrency);
+	long long newValue = static_cast<long long> (mAmount * rate);
+
+	return Money (newValue, rcNewCurrency);
 }
 
 //***************************************************************************

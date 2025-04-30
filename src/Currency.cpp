@@ -94,6 +94,21 @@ bool Currency::operator!= (const Currency& rcOther) const {
 }
 
 //***************************************************************************
+// Function:    operator<
+//
+// Description: compare two Currency objects (for map........)
+//
+// Parameters:  rcOther - Currency object to compare to
+//
+// Returned:    true or false
+//***************************************************************************
+
+bool Currency::operator< (const Currency& rcOther) const {
+	return static_cast<int>(meCurrencyType)
+		< static_cast<int>(rcOther.meCurrencyType);
+}
+
+//***************************************************************************
 // Function:    display
 //
 // Description: display the Currency object to the stream

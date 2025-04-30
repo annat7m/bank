@@ -22,6 +22,7 @@
 #include "../include/TXTTransactionReader.h"
 #include "../include/CSVTransactionReader.h"
 #include "../include/MapContainer.h"
+#include "../include/CurrencyConversionTable.h"
 
 //***************************************************************************
 // Function:    main
@@ -33,18 +34,23 @@
 //                     arguments:
 //                     argv[1] should be the path to the Accounts file
 //                     argv[2] should be the path to the Commands file
+//                     argv[3] should be the path to the Conversions file
 //
 // Returned:    EXIT_SUCCESS
 //***************************************************************************
 int main (int argc, char* argv[]) {
 
-	if (argc != 3) {
-		std::cerr << "Usage: " << argv[0] << " accountsFile commandsFile\n";
+	if (argc != 4) {
+		std::cerr << "Usage: " << argv[0] <<
+			" accountsFile commandsFile conversionsFile\n";
 		return EXIT_FAILURE;
 	}
 
 	std::string accountsFileName = argv[1];
 	std::string commandsFileName = argv[2];
+	std::string conversionTableFileName = argv[3];
+
+	CurrencyConversionTable::getInstance ().readConversions (conversionTableFileName);
 
 	TXTAccountReader cAccountReader (accountsFileName);
 
