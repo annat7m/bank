@@ -55,5 +55,12 @@ DepositCommand::~DepositCommand () {}
 //***************************************************************************
 
 void DepositCommand::execute () {
-	mpcBank->deposit (mAccountNumber, mcAmount);
+	const std::string COMMAND = "D";
+	try {
+		mpcBank->deposit (mAccountNumber, mcAmount);
+	}
+	catch (CurrencyMismatchException& e) {
+		mpcBank->logCurrencyException (COMMAND, mAccountNumber, e.getFromCurrency (),
+			e.getToCurrency ());
+	}
 }

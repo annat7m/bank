@@ -89,6 +89,7 @@ Bank::~Bank () {}
 void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
 	pcAccount->deposit (rcAmount);
+
 }
 
 //***************************************************************************
@@ -155,4 +156,32 @@ void Bank::backupAccounts (std::ostream& rcOutStream_S,
 	std::ostream& rcOutStream_C) {
 	BackupVisitor cBackupVisitor (rcOutStream_S, rcOutStream_C);
 	mpAccounts->applyVisitor (cBackupVisitor);
+}
+
+//***************************************************************************
+// Function:    logCurrencyException
+//
+// Description: Logging currency mismatch exception to log file
+//
+// Parameters:  rcCommand     	- command that triggered the exception
+//    					accountNumber		- account number where the mismatch occurred
+//    					rcFromCurrency	- source currency
+//    					rcToCurrency		- destination currency
+//
+// Returned:    Reference to the output stream used
+//***************************************************************************
+std::ostream& Bank::logCurrencyException (const std::string& rcCommand,
+	unsigned int accountNumber, const Currency& rcFromCurrency,
+	const Currency& rcToCurrency) {
+
+	static std::ofstream cLogFile ("CurrencyExceptions.log", std::ios::app);
+	if (!cLogFile.is_open ()) {
+		throw std::runtime_error ("Failed to open CurrencyExceptions.log");
+	}
+
+	cLogFile << "COMMAND: " << rcCommand << " ACCOUNT: " << accountNumber
+		<< " CurrencyMismatchException: FROM: " << rcFromCurrency
+		<< " TO: " << rcToCurrency << std::endl;
+
+	return cLogFile;
 }

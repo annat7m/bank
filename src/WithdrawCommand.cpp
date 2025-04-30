@@ -55,5 +55,12 @@ WithdrawCommand::~WithdrawCommand () {}
 //***************************************************************************
 
 void WithdrawCommand::execute () {
-	mpcBank->withdraw (mAccountNumber, mcAmount);
+	const std::string COMMAND = "W";
+	try {
+		mpcBank->withdraw (mAccountNumber, mcAmount);
+	}
+	catch (CurrencyMismatchException& e) {
+		mpcBank->logCurrencyException (COMMAND, mAccountNumber, e.getFromCurrency (),
+			e.getToCurrency ());
+	}
 }

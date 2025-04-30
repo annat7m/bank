@@ -22,7 +22,7 @@ class Bank {
 
 public:
 	Bank (std::shared_ptr<IContainer> pcContainer);
-	Bank (IAccountReader& rcAccountReader, 
+	Bank (IAccountReader& rcAccountReader,
 		std::shared_ptr<IContainer> pcContainer);
 	virtual ~Bank ();
 
@@ -31,8 +31,12 @@ public:
 
 	void applyMonthlyUpdates ();
 	void display (std::ostream& rcOutStream) const;
-	void backupAccounts (std::ostream& rcOutStream_S, 
+	void backupAccounts (std::ostream& rcOutStream_S,
 		std::ostream& rcOutStream_C);
+
+	std::ostream& logCurrencyException (const std::string& rcMessage,
+		unsigned int accountNumber, const Currency& rcCurrency1,
+		const Currency& rcCurrency2);
 
 private:
 	std::shared_ptr<IContainer> mpAccounts;
