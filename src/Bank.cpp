@@ -6,7 +6,6 @@
 // Assignment:  Assignment 4 - Bank 2
 // Purpose:     Practice Object Oriented Design Skills
 //***************************************************************************
-
 #include "../include/Bank.h"
 #include "../include/IContainer.h"
 #include "../include/CurrencyMismatchException.h"
@@ -27,7 +26,6 @@
 //
 // Returned:    None
 //***************************************************************************
-
 Bank::Bank (std::shared_ptr<IContainer> pcContainer) {
 	mpAccounts = pcContainer;
 }
@@ -44,7 +42,6 @@ Bank::Bank (std::shared_ptr<IContainer> pcContainer) {
 //
 // Returned:    None
 //***************************************************************************
-
 Bank::Bank (IAccountReader& rcAccountReader,
 	std::shared_ptr<IContainer> pcContainer) {
 
@@ -72,7 +69,6 @@ Bank::Bank (IAccountReader& rcAccountReader,
 //
 // Returned:    None
 //***************************************************************************
-
 Bank::~Bank () {}
 
 //***************************************************************************
@@ -85,7 +81,6 @@ Bank::~Bank () {}
 //
 // Returned:    none
 //***************************************************************************
-
 void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
 	pcAccount->deposit (rcAmount);
@@ -102,7 +97,6 @@ void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 //
 // Returned:    none
 //***************************************************************************
-
 void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
 	pcAccount->withdraw (rcAmount);
@@ -117,7 +111,6 @@ void Bank::withdraw (unsigned int accNumber, const Money& rcAmount) {
 //
 // Returned:    none
 //***************************************************************************
-
 void Bank::applyMonthlyUpdates () {
 	MonthlyVisitor cMonthlyVisitor;
 	mpAccounts->applyVisitor (cMonthlyVisitor);
@@ -132,7 +125,6 @@ void Bank::applyMonthlyUpdates () {
 //
 // Returned:    none
 //***************************************************************************
-
 void Bank::display (std::ostream& rcOutStream) const {
 	PrintVisitor cPrintVisitor (rcOutStream);
 	mpAccounts->applyVisitor (cPrintVisitor);
@@ -151,7 +143,6 @@ void Bank::display (std::ostream& rcOutStream) const {
 //
 // Returned:    none
 //***************************************************************************
-
 void Bank::backupAccounts (std::ostream& rcOutStream_S,
 	std::ostream& rcOutStream_C) {
 	BackupVisitor cBackupVisitor (rcOutStream_S, rcOutStream_C);
@@ -174,7 +165,7 @@ std::ostream& Bank::logCurrencyException (const std::string& rcCommand,
 	unsigned int accountNumber, const Currency& rcFromCurrency,
 	const Currency& rcToCurrency) {
 
-	static std::ofstream cLogFile ("CurrencyExceptions.log", std::ios::app);
+	static std::ofstream cLogFile ("CurrencyExceptions.log");
 	if (!cLogFile.is_open ()) {
 		throw std::runtime_error ("Failed to open CurrencyExceptions.log");
 	}
