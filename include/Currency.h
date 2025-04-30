@@ -30,6 +30,8 @@ public:
 	bool operator== (const Currency& rcOther) const;
 	bool operator!= (const Currency& rcOther) const;
 
+	bool operator< (const Currency& rcRHS) const;
+
 	void display (std::ostream& rcOutStream) const;
 	void read (std::istream& rcInStream);
 

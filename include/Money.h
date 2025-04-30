@@ -40,6 +40,8 @@ public:
 	friend std::istream& operator>> (std::istream& rcInStream,
 		Money& rcAmount);
 
+	Money convertTo (const Currency& rcCurrency) const;
+
 private:
 	long long mAmount;
 	Currency mcCurrency;
