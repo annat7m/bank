@@ -22,8 +22,8 @@
 
 CurrencyMismatchException::CurrencyMismatchException (Currency cCurrency1,
 	Currency cCurrency2) {
-	mCurrency1 = cCurrency1;
-	mCurrency2 = cCurrency2;
+	mcCurrency1 = cCurrency1;
+	mcCurrency2 = cCurrency2;
 	mcMessage = "Currency mismatch";
 }
 
@@ -39,8 +39,8 @@ CurrencyMismatchException::CurrencyMismatchException (Currency cCurrency1,
 
 CurrencyMismatchException::CurrencyMismatchException (
 	const CurrencyMismatchException& rcOther) {
-	mCurrency1 = rcOther.mCurrency1;
-	mCurrency2 = rcOther.mCurrency2;
+	mcCurrency1 = rcOther.mcCurrency1;
+	mcCurrency2 = rcOther.mcCurrency2;
 	mcMessage = rcOther.mcMessage;
 }
 
@@ -57,6 +57,32 @@ CurrencyMismatchException::CurrencyMismatchException (
 CurrencyMismatchException::~CurrencyMismatchException () {}
 
 //***************************************************************************
+// Function:    getFromCurrency
+//
+// Description: Getter for the first currency
+//
+// Parameters:  None
+//
+// Returned:    currency that failed to convert from
+//***************************************************************************
+const Currency& CurrencyMismatchException::getFromCurrency () const {
+	return mcCurrency1;
+}
+
+//***************************************************************************
+// Function:    getToCurrency
+//
+// Description: Getter for the second currency
+//
+// Parameters:  None
+//
+// Returned:    currency that failed to convert to
+//***************************************************************************
+const Currency& CurrencyMismatchException::getToCurrency () const {
+	return mcCurrency2;
+}
+
+//***************************************************************************
 // Function:    operator=
 //
 // Description: Assignment operator for CurrencyMismatchException. Uses
@@ -69,8 +95,8 @@ CurrencyMismatchException::~CurrencyMismatchException () {}
 
 CurrencyMismatchException& CurrencyMismatchException::operator=(
 	CurrencyMismatchException cOther) {
-	std::swap (mCurrency1, cOther.mCurrency1);
-	std::swap (mCurrency2, cOther.mCurrency2);
+	std::swap (mcCurrency1, cOther.mcCurrency1);
+	std::swap (mcCurrency2, cOther.mcCurrency2);
 	std::swap (mcMessage, cOther.mcMessage);
 	return *this;
 }

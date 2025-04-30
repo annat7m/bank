@@ -14,18 +14,21 @@
 #pragma once
 
 class CurrencyMismatchException : public std::exception {
-	public:
+public:
 	CurrencyMismatchException (Currency cCurrency1, Currency cCurrency2);
 	CurrencyMismatchException (const CurrencyMismatchException& rcOther);
 	~CurrencyMismatchException ();
+
+	const Currency& getFromCurrency () const;
+	const Currency& getToCurrency () const;
 
 	CurrencyMismatchException& operator= (CurrencyMismatchException cOther);
 
 	virtual const char* what () const noexcept override;
 
-	private:
-	Currency mCurrency1;
-	Currency mCurrency2;
+private:
+	Currency mcCurrency1;
+	Currency mcCurrency2;
 	std::string mcMessage;
 
 };
