@@ -150,6 +150,20 @@ void Bank::backupAccounts (std::ostream& rcOutStream_S,
 }
 
 //***************************************************************************
+// Function:    switchToCurrency
+//
+// Description: Switch all accounts to a particular currency
+//
+// Parameters:  rcOutStream	- reference to the output stream
+//							cCurrency		- currency to convert all accounts monetary values to
+//
+// Returned:    none
+//***************************************************************************
+void Bank::switchToCurrency (std::ostream& rcOutStream, Currency cCurrency) {
+
+}
+
+//***************************************************************************
 // Function:    logCurrencyException
 //
 // Description: Logging currency mismatch exception to log file

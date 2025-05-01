@@ -33,6 +33,7 @@ public:
 	void display (std::ostream& rcOutStream) const;
 	void backupAccounts (std::ostream& rcOutStream_S,
 		std::ostream& rcOutStream_C);
+	void switchToCurrency (std::ostream& rcOutStream, Currency cCurrency);
 
 	std::ostream& logCurrencyException (const std::string& rcMessage,
 		unsigned int accountNumber, const Currency& rcCurrency1,
