@@ -13,6 +13,7 @@
 #include "../include/PrintVisitor.h"
 #include "../include/MonthlyVisitor.h"
 #include "../include/BackupVisitor.h"
+#include "../include/CurrencyVisitor.h"
 
 #include <iostream>
 #include <fstream>
@@ -160,7 +161,8 @@ void Bank::backupAccounts (std::ostream& rcOutStream_S,
 // Returned:    none
 //***************************************************************************
 void Bank::switchToCurrency (std::ostream& rcOutStream, Currency cCurrency) {
-
+	CurrencyVisitor cCurrencyVisitor (rcOutStream, cCurrency);
+	mpAccounts->applyVisitor(cCurrencyVisitor);
 }
 
 //***************************************************************************

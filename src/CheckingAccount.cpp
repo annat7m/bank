@@ -145,6 +145,32 @@ void CheckingAccount::applyMinBalanceFee () {
 }
 
 //***************************************************************************
+// Function:    displayConverted
+//
+// Description: display converted to a given currency account info to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//							rcCurrency	- reference to the currency account needs to be
+//														converted to
+//
+// Returned:    none
+//***************************************************************************
+
+void CheckingAccount::displayConverted (std::ostream& rcOutStream,
+	const Currency& rcCurrency) const {
+	try {
+		Money cConvertedMinBal = mcMinBalance.convertTo (rcCurrency);
+		Money cConvertedMinBalFee = mcMinBalanceFee.convertTo (rcCurrency);
+		Account::display (rcOutStream);
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << cConvertedMinBal << ", " << cConvertedMinBalFee;
+	}
+	catch (const CurrencyMismatchException&) {
+		display (rcOutStream);
+	}
+}
+
+//***************************************************************************
 // Function:    display
 //
 // Description: display checking account
