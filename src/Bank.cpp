@@ -162,7 +162,7 @@ void Bank::backupAccounts (std::ostream& rcOutStream_S,
 //***************************************************************************
 void Bank::switchToCurrency (std::ostream& rcOutStream, Currency cCurrency) {
 	CurrencyVisitor cCurrencyVisitor (rcOutStream, cCurrency);
-	mpAccounts->applyVisitor(cCurrencyVisitor);
+	mpAccounts->applyVisitor (cCurrencyVisitor);
 }
 
 //***************************************************************************
