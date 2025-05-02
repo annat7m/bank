@@ -125,7 +125,7 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 
 			std::getline (cStrStream, cCheckingFileName, ',');
 			std::getline (cStrStream, cSavingFileName, ',');
-			
+
 			return std::make_shared<BackupCommand> (std::make_shared<Bank> (rcBank),
 				cCheckingFileName, cSavingFileName);
 		}
@@ -134,7 +134,7 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 			std::getline (cStrStream, currencyStr, ',');
 			Currency cCurrency (currencyStr);
 			return std::make_shared<CurrencyCommand> (std::make_shared<Bank> (rcBank),
-			rcOutStream, cCurrency);
+				rcOutStream, cCurrency);
 		}
 	}
 

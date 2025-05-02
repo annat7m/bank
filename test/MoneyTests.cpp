@@ -238,7 +238,7 @@ TEST (MoneyArithmeticTests, ShortenedSubtraction_DifferentCurrencies) {
 
 // ***************************************************************************
 // Test: 				SimpleMultiplication
-
+//
 // Description: testing the multiplication operator 
 // ***************************************************************************
 
@@ -252,7 +252,7 @@ TEST (MoneyArithmeticTests, SimpleMultiplication) {
 
 // ***************************************************************************
 // Test: 				LessThan_Appropriate
-
+//
 // Description: testing operator<
 // ***************************************************************************
 
@@ -264,7 +264,7 @@ TEST (MoneyComparisonTests, LessThan_Appropriate) {
 
 // ***************************************************************************
 // Test: 				LessThan_Inappropriate
-
+//
 // Description: testing operator<
 // ***************************************************************************
 
@@ -276,7 +276,7 @@ TEST (MoneyComparisonTests, LessThan_Inappropriate) {
 
 // ***************************************************************************
 // Test: 				GraterThanOrEqual_Appropriate_Grater
-
+//
 // Description: testing operator>=
 // ***************************************************************************
 
@@ -288,7 +288,7 @@ TEST (MoneyComparisonTests, GraterThanOrEqual_Appropriate_Grater) {
 
 // ***************************************************************************
 // Test: 				GraterThanOrEqual_Appropriate_Equal
-
+//
 // Description: testing operator>=
 // ***************************************************************************
 
@@ -300,7 +300,7 @@ TEST (MoneyComparisonTests, GraterThanOrEqual_Appropriate_Equal) {
 
 // ***************************************************************************
 // Test: 				GraterThanOrEqual_Inappropriate
-
+//
 // Description: testing operator>=
 // ***************************************************************************
 
@@ -312,7 +312,7 @@ TEST (MoneyComparisonTests, GraterThanOrEqual_Inappropriate) {
 
 // ***************************************************************************
 // Test: 				Input
-
+//
 // Description: testing operator>>
 // ***************************************************************************
 
@@ -327,7 +327,7 @@ TEST (MoneyIOTests, Input) {
 
 // ***************************************************************************
 // Test: 				Output
-
+//
 // Description: testing operator<<
 // ***************************************************************************
 
@@ -336,4 +336,32 @@ TEST (MoneyIOTests, Output) {
 	std::ostringstream outStream;
 	outStream << value;
 	EXPECT_EQ (outStream.str (), "USD0.00");
+}
+
+// ***************************************************************************
+// Test: 				ConvertToSameCurrency
+//
+// Description: testing Money::convertTo function
+// ***************************************************************************
+
+TEST (MoneyConversionTests, ConvertToSameCurrency) {
+	Money usd100 (100, Currency (CurrencyType::USD));
+	Money converted = usd100.convertTo (Currency (CurrencyType::USD));
+	std::ostringstream stream;
+	stream << converted;
+	EXPECT_EQ (stream.str (), "USD1.00");
+}
+
+// ***************************************************************************
+// Test: 				ConvertUsdToEur
+//
+// Description: testing Money::convertTo function
+// ***************************************************************************
+
+TEST (MoneyConversionTests, ConvertUsdToEur) {
+	Money usd100 (100, Currency (CurrencyType::USD));
+	Money eur = usd100.convertTo (Currency (CurrencyType::EUR));
+	std::ostringstream stream;
+	stream << eur;
+	EXPECT_EQ (stream.str (), "EUR0.92");
 }

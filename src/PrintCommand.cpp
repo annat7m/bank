@@ -26,7 +26,8 @@
 //***************************************************************************
 
 PrintCommand::PrintCommand (std::shared_ptr<Bank> cpBank,
-	std::ostream& rcOutStream) : mpcBank (cpBank), mrcOutStream (rcOutStream) {}
+	std::ostream& rcOutStream) : mpcBank (cpBank), mrcOutStream (rcOutStream) {
+}
 
 //***************************************************************************
 // Destructor:  PrintCommand
