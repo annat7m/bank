@@ -152,11 +152,15 @@ void Account::displayConverted (std::ostream& rcOutStream,
 		Money cConvertedBalance = mBalance.convertTo (rcCurrency);
 
 		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-			<< ", " << cConvertedBalance << ", " << *mpInterestRate << ", ";
+			<< ", " << cConvertedBalance << ", ";
+		mpInterestRate->displayConverted (rcOutStream, rcCurrency);
+		rcOutStream << ", ";
 	}
 	catch (const CurrencyMismatchException&) {
 		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-			<< ", " << mBalance << ", " << *mpInterestRate << ", ";
+			<< ", " << mBalance << ", ";
+		mpInterestRate->displayConverted (rcOutStream, rcCurrency);
+		rcOutStream << ", ";
 	}
 }
 
