@@ -23,9 +23,9 @@
 // Returned:    None
 //***************************************************************************
 
-BackupVisitor::BackupVisitor (std::ostream& rcOutStream_C, 
+BackupVisitor::BackupVisitor (std::ostream& rcOutStream_C,
 	std::ostream& rcOutStream_S)
-	: mrcOutStream_C (rcOutStream_C), mrcOutStream_S (rcOutStream_S){
+	: mrcOutStream_C (rcOutStream_C), mrcOutStream_S (rcOutStream_S) {
 }
 
 //***************************************************************************

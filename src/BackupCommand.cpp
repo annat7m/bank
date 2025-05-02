@@ -61,8 +61,8 @@ void BackupCommand::execute () {
 	std::ofstream cOut_S (mcFileName_S);
 
 	if (!cOut_C.is_open () || !cOut_S.is_open ()) {
-		throw std::system_error (errno, std::system_category (), 
-		"Error: Could not open backup files.");
+		throw std::system_error (errno, std::system_category (),
+			"Error: Could not open backup files.");
 	}
 
 	mpcBank->backupAccounts (cOut_C, cOut_S);

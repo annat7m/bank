@@ -11,6 +11,7 @@ set(Sources
 		TieredInterestTests.cpp
 		CheckingAccountTests.cpp
 		SavingsAccountTests.cpp
+		CurrencyConversionTableTests.cpp
 )
 
 add_executable(${This} ${Sources})
