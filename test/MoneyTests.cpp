@@ -13,6 +13,17 @@
 #include "../include/Money.h"
 #include "../include/Currency.h"
 #include "../include/CurrencyMismatchException.h"
+#include "../include/CurrencyConversionTable.h"
+
+namespace {
+	struct ConversionTableInitializer {
+		ConversionTableInitializer () {
+			std::string cFileName = "data/CurrencyConversions.txt";
+			CurrencyConversionTable::getInstance ()
+				.readConversions (cFileName);
+		}
+	} conversionInitializer;
+}
 
 //***************************************************************************
 // Test: 				Constructor_LongLong_Positive
@@ -44,7 +55,7 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Negative) {
 
 // ***************************************************************************
 // Test: 				CopyConstructor
-
+//
 // Description: testing the assignment operator of the Money object 
 // ***************************************************************************
 
@@ -58,60 +69,60 @@ TEST (MoneyConstructorTests, CopyConstructor) {
 
 // ***************************************************************************
 // Test: 				SimpleAddition_CurrencyMismatchException
-
+//
 // Description: testing if adding two different currencies will throw 
 //							an exception 
 // ***************************************************************************
 
 TEST (MoneyArithmeticTests, Addition_CurrencyMismatchException) {
 	Money usdMoney (100, Currency (CurrencyType::USD));
-	Money eurMoney (100, Currency (CurrencyType::EUR));
+	Money eurMoney (100, Currency (CurrencyType::YEN));
 	EXPECT_THROW ({ Money result = usdMoney + eurMoney; }, CurrencyMismatchException);
 }
 
 // ***************************************************************************
 // Test: 				SimpleSubtraction_CurrencyMismatchException
-
-// Description: testing if adding two different currencies will throw 
-//							an exception 
+//
+// Description: testing if adding two different currencies that do not have 
+//							a defined conversion in the file will throw an exception 
 // ***************************************************************************
 
 TEST (MoneyArithmeticTests, Subtraction_CurrencyMismatchException) {
 	Money usdMoney (100, Currency (CurrencyType::USD));
-	Money eurMoney (100, Currency (CurrencyType::EUR));
+	Money eurMoney (100, Currency (CurrencyType::YEN));
 	EXPECT_THROW ({ Money result = usdMoney - eurMoney; },
 		CurrencyMismatchException);
 }
 
 // ***************************************************************************
 // Test: 				ShortenedAddition_CurrencyMismatchException
-
-// Description: testing if adding two different currencies will throw 
-//							an exception 
+//
+// Description: testing if adding two different currencies that do not have 
+//							a defined conversion in the file will throw an exception 
 // ***************************************************************************
 
 TEST (MoneyArithmeticTests, ShortenedAddition_CurrencyMismatchException) {
 	Money usdMoney (100, Currency (CurrencyType::USD));
-	Money eurMoney (100, Currency (CurrencyType::EUR));
+	Money eurMoney (100, Currency (CurrencyType::YEN));
 	EXPECT_THROW ({ usdMoney += eurMoney; }, CurrencyMismatchException);
 }
 
 // ***************************************************************************
 // Test: 				ShortenedSubtraction_CurrencyMismatchException
-
-// Description: testing if adding two different currencies will throw 
-//							an exception 
+//
+// Description: testing if adding two different currencies that do not have 
+//							a defined conversion in the file will throw an exception 
 // ***************************************************************************
 
 TEST (MoneyArithmeticTests, ShortenedSubtraction_CurrencyMismatchException) {
 	Money usdMoney (100, Currency (CurrencyType::USD));
-	Money eurMoney (100, Currency (CurrencyType::EUR));
+	Money eurMoney (100, Currency (CurrencyType::YEN));
 	EXPECT_THROW ({ usdMoney -= eurMoney; }, CurrencyMismatchException);
 }
 
 // ***************************************************************************
 // Test: 				SimpleAddition
-
+//
 // Description: testing the addition operator 
 // ***************************************************************************
 
@@ -124,8 +135,22 @@ TEST (MoneyArithmeticTests, SimpleAddition) {
 }
 
 // ***************************************************************************
-// Test: 				ShortenedAddition
+// Test: 				SimpleAddition_DifferentCurrencies
+//
+// Description: testing the addition operator 
+// ***************************************************************************
 
+TEST (MoneyArithmeticTests, SimpleAddition_DifferentCurrencies) {
+	Money value1 (1000, Currency (CurrencyType::EUR));
+	Money value2 (100, Currency (CurrencyType::USD));
+	std::ostringstream stream;
+	stream << value1 + value2;
+	EXPECT_EQ (stream.str (), "EUR10.92");
+}
+
+// ***************************************************************************
+// Test: 				ShortenedAddition
+//
 // Description: testing operator+= 
 // ***************************************************************************
 
@@ -139,8 +164,23 @@ TEST (MoneyArithmeticTests, ShortenedAddition) {
 }
 
 // ***************************************************************************
-// Test: 				SimpleSubtraction
+// Test: 				ShortenedAddition_DifferentCurrencies
+//
+// Description: testing operator+= 
+// ***************************************************************************
 
+TEST (MoneyArithmeticTests, ShortenedAddition_DifferentCurrencies) {
+	Money value1 (1000, Currency (CurrencyType::EUR));
+	Money value2 (100, Currency (CurrencyType::USD));
+	std::ostringstream stream;
+	value1 += value2;
+	stream << value1;
+	EXPECT_EQ (stream.str (), "EUR10.92");
+}
+
+// ***************************************************************************
+// Test: 				SimpleSubtraction
+//
 // Description: testing the subtraction operator 
 // ***************************************************************************
 
@@ -153,8 +193,22 @@ TEST (MoneyArithmeticTests, SimpleSubtraction) {
 }
 
 // ***************************************************************************
-// Test: 				ShortenedSubtraction
+// Test: 				SimpleSubtraction_DifferentCurrencies
+//
+// Description: testing the subtraction operator 
+// ***************************************************************************
 
+TEST (MoneyArithmeticTests, SimpleSubtraction_DifferentCurrencies) {
+	Money value1 (1000, Currency (CurrencyType::USD));
+	Money value2 (100, Currency (CurrencyType::GBP));
+	std::ostringstream stream;
+	stream << value1 - value2;
+	EXPECT_EQ (stream.str (), "USD8.69");
+}
+
+// ***************************************************************************
+// Test: 				ShortenedSubtraction
+//
 // Description: testing operator-= 
 // ***************************************************************************
 
@@ -165,6 +219,21 @@ TEST (MoneyArithmeticTests, ShortenedSubtraction) {
 	value1 -= value2;
 	stream << value1;
 	EXPECT_EQ (stream.str (), "GBP2.00");
+}
+
+// ***************************************************************************
+// Test: 				ShortenedSubtraction_DifferentCurrencies
+//
+// Description: testing operator-= 
+// ***************************************************************************
+
+TEST (MoneyArithmeticTests, ShortenedSubtraction_DifferentCurrencies) {
+	Money value1 (1000, Currency (CurrencyType::USD));
+	Money value2 (100, Currency (CurrencyType::GBP));
+	std::ostringstream stream;
+	value1 -= value2;
+	stream << value1;
+	EXPECT_EQ (stream.str (), "USD8.69");
 }
 
 // ***************************************************************************
