@@ -29,7 +29,7 @@
 // Returned:    None
 //***************************************************************************
 Account::Account (unsigned int accountNumber, const Money& rcBalance,
-	std::shared_ptr<Interest>& rpcInterestRate) : mBalance (rcBalance) {
+	std::shared_ptr<Interest>& rpcInterestRate) : mcBalance (rcBalance) {
 	mAccountNumber = accountNumber;
 	mpInterestRate = std::move (rpcInterestRate);
 }
@@ -55,7 +55,7 @@ Account::~Account () {}
 // Returned:    none
 //***************************************************************************
 void Account::deposit (const Money& rcAmount) {
-	mBalance += rcAmount;
+	mcBalance += rcAmount;
 }
 
 //***************************************************************************
@@ -69,7 +69,7 @@ void Account::deposit (const Money& rcAmount) {
 //***************************************************************************
 void Account::withdraw (const Money& rcAmount) {
 	// accounts are allowed to be negative
-	mBalance -= rcAmount;
+	mcBalance -= rcAmount;
 }
 
 //***************************************************************************
@@ -93,7 +93,7 @@ void Account::chargeMonthlyFee () {}
 // Returned:    none
 //***************************************************************************
 void Account::generateInterest () {
-	mBalance = mpInterestRate->generate (mBalance);
+	mcBalance = mpInterestRate->generate (mcBalance);
 }
 
 //***************************************************************************
@@ -106,7 +106,7 @@ void Account::generateInterest () {
 // Returned:    amount of money that is on the balance
 //***************************************************************************
 Money Account::getBalance () const {
-	return mBalance;
+	return mcBalance;
 }
 
 //***************************************************************************
@@ -149,7 +149,7 @@ bool Account::operator== (unsigned int accountNum) const {
 void Account::displayConverted (std::ostream& rcOutStream,
 	const Currency& rcCurrency) const {
 	try {
-		Money cConvertedBalance = mBalance.convertTo (rcCurrency);
+		Money cConvertedBalance = mcBalance.convertTo (rcCurrency);
 
 		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
 			<< ", " << cConvertedBalance << ", ";
@@ -158,7 +158,7 @@ void Account::displayConverted (std::ostream& rcOutStream,
 	}
 	catch (const CurrencyMismatchException&) {
 		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-			<< ", " << mBalance << ", ";
+			<< ", " << mcBalance << ", ";
 		mpInterestRate->displayConverted (rcOutStream, rcCurrency);
 		rcOutStream << ", ";
 	}
@@ -175,7 +175,7 @@ void Account::displayConverted (std::ostream& rcOutStream,
 //***************************************************************************
 void Account::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
-		<< ", " << mBalance << ", " << *mpInterestRate << ", ";
+		<< ", " << mcBalance << ", " << *mpInterestRate << ", ";
 }
 
 //***************************************************************************
@@ -192,7 +192,7 @@ void Account::read (std::istream& rcInStream) {
 	const char TIERED = 'T';
 	char interestType;
 
-	rcInStream >> mAccountNumber >> mBalance >> interestType;
+	rcInStream >> mAccountNumber >> mcBalance >> interestType;
 	if (interestType == FLAT) {
 		mpInterestRate = std::make_shared<FlatInterest> ();
 	}
