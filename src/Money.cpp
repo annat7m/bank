@@ -316,7 +316,8 @@ Money Money::convertTo (const Currency& rcNewCurrency) const {
 
 Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
 	if (rcAmount1.getCurrency () != rcAmount2.getCurrency ()) {
-		throw CurrencyMismatchException (rcAmount1.getCurrency (), rcAmount2.getCurrency ());
+		Money cConvertedAmount2 = rcAmount2.convertTo (rcAmount1.getCurrency ());
+		return Money (rcAmount1 () + cConvertedAmount2 (), rcAmount1.getCurrency ());
 	}
 	return Money (rcAmount1 () + rcAmount2 (), rcAmount1.getCurrency ());
 }
@@ -335,8 +336,8 @@ Money operator+ (const Money& rcAmount1, const Money& rcAmount2) {
 
 Money operator- (const Money& rcAmount1, const Money& rcAmount2) {
 	if (rcAmount1.getCurrency () != rcAmount2.getCurrency ()) {
-		throw CurrencyMismatchException (rcAmount1.getCurrency (),
-			rcAmount2.getCurrency ());
+		Money cConvertedAmount2 = rcAmount2.convertTo (rcAmount1.getCurrency ());
+		return Money (rcAmount1 () - cConvertedAmount2 (), rcAmount1.getCurrency ());
 	}
 	return Money (rcAmount1 () - rcAmount2 (), rcAmount1.getCurrency ());
 }
