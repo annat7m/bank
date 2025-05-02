@@ -9,6 +9,8 @@
 
 #include "../include/TieredInterest.h"
 #include "../include/Interest.h"
+#include "../include/CurrencyMismatchException.h"
+
 #include <iostream>
 #include <algorithm>
 #include <iomanip>
@@ -74,6 +76,40 @@ Money TieredInterest::generate (const Money& rcBalance) const {
 	}
 
 	return result;
+}
+
+//***************************************************************************
+// Function:    displayConverted
+//
+// Description: display converted to a given currency interest to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//							rcCurrency	- reference to the currency account needs to be
+//														converted to
+//
+// Returned:    none
+//***************************************************************************
+
+void TieredInterest::displayConverted (std::ostream& rcOutStream,
+	const Currency& rcCurrency) const {
+	const char TIERED = 'T';
+	rcOutStream << TIERED;
+
+	rcOutStream << std::fixed << std::setprecision (2);
+
+	for (const auto& tier : mInterestRates) {
+		try {
+			Money converted = tier.first.convertTo (rcCurrency);
+			rcOutStream << " " << converted;
+		}
+		catch (const CurrencyMismatchException&) {
+			rcOutStream << " " << tier.first;
+		}
+	}
+
+	for (const auto& tier : mInterestRates) {
+		rcOutStream << " " << tier.second * 100 << "%";
+	}
 }
 
 //***************************************************************************

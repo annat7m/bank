@@ -67,6 +67,22 @@ Money FlatInterest::generate (const Money& rcBalance) const {
 }
 
 //***************************************************************************
+// Function:    displayConverted
+//
+// Description: display converted to a given currency interest to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//							rcCurrency	- reference to the currency account needs to be
+//														converted to
+//
+// Returned:    none
+//***************************************************************************
+void FlatInterest::displayConverted (std::ostream& rcOutStream,
+	const Currency& rcCurrency) const {
+	display (rcOutStream);
+}
+
+//***************************************************************************
 // Function:    display
 //
 // Description: display flat interest rate to the stream
