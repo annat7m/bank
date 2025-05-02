@@ -41,31 +41,27 @@ CurrencyVisitor::~CurrencyVisitor () {}
 //***************************************************************************
 // Function:    visit
 //
-// Description: print all converted checking accounts
+// Description: print converted checking account
 //
 // Parameters:  rcCheckingAccount - checking account to print
 //
 // Returned:    none
 //***************************************************************************
 void CurrencyVisitor::visit (CheckingAccount& rcCheckingAccount) {
-	try {
-		// basically reprint account with new values of all balances
-		// need a bunch of getters in Account object, like getMinBalance, getFee, getRate
-	}
-	catch (const CurrencyMismatchException&) {
-		rcCheckingAccount.display (mrcOutStream);
-	}
+	rcCheckingAccount.displayConverted (mrcOutStream, mcCurrency);
+	mrcOutStream << std::endl;
 }
 
 //***************************************************************************
 // Function:    visit
 //
-// Description: print savings account
+// Description: print converted checking account
 //
 // Parameters:  rcSavingsAccount - savings account to print
 //
 // Returned:    none
 //***************************************************************************
 void CurrencyVisitor::visit (SavingsAccount& rcSavingsAccount) {
-	mrcOutStream << rcSavingsAccount << std::endl;
+	rcSavingsAccount.displayConverted (mrcOutStream, mcCurrency);
+	mrcOutStream << std::endl;
 }
