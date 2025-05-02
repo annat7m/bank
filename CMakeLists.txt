@@ -25,6 +25,7 @@ set (Headers
 		include/CheckingAccount.h
 		include/SavingsAccount.h
 		include/CurrencyMismatchException.h
+		include/CurrencyConversionTable.h
 )
 
 set (Sources
@@ -37,6 +38,7 @@ set (Sources
 		src/CheckingAccount.cpp
 		src/SavingsAccount.cpp
 		src/CurrencyMismatchException.cpp
+		src/CurrencyConversionTable.cpp
 		)
 
 add_library(${This} STATIC ${Sources} ${Headers})
