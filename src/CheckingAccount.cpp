@@ -158,15 +158,24 @@ void CheckingAccount::applyMinBalanceFee () {
 
 void CheckingAccount::displayConverted (std::ostream& rcOutStream,
 	const Currency& rcCurrency) const {
+	Account::displayConverted (rcOutStream, rcCurrency);
 	try {
 		Money cConvertedMinBal = mcMinBalance.convertTo (rcCurrency);
-		Money cConvertedMinBalFee = mcMinBalanceFee.convertTo (rcCurrency);
-		Account::display (rcOutStream);
 		rcOutStream << std::fixed << std::setprecision (2);
-		rcOutStream << cConvertedMinBal << ", " << cConvertedMinBalFee;
+		rcOutStream << cConvertedMinBal << ", ";
 	}
 	catch (const CurrencyMismatchException&) {
-		display (rcOutStream);
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << mcMinBalance << ", ";
+	}
+	try {
+		Money cConvertedMinBalFee = mcMinBalanceFee.convertTo (rcCurrency);
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << cConvertedMinBalFee;
+	}
+	catch (const CurrencyMismatchException&) {
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << mcMinBalanceFee;
 	}
 }
 

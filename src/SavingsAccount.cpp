@@ -136,15 +136,24 @@ void SavingsAccount::generateInterest () {
 
 void SavingsAccount::displayConverted (std::ostream& rcOutStream,
 	const Currency& rcCurrency) const {
+	Account::displayConverted (rcOutStream, rcCurrency);
 	try {
 		Money cConvertedMonthlyFee = mMonthlyFee.convertTo (rcCurrency);
-		Money cConvertedMinBal = mMinBalance.convertTo (rcCurrency);
-		Account::display (rcOutStream);
 		rcOutStream << std::fixed << std::setprecision (2);
-		rcOutStream << cConvertedMonthlyFee << ", " << cConvertedMinBal;
+		rcOutStream << cConvertedMonthlyFee << ", ";
 	}
 	catch (const CurrencyMismatchException&) {
-		display (rcOutStream);
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << mMonthlyFee << ", ";
+	}
+	try {
+		Money cConvertedMinBal = mMinBalance.convertTo (rcCurrency);
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << cConvertedMinBal;
+	}
+	catch (const CurrencyMismatchException&) {
+		rcOutStream << std::fixed << std::setprecision (2);
+		rcOutStream << mMinBalance;
 	}
 }
 
