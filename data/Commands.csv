@@ -1,9 +1,11 @@
-W,1,USD 100
-D,2,GBP 100
 P
+W,1,GBP 100
+D,3,USD 100
+D,1,YEN 1000
+P
+B,c.txt,s.txt
 M
 P
-W,2,GBP 10000
 W,1,USD 9900
 P
 M
@@ -12,8 +14,12 @@ D,1,USD 102
 P
 M
 P
-W,2,GBP 800
 P
 M
 P
-B,checkingBackup_1.txt,savingsBackup_1.txt
+D,1,GBP 100
+W,3,GBP 100
+P
+W,4,YEN 1000
+P
+C,YEN
