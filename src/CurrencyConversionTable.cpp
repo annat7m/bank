@@ -59,12 +59,12 @@ CurrencyConversionTable& CurrencyConversionTable::getInstance () {
 //***************************************************************************
 double CurrencyConversionTable::getRate (const Currency& rcFromCurrency,
 	const Currency& rcToCurrency) const {
-
-	auto it = mcRates.find ({ rcFromCurrency, rcToCurrency });
-	if (it != mcRates.end ()) {
-		return it->second;
+	try {
+		return mcRates.at ({ rcFromCurrency, rcToCurrency });
 	}
-	throw CurrencyMismatchException (rcFromCurrency, rcToCurrency);
+	catch (const std::out_of_range&) {
+		throw CurrencyMismatchException (rcFromCurrency, rcToCurrency);
+	}
 }
 
 //***************************************************************************
