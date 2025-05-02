@@ -297,9 +297,9 @@ Money Money::convertTo (const Currency& rcNewCurrency) const {
 	}
 
 	double rate = table.getRate (mcCurrency, rcNewCurrency);
-	long long newValue = static_cast<long long> (mAmount * rate);
+	long long newValue = static_cast<long long> (mAmount * rate * 100);
 
-	return Money (newValue, rcNewCurrency);
+	return Money (newValue*0.01, rcNewCurrency);
 }
 
 //***************************************************************************
