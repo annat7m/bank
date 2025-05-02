@@ -47,7 +47,7 @@ public:
 
 private:
 	unsigned int mAccountNumber;
-	Money mBalance;
+	Money mcBalance;
 	std::shared_ptr<Interest> mpInterestRate;
 
 };

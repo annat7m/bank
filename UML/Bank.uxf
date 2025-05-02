@@ -1,9 +1,9 @@
-<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><element><id>UMLClass</id><coordinates><x>747</x><y>468</y><w>351</w><h>378</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLClass</id><coordinates><x>776</x><y>896</y><w>320</w><h>336</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 Account
 --
 -mNumber : unsigned int
--mBalance : Money
--mpInterestRate : std::shared_ptr&lt;Interest&gt;
+-mcBalance : Money
+-mpcInterestRate : std::shared_ptr&lt;Interest&gt;
 
 --
 +Account (unsigned int, const Money&amp;, std::shared_ptr&lt;Interest&gt;&amp;)
@@ -17,15 +17,20 @@ Account
 +&lt;&lt;const&gt;&gt; getAccountNumber () : unsigned int
 +&lt;&lt;const&gt;&gt; getBalance () : Money
 +&lt;&lt;const&gt;&gt; operator== (unsigned int) : bool
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) : void/
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
 
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Account&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::istream&amp;, Account&amp;)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1125</x><y>324</y><w>288</w><h>216</h></coordinates><panel_attributes>Bank
+
+/+accept (AccountVisitor&amp;) = 0 : void/
+
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1128</x><y>744</y><w>528</w><h>216</h></coordinates><panel_attributes>Bank
 --
 -mpAccounts : std::shared_ptr&lt;IContainer&gt;
-
+-mpCommands : std::shared_ptr&lt;ICommand&gt;
 --
 +Bank (std::shared_ptr&lt;IContainer&gt;)
 +Bank (IAccountReader&amp;, std::shared_ptr&lt;IContainer&gt;)
@@ -35,9 +40,12 @@ Account
 +withdraw (unsigned int, const Money&amp;) : void
 
 +applyMonthlyUpdates () : void
-
 +&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>927</x><y>891</y><w>585</w><h>234</h></coordinates><panel_attributes>CheckingAccount
++backupAccount (std::ostream&amp;, std::ostream&amp;) : void
+
++&lt;&lt;const&gt;&gt; logCurrencyException(const std::string&amp;, unsigned int, const Currency&amp;, const Currency&amp;) : std::ostream&amp;
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>944</x><y>1272</y><w>520</w><h>280</h></coordinates><panel_attributes>CheckingAccount
 --
 -mcMinBalance : Money
 -mcMinBalanceFee : Money
@@ -51,10 +59,16 @@ Account
 /+chargeMonthlyFee () : void/
 /+generateInterest () : void/
 
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) : void/
+
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
 
--applyMinBalanceFee () : void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>324</x><y>891</y><w>585</w><h>234</h></coordinates><panel_attributes>SavingsAccount
+-applyMinBalanceFee () : void
+
+/+accept (AccountVisitor&amp;) : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>1408</y><w>520</w><h>240</h></coordinates><panel_attributes>SavingsAccount
 --
 -mcMinBalance : Money
 -mcMonthlyFee : Money
@@ -68,9 +82,14 @@ Account
 /+chargeMonthlyFee () : void/
 /+generateInterest () : void/
 
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) : void/
+
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1116</x><y>585</y><w>243</w><h>108</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+
+/+accept (AccountVisitor&amp;) : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1112</x><y>1000</y><w>216</w><h>96</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 IAccountReader
 --
 --
@@ -78,34 +97,38 @@ IAccountReader
 /+~IAccountReader ()/
 
 /+readAccount () = 0 : std::shared_ptr&lt;Account&gt;/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1116</x><y>729</y><w>243</w><h>99</h></coordinates><panel_attributes>TXTAccountReader
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1112</x><y>1128</y><w>216</w><h>88</h></coordinates><panel_attributes>TXTAccountReader
 --
--mAccountFile : std::ifsream
+-mcAccountFile : std::ifsream
 --
 +TXTAccountReader ()
 /+~TXTAccountReader ()/
 
 /+readAccount () : std::shared_ptr&lt;Account&gt;/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1377</x><y>585</y><w>261</w><h>108</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1344</x><y>1000</y><w>400</w><h>96</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 ITransactionReader
 --
 --
 +ITransactionReader ()
 /+~ITransactionReader ()/
 
-/+readTransactions (std::ostream&amp;, Bank&amp;) = 0 : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1377</x><y>729</y><w>243</w><h>99</h></coordinates><panel_attributes>TXTTransactionReader
+/+readTransactions (std::ostream&amp;, Bank&amp;) = 0 : std::vector&lt;std::shared_ptr&lt;ICommand&gt;&gt;/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1344</x><y>1128</y><w>384</w><h>88</h></coordinates><panel_attributes>TXTTransactionReader
 --
 -mcCommandsFile : std::ifstream
 --
 +TXTTransactionReader (const std::string&amp;)
 /+~TXTTransactionReader ()/
 
-/+readTransactions (std::ostream&amp;, Bank&amp;) : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1224</x><y>531</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1395</x><y>531</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1224</x><y>684</y><w>27</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1404</x><y>684</y><w>27</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLNote</id><coordinates><x>855</x><y>432</y><w>117</w><h>27</h></coordinates><panel_attributes>Anna Tymoshenko</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1089</x><y>513</y><w>54</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>40;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>441</x><y>288</y><w>270</w><h>405</h></coordinates><panel_attributes>Money
+/+readTransactions (std::ostream&amp;, Bank&amp;) : std::vector&lt;std::shared_ptr&lt;ICommand&gt;&gt;/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLNote</id><coordinates><x>880</x><y>864</y><w>104</w><h>24</h></coordinates><panel_attributes>Anna Tymoshenko
+bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>936</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>672</y><w>336</w><h>456</h></coordinates><panel_attributes>Money
 --
 -mAmount : long long
 -mcCurrency : Currency
+
 --
 +Money (long long, Currency)
 +Money (const Money&amp;)
@@ -126,13 +149,15 @@ ITransactionReader
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Money&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::istream&amp;, Money&amp;)
 
++&lt;&lt;const&gt;&gt; convertTo (const Currency&amp;) : Money
+
 --
 &lt;&lt;nonmember&gt;&gt;
 
 operator+ (Money, const Money&amp;) : Money
 operator- (Money, const Money&amp;) : Money
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1467</x><y>306</y><w>324</w><h>234</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1688</x><y>728</y><w>264</w><h>232</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 IContainer
 --
 
@@ -149,7 +174,10 @@ IContainer
 /+getAccount (unsigned int) = 0 : std::shared_ptr&lt;Account&gt;/
 
 /+&lt;&lt;const&gt;&gt; print (std::ostream&amp;) = 0 : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1656</x><y>585</y><w>378</w><h>234</h></coordinates><panel_attributes>MapContainer
+
++applyVisitor (AccountVisitor&amp;) : void
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1760</x><y>984</y><w>392</w><h>232</h></coordinates><panel_attributes>MapContainer
 --
 -mAccounts : std::map&lt;unsigned int, std::shared_ptr&lt;Account&gt;&gt;
 -mIterator : std::map&lt;unsigned int, std::shared_ptr&lt;Account&gt;&gt;::iterator
@@ -166,7 +194,8 @@ IContainer
 /+getAccount (unsigned int) : std::shared_ptr&lt;Account&gt;/
 
 /+&lt;&lt;const&gt;&gt; print (std::ostream&amp;) : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>963</x><y>837</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>846</x><y>837</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1656</x><y>531</y><w>27</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>990</x><y>810</y><w>711</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>770;10;770;50;10;50;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>189</x><y>711</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>666</x><y>684</y><w>27</w><h>225</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>675</x><y>684</y><w>288</w><h>225</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>300;230;300;190;10;190;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>576</x><y>0</y><w>342</w><h>198</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>976</x><y>1224</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>872</x><y>1224</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1704</x><y>952</y><w>72</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;70;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1000</x><y>1208</y><w>792</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>970;10;970;40;10;40;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>176</x><y>1136</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>712</x><y>1120</y><w>24</w><h>304</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;360;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>1120</y><w>256</w><h>168</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>300;190;300;150;10;150;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>448</y><w>368</w><h>192</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 Interest
 --
 
@@ -175,12 +204,14 @@ Interest
 /+~Interest ()/
 
 /+generate (Money) = 0 : Money/
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) = 0 : void/
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) = 0 : void/
 /+read (std::istream&amp;) = 0 : void/
 
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Interest&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::ostream&amp;, std::shared_ptr&lt;Interest&gt;&amp;)
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>963</x><y>36</y><w>288</w><h>171</h></coordinates><panel_attributes>FlatInterest
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>792</x><y>488</y><w>304</w><h>152</h></coordinates><panel_attributes>FlatInterest
 --
 -mInterest : double
 
@@ -189,9 +220,11 @@ Interest
 /+~FlatInterest ()/
 
 /+generate (Money) : Money/
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) : void/
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>747</x><y>225</y><w>351</w><h>198</h></coordinates><panel_attributes>TieredInterest
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>776</x><y>664</y><w>320</w><h>192</h></coordinates><panel_attributes>TieredInterest
 --
 -mNumOfTieres : unsigned int
 -mInterestRates : std::vector&lt;std::pair&lt;Money, double&gt;&gt;
@@ -202,20 +235,22 @@ Interest
 /+~TieredInterest ()/
 
 /+generate (Money) : Money/
+/+&lt;&lt;const&gt;&gt; displayConverted (std::ostream&amp;, const Currency&amp;) : void/
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
 
 +addTier (const Money&amp;, double) : void
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>189</y><w>27</w><h>720</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;780;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1062</x><y>198</y><w>63</w><h>711</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;770;50;20;10;20;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>729</x><y>189</y><w>108</w><h>297</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>100;310;100;270;10;270;10;30;50;30;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1089</x><y>531</y><w>495</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>530;10;530;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>909</x><y>144</y><w>72</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;60;10</additional_attributes></element><element><id>Relation</id><coordinates><x>855</x><y>189</y><w>27</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1404</x><y>450</y><w>81</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>702</x><y>333</y><w>63</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1620</x><y>684</y><w>27</w><h>207</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1548</x><y>873</y><w>252</w><h>108</h></coordinates><panel_attributes>CSVTransactionReader
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>632</y><w>24</w><h>792</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;970;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1064</x><y>632</y><w>56</w><h>656</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;800;50;30;10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>744</x><y>632</y><w>48</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>40;390;10;390;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>952</y><w>616</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>750;10;750;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>584</y><w>48</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>632</y><w>56</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1648</x><y>880</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>776</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1728</x><y>1088</y><w>24</w><h>184</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1496</x><y>1256</y><w>344</w><h>96</h></coordinates><panel_attributes>CSVTransactionReader
 --
 -mcCommandsFile : std::ifstream
 --
 +CSVTransactionReader (const std::string&amp;)
 /+~CSVTransactionReader ()/
 
-/+readTransactions (std::ostream&amp;, Bank&amp;) : void/
+/+readTransactions (std::ostream&amp;, Bank&amp;) : std::shared_ptr&lt;ICommand&gt;/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>477</y><w>387</w><h>243</h></coordinates><panel_attributes>Currency
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>904</y><w>320</w><h>240</h></coordinates><panel_attributes>Currency
 --
 -meCurrencyType : CurrencyType
 
@@ -228,37 +263,212 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 +&lt;&lt;const&gt;&gt; operator== (const Currency&amp;) : bool
 +&lt;&lt;const&gt;&gt; operator!= (const Currency&amp;) : bool
 
++operator&lt; (const Currency&amp;) : bool
+
 +&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void
 +read (std::istream&amp;) : void
 
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Currency&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::istream&amp;, Currency&amp;)
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>117</x><y>774</y><w>162</w><h>126</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>144</x><y>1184</y><w>112</w><h>112</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Currency::CurrencyType
 --
 USD
 GBP
 EUR
 YEN
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>702</x><y>585</y><w>63</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>198</y><w>414</w><h>225</h></coordinates><panel_attributes>CurrencyMismatchException
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>1000</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>640</y><w>352</w><h>216</h></coordinates><panel_attributes>CurrencyMismatchException
 --
 -mcMessage : std::string
--mCurrency1 : Currency
--mCurrency2 : Currency
+-mcCurrency1 : Currency
+-mcCurrency2 : Currency
 
 --
 +CurrencyMismatchException (Currency, Currency)
 +CurrencyMismatchException (const CurrencyMismatchException&amp;)
 /+~CurrencyMismatchException ()/
 
++&lt;&lt;const&gt;&gt; getFromCurrency () : const Currency&amp;
++&lt;&lt;const&gt;&gt; getToCurrency () : const Currency&amp; 
+
 +operator= (CurrencyMismatchException) : CurrencyMismatchException&amp; 
 
 /+&lt;&lt;const&gt;&gt; what () : const char*/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>558</y><w>81</w><h>27</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>252</x><y>72</y><w>162</w><h>90</h></coordinates><panel_attributes>std::exception
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>352</x><y>976</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>232</x><y>504</y><w>144</w><h>80</h></coordinates><panel_attributes>std::exception
 --
 
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>153</y><w>27</w><h>63</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>405</x><y>396</y><w>54</w><h>27</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>198</x><y>414</y><w>27</w><h>81</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>576</y><w>24</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>832</y><w>72</w><h>24</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;70;10</additional_attributes></element><element><id>Relation</id><coordinates><x>296</x><y>848</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1656</x><y>288</y><w>208</w><h>128</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+ICommand
+--
+
+--
+/~ICommand ()/
+
++execute () = 0 : void
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1600</x><y>120</y><w>312</w><h>128</h></coordinates><panel_attributes>DepositCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mAccountNumber : unsigned int
+-mcAmount : Money
+--
++DepositCommand (std:shared_ptr&lt;Bank&gt;, unsigned int, Money)
+/~DepositCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>320</y><w>336</w><h>120</h></coordinates><panel_attributes>WithdrawCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mAccountNumber : unsigned int
+-mcAmount : Money
+--
++WithdrawCommand (std:shared_ptr&lt;Bank&gt;, unsigned int, Money)
+/~WithdrawCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1272</x><y>200</y><w>312</w><h>112</h></coordinates><panel_attributes>PrintCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mrcOutStream : std::ostream&amp;
+--
++PrintCommand (std::shared_ptr&lt;Bank&gt;, std::ostream&amp;)
+/~PrintCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1248</x><y>336</y><w>280</w><h>120</h></coordinates><panel_attributes>MonthlyCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+
+--
++MonthlyCommand (std::shared_ptr&lt;Bank&gt;)
+/~MonthlyCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>456</y><w>336</w><h>120</h></coordinates><panel_attributes>BackupCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mcFileName_C : std::string
+-mcFileName_S : std::string
+--
++BackupCommand (std::shared_ptr&lt;Bank&gt;, std::string, std::string)
+/~BackupCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1832</x><y>408</y><w>112</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;120;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>384</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1752</x><y>240</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1576</x><y>288</y><w>96</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1520</x><y>392</y><w>152</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1800</x><y>592</y><w>344</w><h>104</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+ITransactionReader
+--
+--
++ITransactionReader ()
+/+~ITransactionReader ()/
+
+/+readTransactions (std::ostream&amp;, Bank&amp;) = 0 : std::shared_ptr&lt;ICommand&gt;/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>408</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1512</x><y>488</y><w>256</w><h>192</h></coordinates><panel_attributes>Bank
+--
+-mpAccounts : std::shared_ptr&lt;IContainer&gt;
+-mpCommands : std::shared_ptr&lt;ICommand&gt;
+--
++Bank (std::shared_ptr&lt;IContainer&gt;)
++Bank (IAccountReader&amp;, std::shared_ptr&lt;IContainer&gt;)
+/~Bank ()/
+
++deposit (unsigned int, const Money&amp;) : void
++withdraw (unsigned int, const Money&amp;) : void
+
++applyMonthlyUpdates () : void
++&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void
++backupAccount (std::ostream&amp;, std::ostream&amp;) : void
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>656</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1512</x><y>448</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1552</x><y>304</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>528</y><w>184</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>424</y><w>184</w><h>104</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;170;10;170;110;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1616</x><y>240</y><w>24</w><h>264</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;310</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>176</y><w>336</w><h>128</h></coordinates><panel_attributes>CurrencyCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mcCurrency : Currency
+-mcrOutStream : std::ostream&amp;
+--
++CurrencyCommand (std:shared_ptr&lt;Bank&gt;, std::ostream&amp;, Currency)
+/~CurrencyCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>240</y><w>88</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;70;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>288</y><w>184</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;160;10;160;250;10;250</additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>296</y><w>256</w><h>128</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+AccountVisitor
+--
+
+--
++AccountVisitor ()
+/~AccountVisitor ()/
+
++visit (CheckingAccount&amp;) = 0 : void
++visit (SavingsAccount&amp;) = 0 : void
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>968</x><y>136</y><w>264</w><h>128</h></coordinates><panel_attributes>BackupVisitor
+--
+-mrcOutStream_C : std::ostream&amp;
+-mrcOutStream_S : std::ostream&amp;
+--
++BackupVisitor (std::ostream&amp;, std::ostream&amp;)
+/~BackupVisitor ()/
+
+/+visit (CheckingAccount&amp;) : void/
+/+visit (SavingsAccount&amp;) : void/
+
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>632</x><y>136</y><w>256</w><h>120</h></coordinates><panel_attributes>PrintVisitor
+--
+-mrcOutStream : std::ostream&amp;
+
+--
++PrintVisitor (std::ostream&amp;)
+/~PrintVisitor ()/
+
+/+visit (CheckingAccount&amp;) : void/
+/+visit (SavingsAccount&amp;) : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>0</y><w>256</w><h>120</h></coordinates><panel_attributes>MonthlyVisitor
+--
+
+--
++MonthlyVisitor ()
+/~MonthlyVisitor ()/
+
+/+visit (CheckingAccount&amp;) : void/
+/+visit (SavingsAccount&amp;) : void/
+
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1024</x><y>256</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>248</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>112</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>344</y><w>672</w><h>400</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;160;10;160;480;820;480</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>320</y><w>952</w><h>680</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;190;10;190;490;1170;490;1170;830</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>368</y><w>120</w><h>392</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;130;10;130;470</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>392</y><w>96</w><h>536</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;100;10;100;650;80;650</additional_attributes></element><element><id>UMLClass</id><coordinates><x>296</x><y>1176</y><w>408</w><h>208</h></coordinates><panel_attributes>CurrencyConversionTable
+--
+-mcRates : std::map&lt;std::pair&lt;Currency, Currency&gt;, double&gt;
+
+--
+-CurrencyConversionTable ()
+/-~CurrencyConversionTable ()/
+-CurrencyConversionTable (const CurrencyConversionTable&amp;) = delete
+-operator= (const CurrencyConversionTable&amp;) : CurrencyConversionTable&amp; = delete
+
+_+getInstance () : CurrencyConversionTable&amp;_
++&lt;&lt;const&gt;&gt; getRate (const Currency&amp;, const Currency&amp;) : double
+
++readConversions (std::string&amp;) : void
++bConversionExists (const Currency&amp;, const Currency&amp;) : bool
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>1136</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>568</x><y>1120</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>280</y><w>256</w><h>136</h></coordinates><panel_attributes>ConvertVisitor
+--
+-mrcOutStream : std::ostream&amp;
+-mcCurrency : Currency
+
+--
++ConvertVisitor (std::ostream&amp;, Currency)
+/~ConvertVisitor ()/
+
+/+visit (CheckingAccount&amp;) : void/
+/+visit (SavingsAccount&amp;) : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>320</y><w>72</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element></diagram>
