@@ -28,7 +28,6 @@
 //
 // Returned:    None
 //***************************************************************************
-
 Account::Account (unsigned int accountNumber, const Money& rcBalance,
 	std::shared_ptr<Interest>& rpcInterestRate) : mBalance (rcBalance) {
 	mAccountNumber = accountNumber;
@@ -44,7 +43,6 @@ Account::Account (unsigned int accountNumber, const Money& rcBalance,
 //
 // Returned:    None
 //***************************************************************************
-
 Account::~Account () {}
 
 //***************************************************************************
@@ -56,7 +54,6 @@ Account::~Account () {}
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::deposit (const Money& rcAmount) {
 	mBalance += rcAmount;
 }
@@ -70,7 +67,6 @@ void Account::deposit (const Money& rcAmount) {
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::withdraw (const Money& rcAmount) {
 	// accounts are allowed to be negative
 	mBalance -= rcAmount;
@@ -85,7 +81,6 @@ void Account::withdraw (const Money& rcAmount) {
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::chargeMonthlyFee () {}
 
 //***************************************************************************
@@ -97,7 +92,6 @@ void Account::chargeMonthlyFee () {}
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::generateInterest () {
 	mBalance = mpInterestRate->generate (mBalance);
 }
@@ -111,7 +105,6 @@ void Account::generateInterest () {
 //
 // Returned:    amount of money that is on the balance
 //***************************************************************************
-
 Money Account::getBalance () const {
 	return mBalance;
 }
@@ -125,7 +118,6 @@ Money Account::getBalance () const {
 //
 // Returned:    amount of money that is on the balance
 //***************************************************************************
-
 unsigned int Account::getAccountNumber () const {
 	return mAccountNumber;
 }
@@ -139,9 +131,32 @@ unsigned int Account::getAccountNumber () const {
 //
 // Returned:    true if equal, false otherwise
 //***************************************************************************
-
 bool Account::operator== (unsigned int accountNum) const {
 	return mAccountNumber == accountNum;
+}
+
+//***************************************************************************
+// Function:    displayConverted
+//
+// Description: display converted to a given currency account info to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//							rcCurrency	- reference to the currency account needs to be
+//														converted to
+//
+// Returned:    none
+//***************************************************************************
+void Account::displayConverted (std::ostream& rcOutStream,
+	const Currency& rcCurrency) const {
+	try {
+		Money cConvertedBalance = mBalance.convertTo (rcCurrency);
+
+		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
+			<< ", " << cConvertedBalance << ", " << *mpInterestRate << ", ";
+	}
+	catch (const CurrencyMismatchException&) {
+		display (rcOutStream);
+	}
 }
 
 //***************************************************************************
@@ -149,11 +164,10 @@ bool Account::operator== (unsigned int accountNum) const {
 //
 // Description: display account info to the stream 
 //
-// Parameters:  rcOutStream - stream to output to
+// Parameters:  rcOutStream - reference to the stream to output to
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::display (std::ostream& rcOutStream) const {
 	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
 		<< ", " << mBalance << ", " << *mpInterestRate << ", ";
@@ -168,7 +182,6 @@ void Account::display (std::ostream& rcOutStream) const {
 //
 // Returned:    none
 //***************************************************************************
-
 void Account::read (std::istream& rcInStream) {
 	const char FLAT = 'F';
 	const char TIERED = 'T';
@@ -194,7 +207,6 @@ void Account::read (std::istream& rcInStream) {
 //
 // Returned:    none
 //***************************************************************************
-
 std::ostream& operator<< (std::ostream& rcOutStream,
 	const Account& cAccount) {
 	cAccount.display (rcOutStream);
@@ -211,7 +223,6 @@ std::ostream& operator<< (std::ostream& rcOutStream,
 //
 // Returned:    none
 //***************************************************************************
-
 std::istream& operator>> (std::istream& rcInStream, Account& cAccount) {
 	cAccount.read (rcInStream);
 	return rcInStream;
