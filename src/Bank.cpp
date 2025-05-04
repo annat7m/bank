@@ -85,7 +85,6 @@ Bank::~Bank () {}
 void Bank::deposit (unsigned int accNumber, const Money& rcAmount) {
 	std::shared_ptr<Account> pcAccount = mpAccounts->getAccount (accNumber);
 	pcAccount->deposit (rcAmount);
-
 }
 
 //***************************************************************************
