@@ -1,3 +1,9 @@
 P
-T 1 4 USD 100
+T 1 4 USD 9500
+P
+M
+P
+D 1 CHF 500
+P
+M
 P
