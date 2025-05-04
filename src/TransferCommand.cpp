@@ -49,7 +49,9 @@ TransferCommand::~TransferCommand () {}
 //***************************************************************************
 // Function:    execute
 //
-// Description: Withdraws the specified amount of money from the given account
+// Description: Transfers the specified amount of money from one account to
+//							another by withdrawing from one and transfering to a different
+//							one
 //
 // Parameters:  none
 //
@@ -57,12 +59,6 @@ TransferCommand::~TransferCommand () {}
 //***************************************************************************
 
 void TransferCommand::execute () {
-	// const std::string COMMAND = "W";
-	// try {
-	// 	mpcBank->withdraw (mAccountNumber, mcAmount);
-	// }
-	// catch (CurrencyMismatchException& e) {
-	// 	mpcBank->logCurrencyException (COMMAND, mAccountNumber, e.getFromCurrency (),
-	// 		e.getToCurrency ());
-	// }
+	mpcBank->withdraw (mFromAccountNumber, mcAmount);
+	mpcBank->deposit (mToAccountNumber, mcAmount);
 }
