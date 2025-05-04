@@ -18,8 +18,7 @@ namespace {
 	struct ConversionTableInitializer {
 		ConversionTableInitializer () {
 			std::string cFileName = "data/CurrencyConversions.txt";
-			CurrencyConversionTable::getInstance ()
-				.readConversions (cFileName);
+			CurrencyConversionTable::getInstance ().readConversions (cFileName);
 		}
 	} conversionInitializer;
 }
@@ -46,6 +45,30 @@ TEST (CurrencyConversionTableTests, DirectRate_YENtoEUR) {
 	double rate = CurrencyConversionTable::getInstance ().getRate (Currency
 	(CurrencyType::YEN), Currency (CurrencyType::EUR));
 	EXPECT_EQ (rate, 0.69);
+}
+
+//***************************************************************************
+// Test: 				DirectRate_CHFtoUSD
+//
+// Description: testing singleton's getRate function 
+//***************************************************************************
+
+TEST (CurrencyConversionTableTests, DirectRate_CHFtoUSD) {
+	double rate = CurrencyConversionTable::getInstance ().getRate (Currency
+	(CurrencyType::CHF), Currency (CurrencyType::USD));
+	EXPECT_EQ (rate, 0.75);
+}
+
+//***************************************************************************
+// Test: 				ReverseRate_USDtoCHF
+//
+// Description: testing singleton's getRate function 
+//***************************************************************************
+
+TEST (CurrencyConversionTableTests, ReverseRate_USDtoCHF) {
+	double rate = CurrencyConversionTable::getInstance ().getRate (Currency
+	(CurrencyType::USD), Currency (CurrencyType::CHF));
+	EXPECT_EQ (rate, 1 / 0.75);
 }
 
 //***************************************************************************
@@ -93,6 +116,28 @@ TEST (CurrencyConversionTableTests, GetRate_Throw) {
 TEST (CurrencyConversionTableTests, RateExists_Real) {
 	EXPECT_TRUE (CurrencyConversionTable::getInstance ().bConversionExists
 	(Currency (CurrencyType::EUR), Currency (CurrencyType::GBP)));
+}
+
+//***************************************************************************
+// Test: 				RateExists_Real_CHFtoUSD
+//
+// Description: testing singleton's bConversionExists function 
+//***************************************************************************
+
+TEST (CurrencyConversionTableTests, RateExists_Real_CHFtoUSD) {
+	EXPECT_TRUE (CurrencyConversionTable::getInstance ().bConversionExists
+	(Currency (CurrencyType::CHF), Currency (CurrencyType::USD)));
+}
+
+//***************************************************************************
+// Test: 				RateExists_NonExistant_CHFtoYEN
+//
+// Description: testing singleton's bConversionExists function 
+//***************************************************************************
+
+TEST (CurrencyConversionTableTests, RateExists_NonExistant_CHFtoYEN) {
+	EXPECT_FALSE (CurrencyConversionTable::getInstance ().bConversionExists
+	(Currency (CurrencyType::CHF), Currency (CurrencyType::YEN)));
 }
 
 //***************************************************************************
