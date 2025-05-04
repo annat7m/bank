@@ -17,6 +17,7 @@
 #include "../include/MonthlyCommand.h"
 #include "../include/BackupCommand.h"
 #include "../include/CurrencyCommand.h"
+#include "../include/TransferCommand.h"
 
 #include <fstream>
 #include <sstream>
@@ -76,6 +77,7 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 	const char CHARGE = 'M';
 	const char BACKUP = 'B';
 	const char CURRENCY = 'C';
+	const char TRANSFER = 'T';
 
 	std::string line;
 
@@ -135,6 +137,24 @@ std::shared_ptr<ICommand> CSVTransactionReader::readTransactions (std::ostream&
 			Currency cCurrency (currencyStr);
 			return std::make_shared<CurrencyCommand> (std::make_shared<Bank> (rcBank),
 				rcOutStream, cCurrency);
+		}
+		else if (command == TRANSFER) {
+			std::getline (cStrStream, cLine, ',');
+			int sourceAccount = std::stoi (cLine);			
+			std::getline (cStrStream, cLine, ',');
+			int destAccount = std::stoi (cLine);
+
+			std::getline (cStrStream, cLine, ',');
+			std::stringstream currencyStream (cLine);
+			std::string currencyStr;
+			long long amount;
+
+			currencyStream >> currencyStr >> amount;
+			Currency currency (currencyStr);
+			Money money (amount, currency);
+
+			return std::make_shared<TransferCommand> (std::make_shared<Bank> (rcBank),
+			sourceAccount, destAccount, money);
 		}
 	}
 
