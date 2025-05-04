@@ -53,6 +53,20 @@ TEST (MoneyConstructorTests, Constructor_LongLong_Negative) {
 	EXPECT_EQ (stream.str (), "YEN-1.00");
 }
 
+//***************************************************************************
+// Test: 				Constructor_LongLong_Negative_CHF
+//
+// Description: testing the constructor of the Money class that initializes
+//							Money object with 
+//***************************************************************************
+
+TEST (MoneyConstructorTests, Constructor_LongLong_Negative_CHF) {
+	Money amount (-100, Currency (CurrencyType::CHF));
+	std::ostringstream stream;
+	stream << amount;
+	EXPECT_EQ (stream.str (), "CHF-1.00");
+}
+
 // ***************************************************************************
 // Test: 				CopyConstructor
 //
@@ -77,7 +91,8 @@ TEST (MoneyConstructorTests, CopyConstructor) {
 TEST (MoneyArithmeticTests, Addition_CurrencyMismatchException) {
 	Money usdMoney (100, Currency (CurrencyType::USD));
 	Money eurMoney (100, Currency (CurrencyType::YEN));
-	EXPECT_THROW ({ Money result = usdMoney + eurMoney; }, CurrencyMismatchException);
+	EXPECT_THROW ({ Money result = usdMoney + eurMoney; },
+		CurrencyMismatchException);
 }
 
 // ***************************************************************************
@@ -149,6 +164,20 @@ TEST (MoneyArithmeticTests, SimpleAddition_DifferentCurrencies) {
 }
 
 // ***************************************************************************
+// Test: 				SimpleAddition_DifferentCurrencies_CHF
+//
+// Description: testing the addition operator 
+// ***************************************************************************
+
+TEST (MoneyArithmeticTests, SimpleAddition_DifferentCurrencies_CHF) {
+	Money value1 (1000, Currency (CurrencyType::CHF));
+	Money value2 (100, Currency (CurrencyType::USD));
+	std::ostringstream stream;
+	stream << value1 + value2;
+	EXPECT_EQ (stream.str (), "CHF11.33");
+}
+
+// ***************************************************************************
 // Test: 				ShortenedAddition
 //
 // Description: testing operator+= 
@@ -179,6 +208,21 @@ TEST (MoneyArithmeticTests, ShortenedAddition_DifferentCurrencies) {
 }
 
 // ***************************************************************************
+// Test: 				ShortenedAddition_DifferentCurrencies_CHF
+//
+// Description: testing operator+= 
+// ***************************************************************************
+
+TEST (MoneyArithmeticTests, ShortenedAddition_DifferentCurrencies_CHF) {
+	Money value1 (1000, Currency (CurrencyType::USD));
+	Money value2 (100, Currency (CurrencyType::CHF));
+	std::ostringstream stream;
+	value1 += value2;
+	stream << value1;
+	EXPECT_EQ (stream.str (), "USD10.75");
+}
+
+// ***************************************************************************
 // Test: 				SimpleSubtraction
 //
 // Description: testing the subtraction operator 
@@ -204,6 +248,20 @@ TEST (MoneyArithmeticTests, SimpleSubtraction_DifferentCurrencies) {
 	std::ostringstream stream;
 	stream << value1 - value2;
 	EXPECT_EQ (stream.str (), "USD8.69");
+}
+
+// ***************************************************************************
+// Test: 				SimpleSubtraction_DifferentCurrencies_CHF
+//
+// Description: testing the subtraction operator 
+// ***************************************************************************
+
+TEST (MoneyArithmeticTests, SimpleSubtraction_DifferentCurrencies_CHF) {
+	Money value1 (1000, Currency (CurrencyType::USD));
+	Money value2 (100, Currency (CurrencyType::CHF));
+	std::ostringstream stream;
+	stream << value1 - value2;
+	EXPECT_EQ (stream.str (), "USD9.25");
 }
 
 // ***************************************************************************
