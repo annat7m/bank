@@ -51,6 +51,9 @@ Currency::Currency (std::string type) {
 	else if (type == "YEN") {
 		meCurrencyType = CurrencyType::YEN;
 	}
+	else if (type == "CHF") {
+		meCurrencyType = CurrencyType::CHF;
+	}
 }
 
 //***************************************************************************
@@ -130,6 +133,9 @@ void Currency::display (std::ostream& rcOutStream) const {
 	}
 	else if (meCurrencyType == CurrencyType::YEN) {
 		rcOutStream << "YEN";
+	}
+	else if (meCurrencyType == CurrencyType::CHF) {
+		rcOutStream << "CHF";
 	}
 }
 

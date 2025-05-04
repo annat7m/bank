@@ -16,7 +16,8 @@ enum class CurrencyType : char {
 	USD,
 	GBP,
 	EUR,
-	YEN
+	YEN,
+	CHF
 };
 
 class Currency {
@@ -35,9 +36,9 @@ public:
 	void display (std::ostream& rcOutStream) const;
 	void read (std::istream& rcInStream);
 
-	friend std::ostream& operator<<(std::ostream& rcOutStream, 
+	friend std::ostream& operator<<(std::ostream& rcOutStream,
 		const Currency& rcCurrency);
-	friend std::istream& operator>>(std::istream& rcInStream, 
+	friend std::istream& operator>>(std::istream& rcInStream,
 		Currency& rcCurrency);
 
 private:
