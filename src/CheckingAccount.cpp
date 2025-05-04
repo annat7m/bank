@@ -87,11 +87,9 @@ void CheckingAccount::deposit (const Money& rcAmount) {
 //***************************************************************************
 
 void CheckingAccount::withdraw (const Money& rcAmount) {
-	bool wasAboveMin = Account::getBalance () >= mcMinBalance;
-
 	Account::withdraw (rcAmount);
 
-	if (wasAboveMin && (Account::getBalance () < mcMinBalance)) {
+	if (Account::getBalance () < mcMinBalance) {
 		Account::withdraw (mcMinBalanceFee);
 		mbIsBelowMinBalance = true;
 	}
