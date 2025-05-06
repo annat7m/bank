@@ -81,3 +81,42 @@ int main (int argc, char* argv[]) {
 
 	return EXIT_SUCCESS;
 }
+
+/*
+
+1. To add the ability to handle Swiss Francs, which source files (.h or .cpp) 
+did you need to add/modify? List each function you edited or added in an existing 
+class.
+
+	Currency.h, 
+	Currency.cpp
+
+	Currency::Currency (std::string type)
+	Currency::display
+
+2. To add the ability to handle the Transfer Command, which source files 
+(.h or .cpp) did you need to add/modify? List each function you edited or added
+in an existing class.
+
+	TrahsferCommand.h
+	TrahsferCommand.cpp
+	TXTTransactionReader.cpp 
+	CSVTransactionReader.cpp 
+
+	TXTTransactionReader::readTransactions
+	CSVTransactionReader::readTransactions
+
+3. What do these two answers say about your design? Do they indicate a good design? 
+Poor design? Explain why you think so. Be sure to reference the notion of 
+encapsulation and “isolate what may change.”
+
+	I think this says that my design is good because everythng is loosely coupled
+	and adding new functionality to the program affects very few classes. 
+	In case of adding new currencies, no matter what changes I make,
+	those are isolated because changes in Currency class don't affect any other 
+	class -> Currency is encapsulated. 
+	The only thing that could have made my amazing design even better is adding
+	a factory for commands in the readers, so I wouldn't need to change the readers
+	to add the same code to two of them.
+
+*/

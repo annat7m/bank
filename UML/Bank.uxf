@@ -26,8 +26,7 @@ Account
 
 /+accept (AccountVisitor&amp;) = 0 : void/
 
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1128</x><y>744</y><w>528</w><h>216</h></coordinates><panel_attributes>Bank
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1128</x><y>744</y><w>528</w><h>216</h></coordinates><panel_attributes>Bank
 --
 -mpAccounts : std::shared_ptr&lt;IContainer&gt;
 -mpCommands : std::shared_ptr&lt;ICommand&gt;
@@ -44,8 +43,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 +backupAccount (std::ostream&amp;, std::ostream&amp;) : void
 
 +&lt;&lt;const&gt;&gt; logCurrencyException(const std::string&amp;, unsigned int, const Currency&amp;, const Currency&amp;) : std::ostream&amp;
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>944</x><y>1272</y><w>520</w><h>280</h></coordinates><panel_attributes>CheckingAccount
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>944</x><y>1272</y><w>520</w><h>280</h></coordinates><panel_attributes>CheckingAccount
 --
 -mcMinBalance : Money
 -mcMinBalanceFee : Money
@@ -68,7 +66,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+accept (AccountVisitor&amp;) : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>1408</y><w>520</w><h>240</h></coordinates><panel_attributes>SavingsAccount
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>1408</y><w>520</w><h>240</h></coordinates><panel_attributes>SavingsAccount
 --
 -mcMinBalance : Money
 -mcMonthlyFee : Money
@@ -89,7 +87,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+accept (AccountVisitor&amp;) : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1112</x><y>1000</y><w>216</w><h>96</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1112</x><y>1000</y><w>216</w><h>96</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 IAccountReader
 --
 --
@@ -114,7 +112,7 @@ ITransactionReader
 
 /+readTransactions (std::ostream&amp;, Bank&amp;) = 0 : std::vector&lt;std::shared_ptr&lt;ICommand&gt;&gt;/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1344</x><y>1128</y><w>384</w><h>88</h></coordinates><panel_attributes>TXTTransactionReader
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1344</x><y>1128</y><w>384</w><h>88</h></coordinates><panel_attributes>TXTTransactionReader
 --
 -mcCommandsFile : std::ifstream
 --
@@ -123,7 +121,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+readTransactions (std::ostream&amp;, Bank&amp;) : std::vector&lt;std::shared_ptr&lt;ICommand&gt;&gt;/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLNote</id><coordinates><x>880</x><y>864</y><w>104</w><h>24</h></coordinates><panel_attributes>Anna Tymoshenko
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>952</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>1208</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>1088</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLNote</id><coordinates><x>880</x><y>864</y><w>104</w><h>24</h></coordinates><panel_attributes>Anna Tymoshenko
 bg=pink</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>936</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>400</x><y>672</y><w>336</w><h>456</h></coordinates><panel_attributes>Money
 --
 -mAmount : long long
@@ -156,8 +154,7 @@ bg=pink</panel_attributes><additional_attributes></additional_attributes></eleme
 
 operator+ (Money, const Money&amp;) : Money
 operator- (Money, const Money&amp;) : Money
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1688</x><y>728</y><w>264</w><h>232</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1688</x><y>728</y><w>264</w><h>232</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 IContainer
 --
 
@@ -177,7 +174,7 @@ IContainer
 
 +applyVisitor (AccountVisitor&amp;) : void
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1760</x><y>984</y><w>392</w><h>232</h></coordinates><panel_attributes>MapContainer
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1760</x><y>984</y><w>392</w><h>232</h></coordinates><panel_attributes>MapContainer
 --
 -mAccounts : std::map&lt;unsigned int, std::shared_ptr&lt;Account&gt;&gt;
 -mIterator : std::map&lt;unsigned int, std::shared_ptr&lt;Account&gt;&gt;::iterator
@@ -211,7 +208,7 @@ Interest
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Interest&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::ostream&amp;, std::shared_ptr&lt;Interest&gt;&amp;)
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>792</x><y>488</y><w>304</w><h>152</h></coordinates><panel_attributes>FlatInterest
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>792</x><y>488</y><w>304</w><h>152</h></coordinates><panel_attributes>FlatInterest
 --
 -mInterest : double
 
@@ -224,7 +221,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 /+&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void/
 /+read (std::istream&amp;) : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>776</x><y>664</y><w>320</w><h>192</h></coordinates><panel_attributes>TieredInterest
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>776</x><y>664</y><w>320</w><h>192</h></coordinates><panel_attributes>TieredInterest
 --
 -mNumOfTieres : unsigned int
 -mInterestRates : std::vector&lt;std::pair&lt;Money, double&gt;&gt;
@@ -241,7 +238,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 +addTier (const Money&amp;, double) : void
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>632</y><w>24</w><h>792</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;970;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1064</x><y>632</y><w>56</w><h>656</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;800;50;30;10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>744</x><y>632</y><w>48</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>40;390;10;390;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>952</y><w>616</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>750;10;750;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>584</y><w>48</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>632</y><w>56</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1648</x><y>880</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>776</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1728</x><y>1088</y><w>24</w><h>184</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1496</x><y>1256</y><w>344</w><h>96</h></coordinates><panel_attributes>CSVTransactionReader
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>632</y><w>24</w><h>792</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;970;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1064</x><y>632</y><w>56</w><h>656</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>50;800;50;30;10;30;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>744</x><y>632</y><w>48</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>40;390;10;390;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>952</y><w>616</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>750;10;750;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>584</y><w>48</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;40;10</additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>632</y><w>56</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;40</additional_attributes></element><element><id>Relation</id><coordinates><x>1648</x><y>880</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>776</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1728</x><y>1088</y><w>24</w><h>184</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;10;210</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1496</x><y>1256</y><w>344</w><h>96</h></coordinates><panel_attributes>CSVTransactionReader
 --
 -mcCommandsFile : std::ifstream
 --
@@ -250,7 +247,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+readTransactions (std::ostream&amp;, Bank&amp;) : std::shared_ptr&lt;ICommand&gt;/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>904</y><w>320</w><h>240</h></coordinates><panel_attributes>Currency
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>904</y><w>320</w><h>240</h></coordinates><panel_attributes>Currency
 --
 -meCurrencyType : CurrencyType
 
@@ -270,15 +267,16 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 &lt;&lt;friend&gt;&gt; operator&lt;&lt; (std::ostream&amp;, const Currency&amp;)
 &lt;&lt;friend&gt;&gt; operator&gt;&gt; (std::istream&amp;, Currency&amp;)
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>144</x><y>1184</y><w>112</w><h>112</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>144</x><y>1184</y><w>112</w><h>112</h></coordinates><panel_attributes>&lt;&lt;enumeration&gt;&gt;
 Currency::CurrencyType
 --
 USD
 GBP
 EUR
 YEN
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>1000</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>640</y><w>352</w><h>216</h></coordinates><panel_attributes>CurrencyMismatchException
+CHF
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>1000</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>640</y><w>352</w><h>216</h></coordinates><panel_attributes>CurrencyMismatchException
 --
 -mcMessage : std::string
 -mcCurrency1 : Currency
@@ -296,7 +294,7 @@ YEN
 
 /+&lt;&lt;const&gt;&gt; what () : const char*/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>352</x><y>976</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>232</x><y>504</y><w>144</w><h>80</h></coordinates><panel_attributes>std::exception
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>352</x><y>976</y><w>64</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>60;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>232</x><y>504</y><w>144</w><h>80</h></coordinates><panel_attributes>std::exception
 --
 
 
@@ -309,7 +307,7 @@ ICommand
 
 +execute () = 0 : void
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1600</x><y>120</y><w>312</w><h>128</h></coordinates><panel_attributes>DepositCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1360</x><y>56</y><w>328</w><h>128</h></coordinates><panel_attributes>DepositCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 -mAccountNumber : unsigned int
@@ -320,7 +318,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>320</y><w>336</w><h>120</h></coordinates><panel_attributes>WithdrawCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>320</y><w>336</w><h>120</h></coordinates><panel_attributes>WithdrawCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 -mAccountNumber : unsigned int
@@ -331,7 +329,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1272</x><y>200</y><w>312</w><h>112</h></coordinates><panel_attributes>PrintCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1272</x><y>200</y><w>312</w><h>112</h></coordinates><panel_attributes>PrintCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 -mrcOutStream : std::ostream&amp;
@@ -341,7 +339,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1248</x><y>336</y><w>280</w><h>120</h></coordinates><panel_attributes>MonthlyCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1248</x><y>336</y><w>280</w><h>120</h></coordinates><panel_attributes>MonthlyCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 
@@ -351,7 +349,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>456</y><w>336</w><h>120</h></coordinates><panel_attributes>BackupCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>456</y><w>336</w><h>120</h></coordinates><panel_attributes>BackupCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 -mcFileName_C : std::string
@@ -362,7 +360,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1832</x><y>408</y><w>112</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;120;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>384</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1752</x><y>240</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1576</x><y>288</y><w>96</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1520</x><y>392</y><w>152</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1800</x><y>592</y><w>344</w><h>104</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1832</x><y>408</y><w>112</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;120;130</additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>384</y><w>88</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1664</x><y>176</y><w>24</w><h>128</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1576</x><y>288</y><w>96</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>100;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1520</x><y>392</y><w>152</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1800</x><y>592</y><w>344</w><h>104</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 ITransactionReader
 --
 --
@@ -371,7 +369,7 @@ ITransactionReader
 
 /+readTransactions (std::ostream&amp;, Bank&amp;) = 0 : std::shared_ptr&lt;ICommand&gt;/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>408</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1512</x><y>488</y><w>256</w><h>192</h></coordinates><panel_attributes>Bank
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1816</x><y>408</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1512</x><y>488</y><w>256</w><h>192</h></coordinates><panel_attributes>Bank
 --
 -mpAccounts : std::shared_ptr&lt;IContainer&gt;
 -mpCommands : std::shared_ptr&lt;ICommand&gt;
@@ -387,7 +385,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 +&lt;&lt;const&gt;&gt; display (std::ostream&amp;) : void
 +backupAccount (std::ostream&amp;, std::ostream&amp;) : void
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>656</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1512</x><y>448</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1552</x><y>304</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>528</y><w>184</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>424</y><w>184</w><h>104</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;170;10;170;110;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1616</x><y>240</y><w>24</w><h>264</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;310</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>176</y><w>336</w><h>128</h></coordinates><panel_attributes>CurrencyCommand
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>656</y><w>56</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;50;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1512</x><y>448</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>1552</x><y>304</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;230</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>528</y><w>184</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>424</y><w>184</w><h>104</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;170;10;170;110;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1616</x><y>176</y><w>24</w><h>328</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;390</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1928</x><y>176</y><w>336</w><h>128</h></coordinates><panel_attributes>CurrencyCommand
 --
 -mpcBank : std::shared_ptr&lt;Bank&gt;
 -mcCurrency : Currency
@@ -398,7 +396,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+execute () : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>240</y><w>88</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;70;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>288</y><w>184</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;160;10;160;250;10;250</additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>296</y><w>256</w><h>128</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1856</x><y>240</y><w>88</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;70;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1760</x><y>288</y><w>184</w><h>216</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>210;10;160;10;160;250;10;250</additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>296</y><w>256</w><h>128</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
 AccountVisitor
 --
 
@@ -409,7 +407,7 @@ AccountVisitor
 +visit (CheckingAccount&amp;) = 0 : void
 +visit (SavingsAccount&amp;) = 0 : void
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>968</x><y>136</y><w>264</w><h>128</h></coordinates><panel_attributes>BackupVisitor
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>968</x><y>136</y><w>264</w><h>128</h></coordinates><panel_attributes>BackupVisitor
 --
 -mrcOutStream_C : std::ostream&amp;
 -mrcOutStream_S : std::ostream&amp;
@@ -421,7 +419,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 /+visit (SavingsAccount&amp;) : void/
 
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>632</x><y>136</y><w>256</w><h>120</h></coordinates><panel_attributes>PrintVisitor
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>632</x><y>136</y><w>256</w><h>120</h></coordinates><panel_attributes>PrintVisitor
 --
 -mrcOutStream : std::ostream&amp;
 
@@ -431,8 +429,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 
 /+visit (CheckingAccount&amp;) : void/
 /+visit (SavingsAccount&amp;) : void/
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>0</y><w>256</w><h>120</h></coordinates><panel_attributes>MonthlyVisitor
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>784</x><y>0</y><w>256</w><h>120</h></coordinates><panel_attributes>MonthlyVisitor
 --
 
 --
@@ -443,7 +440,7 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 /+visit (SavingsAccount&amp;) : void/
 
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1024</x><y>256</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>248</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>112</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>344</y><w>672</w><h>400</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;160;10;160;480;820;480</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>320</y><w>952</w><h>680</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;190;10;190;490;1170;490;1170;830</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>368</y><w>120</w><h>392</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;130;10;130;470</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>392</y><w>96</w><h>536</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;100;10;100;650;80;650</additional_attributes></element><element><id>UMLClass</id><coordinates><x>296</x><y>1176</y><w>408</w><h>208</h></coordinates><panel_attributes>CurrencyConversionTable
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1024</x><y>256</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>840</x><y>248</y><w>24</w><h>64</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>920</x><y>112</y><w>24</w><h>200</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;230;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>344</y><w>672</w><h>400</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;160;10;160;480;820;480</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>320</y><w>952</w><h>680</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;190;10;190;490;1170;490;1170;830</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>368</y><w>120</w><h>392</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;130;10;130;470</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>392</y><w>96</w><h>536</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;10;100;10;100;650;80;650</additional_attributes></element><element><id>UMLClass</id><coordinates><x>296</x><y>1176</y><w>408</w><h>208</h></coordinates><panel_attributes>CurrencyConversionTable
 --
 -mcRates : std::map&lt;std::pair&lt;Currency, Currency&gt;, double&gt;
 
@@ -458,8 +455,7 @@ _+getInstance () : CurrencyConversionTable&amp;_
 
 +readConversions (std::string&amp;) : void
 +bConversionExists (const Currency&amp;, const Currency&amp;) : bool
-
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>1136</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>568</x><y>1120</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>280</y><w>256</w><h>136</h></coordinates><panel_attributes>ConvertVisitor
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>1136</y><w>24</w><h>56</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>568</x><y>1120</y><w>24</w><h>72</h></coordinates><panel_attributes>lt=&lt;.</panel_attributes><additional_attributes>10;70;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>280</y><w>256</w><h>136</h></coordinates><panel_attributes>ConvertVisitor
 --
 -mrcOutStream : std::ostream&amp;
 -mcCurrency : Currency
@@ -471,4 +467,16 @@ lw=5</panel_attributes><additional_attributes></additional_attributes></element>
 /+visit (CheckingAccount&amp;) : void/
 /+visit (SavingsAccount&amp;) : void/
 
-lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>320</y><w>72</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>728</x><y>320</y><w>72</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1704</x><y>40</y><w>400</w><h>128</h></coordinates><panel_attributes>TransferCommand
+--
+-mpcBank : std::shared_ptr&lt;Bank&gt;
+-mFromAccountNumber : unsigned int
+-mToAccountNumber : unsigned int
+-mcAmount : Money
+--
++CurrencyCommand (std:shared_ptr&lt;Bank&gt;, unsigned int, unsigned int, Money)
+/~CurrencyCommand ()/
+
+/+execute () : void/
+
+lw=5</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1776</x><y>160</y><w>24</w><h>144</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element></diagram>
