@@ -1,0 +1,234 @@
+//***************************************************************************
+// File name:   Account.cpp
+// Author:      Anna Tymoshenko
+// Date:        03/04/2025
+// Class:       CS485
+// Assignment:  Assignment 3 - Bank Accounts
+// Purpose:     Practice Object Oriented Design Skills
+//***************************************************************************
+
+#include "../include/Account.h"
+#include "../include/Interest.h"
+#include "../include/FlatInterest.h"
+#include "../include/TieredInterest.h"
+#include "../include/Money.h"
+#include "../include/CurrencyMismatchException.h"
+#include <iostream>
+#include <iomanip>
+#include <memory>
+
+//***************************************************************************
+// Constructor: Account
+//
+// Description: Initializes Bank Account object
+//
+// Parameters:  accountNumber - account number
+//							rcBalance				- initial balance of the account
+//							rpcInterestRate	- interest rate
+//
+// Returned:    None
+//***************************************************************************
+Account::Account (unsigned int accountNumber, const Money& rcBalance,
+	std::shared_ptr<Interest>& rpcInterestRate) : mcBalance (rcBalance) {
+	mAccountNumber = accountNumber;
+	mpInterestRate = std::move (rpcInterestRate);
+}
+
+//***************************************************************************
+// Destructor:  Account
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+Account::~Account () {}
+
+//***************************************************************************
+// Function:    deposit
+//
+// Description: apply deposit operation on account
+//
+// Parameters:  rcAmount - amount deposited
+//
+// Returned:    none
+//***************************************************************************
+void Account::deposit (const Money& rcAmount) {
+	mcBalance += rcAmount;
+}
+
+//***************************************************************************
+// Function:    withdraw
+//
+// Description: withdraw money from account
+//
+// Parameters:  cAmount - amount withdrawn
+//
+// Returned:    none
+//***************************************************************************
+void Account::withdraw (const Money& rcAmount) {
+	// accounts are allowed to be negative
+	mcBalance -= rcAmount;
+}
+
+//***************************************************************************
+// Function:    chargeMonthlyFee
+//
+// Description: charge banking account the monthly fee
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+void Account::chargeMonthlyFee () {}
+
+//***************************************************************************
+// Function:    generateInterest
+//
+// Description: apply interest rate to banking account
+//
+// Parameters:  none
+//
+// Returned:    none
+//***************************************************************************
+void Account::generateInterest () {
+	mcBalance = mpInterestRate->generate (mcBalance);
+}
+
+//***************************************************************************
+// Function:    getBalance
+//
+// Description: getter function for balance
+//
+// Parameters:  none
+//
+// Returned:    amount of money that is on the balance
+//***************************************************************************
+Money Account::getBalance () const {
+	return mcBalance;
+}
+
+//***************************************************************************
+// Function:    getAccountNumber
+//
+// Description: getter function for account number
+//
+// Parameters:  none
+//
+// Returned:    amount of money that is on the balance
+//***************************************************************************
+unsigned int Account::getAccountNumber () const {
+	return mAccountNumber;
+}
+
+//***************************************************************************
+// Function:    operaotr==
+//
+// Description: compare if accounts are the same 
+//
+// Parameters:  accountNum - number of account
+//
+// Returned:    true if equal, false otherwise
+//***************************************************************************
+bool Account::operator== (unsigned int accountNum) const {
+	return mAccountNumber == accountNum;
+}
+
+//***************************************************************************
+// Function:    displayConverted
+//
+// Description: display converted to a given currency account info to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//							rcCurrency	- reference to the currency account needs to be
+//														converted to
+//
+// Returned:    none
+//***************************************************************************
+void Account::displayConverted (std::ostream& rcOutStream,
+	const Currency& rcCurrency) const {
+	try {
+		Money cConvertedBalance = mcBalance.convertTo (rcCurrency);
+
+		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
+			<< ", " << cConvertedBalance << ", ";
+		mpInterestRate->displayConverted (rcOutStream, rcCurrency);
+		rcOutStream << ", ";
+	}
+	catch (const CurrencyMismatchException&) {
+		rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
+			<< ", " << mcBalance << ", ";
+		mpInterestRate->displayConverted (rcOutStream, rcCurrency);
+		rcOutStream << ", ";
+	}
+}
+
+//***************************************************************************
+// Function:    display
+//
+// Description: display account info to the stream 
+//
+// Parameters:  rcOutStream - reference to the stream to output to
+//
+// Returned:    none
+//***************************************************************************
+void Account::display (std::ostream& rcOutStream) const {
+	rcOutStream << std::fixed << std::setprecision (2) << mAccountNumber
+		<< ", " << mcBalance << ", " << *mpInterestRate << ", ";
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read account info from the stream 
+//
+// Parameters:  rcInStream - stream to input from
+//
+// Returned:    none
+//***************************************************************************
+void Account::read (std::istream& rcInStream) {
+	const char FLAT = 'F';
+	const char TIERED = 'T';
+	char interestType;
+
+	rcInStream >> mAccountNumber >> mcBalance >> interestType;
+	if (interestType == FLAT) {
+		mpInterestRate = std::make_shared<FlatInterest> ();
+	}
+	else if (interestType == TIERED) {
+		mpInterestRate = std::make_shared<TieredInterest> ();
+	}
+	rcInStream >> mpInterestRate;
+}
+
+//***************************************************************************
+// Function:    operator<<
+//
+// Description: display account info to the screen 
+//
+// Parameters:  rcOutStream	- steam to output to
+//							cAccount			- account to output
+//
+// Returned:    none
+//***************************************************************************
+std::ostream& operator<< (std::ostream& rcOutStream,
+	const Account& cAccount) {
+	cAccount.display (rcOutStream);
+	return rcOutStream;
+}
+
+//***************************************************************************
+// Function:    operator>>
+//
+// Description: read account info from the stream 
+//
+// Parameters:  rcOutStream - steam to input from
+//							cAccount			- account to input
+//
+// Returned:    none
+//***************************************************************************
+std::istream& operator>> (std::istream& rcInStream, Account& cAccount) {
+	cAccount.read (rcInStream);
+	return rcInStream;
+}

@@ -1,0 +1,189 @@
+//***************************************************************************
+// File name:   Currency.cpp
+// Author:      Anna Tymoshenko
+// Date:        04/05/2025
+// Class:       CS485
+// Assignment:  Assignment 5 - Bank 3
+// Purpose:     Practice Object Oriented Design Skills
+//***************************************************************************
+
+#include "../include/Currency.h"
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+
+Currency::Currency () {}
+
+//***************************************************************************
+// Constructor: Currency
+//
+// Description: Constructor that takes an enum to initialize Currency object
+//
+// Parameters:  eType - currency type as a scoped enum object
+//
+// Returned:    None
+//***************************************************************************
+
+Currency::Currency (CurrencyType eType) {
+	meCurrencyType = eType;
+}
+
+//***************************************************************************
+// Constructor: Currency
+//
+// Description: Constructor that takes a string to initialize Currency object
+//
+// Parameters:  type - currency type of type string
+//
+// Returned:    None
+//***************************************************************************
+
+Currency::Currency (std::string type) {
+	if (type == "USD") {
+		meCurrencyType = CurrencyType::USD;
+	}
+	else if (type == "GBP") {
+		meCurrencyType = CurrencyType::GBP;
+	}
+	else if (type == "EUR") {
+		meCurrencyType = CurrencyType::EUR;
+	}
+	else if (type == "YEN") {
+		meCurrencyType = CurrencyType::YEN;
+	}
+	else if (type == "CHF") {
+		meCurrencyType = CurrencyType::CHF;
+	}
+}
+
+//***************************************************************************
+// Destructor:  Currency
+//
+// Description: Default destructor
+//
+// Parameters:  None
+//
+// Returned:    None
+//***************************************************************************
+
+Currency::~Currency () {}
+
+//***************************************************************************
+// Function:    operator==
+//
+// Description: compare two Currency objects
+//
+// Parameters:  rcOther - Currency object to compare to
+//
+// Returned:    true or false
+//***************************************************************************
+
+bool Currency::operator== (const Currency& rcOther) const {
+	return meCurrencyType == rcOther.meCurrencyType;
+}
+
+//***************************************************************************
+// Function:    operator!=
+//
+// Description: compare two Currency objects
+//
+// Parameters:  rcOther - Currency object to compare to
+//
+// Returned:    true or false
+//***************************************************************************
+
+bool Currency::operator!= (const Currency& rcOther) const {
+	return meCurrencyType != rcOther.meCurrencyType;
+}
+
+//***************************************************************************
+// Function:    operator<
+//
+// Description: compare two Currency objects (for map........)
+//
+// Parameters:  rcOther - Currency object to compare to
+//
+// Returned:    true or false
+//***************************************************************************
+
+bool Currency::operator< (const Currency& rcOther) const {
+	return static_cast<int>(meCurrencyType)
+		< static_cast<int>(rcOther.meCurrencyType);
+}
+
+//***************************************************************************
+// Function:    display
+//
+// Description: display the Currency object to the stream
+//
+// Parameters:  rcOutStream - user chosen stream
+//
+// Returned:    none
+//***************************************************************************
+
+void Currency::display (std::ostream& rcOutStream) const {
+	if (meCurrencyType == CurrencyType::USD) {
+		rcOutStream << "USD";
+	}
+	else if (meCurrencyType == CurrencyType::GBP) {
+		rcOutStream << "GBP";
+	}
+	else if (meCurrencyType == CurrencyType::EUR) {
+		rcOutStream << "EUR";
+	}
+	else if (meCurrencyType == CurrencyType::YEN) {
+		rcOutStream << "YEN";
+	}
+	else if (meCurrencyType == CurrencyType::CHF) {
+		rcOutStream << "CHF";
+	}
+}
+
+//***************************************************************************
+// Function:    read
+//
+// Description: read the Currency object from the stream
+//
+// Parameters:  rcInStream - user chosen stream
+//
+// Returned:    none
+//***************************************************************************
+
+void Currency::read (std::istream& rcInStream) {
+	std::string type;
+	rcInStream >> type;
+
+	*this = Currency (type);
+}
+
+//***************************************************************************
+// Function:    operator<<
+//
+// Description: extraction operator
+//
+// Parameters:  rcOutStream	- user chosen stream
+//							rcCurrency	- currency to output
+//
+// Returned:    none
+//***************************************************************************
+
+std::ostream& operator<<(std::ostream& rcOutStream, const Currency& rcCurrency) {
+	rcCurrency.display (rcOutStream);
+	return rcOutStream;
+}
+
+//***************************************************************************
+// Function:    operator>>
+//
+// Description: insertion operator
+//
+// Parameters:  rcInStream	- user chosen stream
+//							rcCurrency	- currency to input
+//
+// Returned:    none
+//***************************************************************************
+
+std::istream& operator>>(std::istream& rcInStream, Currency& rcCurrency) {
+	rcCurrency.read (rcInStream);
+	return rcInStream;
+}
