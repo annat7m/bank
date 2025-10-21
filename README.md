@@ -6,4 +6,4 @@ C++ bank simulation featuring modular design and advanced object-oriented archit
 
 ### UML class diagram
 
-![class diagram](UML/final_class_uml.pdf)
+![class diagram](UML/final_class_uml.png)
