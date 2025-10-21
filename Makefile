@@ -1,10 +1,12 @@
 #############################################################################
 # File name:  Makefile
-# Author:     chadd williams
-# Date:       Sept 1, 2021
-# Class:      CS360
-# Assignment: 
-# Purpose:    
+# Author:     Anna Tymoshenko
+# Date:       Oct 21, 2025
+# Class:      CS485
+# Assignment: Bank Simulation Project
+# Purpose:    Build configuration for a C++ bank simulation featuring modular
+#             design with account management, currency conversions, and various
+#             banking operations. Includes debug flags and test configurations.
 #############################################################################
 
 all: bin bin/main
@@ -12,7 +14,7 @@ all: bin bin/main
 ENSCRIPT_FLAGS=-C -T 2 -p - -M Letter -Ecpp --color -fCourier8
 VALGRIND_FLAGS=-v --leak-check=yes --track-origins=yes --leak-check=full --show-leak-kinds=all 
 
-compiler=clang++-16
+compiler=clang++
 #compiler=g++
 
 # clang
