@@ -1,3 +1,96 @@
+# Bank Management System
+C++ bank simulation featuring modular design and advanced object-oriented architecture.
+
+![Language](https://img.shields.io/badge/Language-C++-pink)
+
+## UML Class Diagram
+
+![class diagram](UML/final_class_uml.png)
+
+## How to Run the Bank Program
+
+### Prerequisites
+- G++ compiler with C++23 support
+- Make build system
+
+### Building the Program
+1. Clean any previous builds:
+```bash
+make clean
+```
+
+2. Build the program:
+```bash
+make
+```
+
+### Running the Program
+The bank program requires three input files:
+1. Accounts file (.txt) - contains initial account information
+2. Commands file (.txt or .csv) - contains transactions and operations to perform
+3. Currency Conversions file (.txt) - contains exchange rates between different currencies
+
+To run the program, use the following command:
+```bash
+bin/main <accounts_file.txt> <commands_file.txt|csv> <currency_file.txt>
+```
+
+Example:
+```bash
+bin/main data/Accounts.txt data/Commands.csv data/CurrencyConversions.txt
+```
+
+### Input File Formats
+- Accounts file (.txt): Contains account information including account number, initial balance, interest type, and currency
+
+	Data File Format
+	```bash
+	data/Accounts.txt:
+		S Acct# InitialBalance INTEREST MonthlyFee MinMonthlyBalance
+		C Acct# InitialBalance INTEREST MinBalance MinBalanceFee
+	```
+	where INTEREST can either be:
+	```bash
+		F 0.01
+	```
+	For a flat interest rate of 0.01
+	```bash
+		T 3 USD 0 USD 10000 USD 20000 0.001 0.01 0.02
+	```
+	For a tiered interest calculation of:  
+		Balance >= 20000 Interest is 0.02  
+		Balance >= 10000 Interest is 0.01  
+		Balance >= 0 Interest is 0.001  
+- Commands file (.txt or .csv): Contains transactions like deposits, withdrawals, and transfers
+
+	commands:
+	- W - Withdraw
+	- D - Deposit
+	- P - Print all accounts (in the same order they appear in Accounts.txt)
+	- M - Charge monthly fees to savings accounts and Generate Interest in all accounts (in that order).
+	- B - This command will cause all checking accounts to be written to the first file and all savings accounts to be written to the second file.
+	- T - Amount is removed from SourceAcct and added to DestinationAcct.
+
+	Data File Format
+	```bash
+	data/Accounts.txt:
+		W Acct# Amt
+		D Acct# Amt
+		P
+		M
+		B checkingBackup_1.txt savingsBackup_1.txt
+		T SourceAcct DestinationAcct Amount
+	```
+- Currency Conversions file (.txt): Contains currency exchange rates for converting between different currencies
+	```bash
+	USD GBP 0.76
+	USD EUR 0.92
+	YEN EUR 0.69
+	YEN GBP 0.58
+	EUR GBP 0.84
+	CHF USD 0.75
+	```
+
 ## C++ in VS Code in a Linux Dev Container
 
 ### Code Formatting
